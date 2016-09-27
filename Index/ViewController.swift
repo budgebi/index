@@ -10,16 +10,34 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var paperView: PaperView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func smallButtonPressed() {
+        self.paperView.setLineWidth(lWidth: "small")
+    }
+    
+    @IBAction func mediumButtonPressed() {
+        self.paperView.setLineWidth(lWidth: "medium")
+    }
+    
+    @IBAction func largeButtonPressed() {
+        self.paperView.setLineWidth(lWidth: "large")
+    }
+    
+    @IBAction func deleteNote() {
+        self.paperView.deleteNote()
+    }
+    
+    @IBAction func eraserButtonPressed() {
+        self.paperView.useEraser()
+    }
 }
 

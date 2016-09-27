@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aP0-gA-HMJ" customClass="IndexSearchBar" customModule="Index" customModuleProvider="target">
-                                <frame key="frameInset" minX="-2" minY="20" height="44"/>
+                                <frame key="frameInset" minX="-2" minY="20" height="44" maxX="1"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -27,13 +27,54 @@
                                 </connections>
                             </searchBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-D5-nBy" customClass="PaperView" customModule="Index" customModuleProvider="target">
-                                <frame key="frameInset" minX="-2" minY="64" width="100.68%" height="101.28%"/>
+                                <frame key="frameInset" minX="-2" minY="63.5" width="100.59%" height="101.06%"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0F-cM-Pow">
+                                <frame key="frameInset" minX="24" minY="638" width="39" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Large"/>
+                                <connections>
+                                    <action selector="largeButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="pvt-Ih-3xj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVB-6Z-f2m">
+                                <frame key="frameInset" minX="24" minY="600" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Medium"/>
+                                <connections>
+                                    <action selector="mediumButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ts1-98-ThI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxr-pH-GFs">
+                                <frame key="frameInset" minX="24" minY="562" width="38" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Small"/>
+                                <connections>
+                                    <action selector="smallButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="Obb-vR-3gA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbW-vW-nq2">
+                                <frame key="frameInset" minX="24" minY="676" width="44" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Eraser"/>
+                                <connections>
+                                    <action selector="eraserButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="TFP-P7-5r3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIQ-qK-Wfl">
+                                <frame key="frameInset" minX="24" minY="714" width="45" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="x4U-eO-Tek"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="paperView" destination="0eb-D5-nBy" id="IK6-9z-1p4"/>
                         <outlet property="searchDisplayController" destination="cjo-na-Hko" id="NMD-mG-983"/>
                     </connections>
                 </viewController>
