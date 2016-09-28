@@ -39,5 +39,29 @@ class ViewController: UIViewController {
     @IBAction func eraserButtonPressed() {
         self.paperView.useEraser()
     }
+    
+    @IBAction func drawLine() {
+        self.paperView.lineSelected()
+    }
+    
+    @IBAction func setDrawColorRed() {
+        self.paperView.setDrawColor(color: "red")
+    }
+    
+    @IBAction func setDrawColorGreen() {
+        self.paperView.setDrawColor(color: "green")
+    }
+    
+    @IBAction func setDrawColorBlue() {
+        self.paperView.setDrawColor(color: "blue")
+    }
+    
+    @IBAction func setDrawColorYellow() {
+        self.paperView.setDrawColor(color: "yellow")
+    }
+    
+    @IBAction func setDrawColorBlack() {
+        self.paperView.setDrawColor(color: "black")
+    }
 }
 

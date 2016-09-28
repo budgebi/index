@@ -19,18 +19,32 @@ class PaperView: UIImageView {
     fileprivate let paperColor: UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
     fileprivate var drawColor: UIColor = UIColor.black
     
-    fileprivate var touch: UITouch!
+    fileprivate let redColor = UIColor(red: 239/255, green: 83/255, blue: 80/255, alpha: 1)
+    fileprivate let blueColor = UIColor(red: 66/255, green: 165/255, blue: 245/255, alpha: 1)
+    fileprivate let greenColor = UIColor(red: 102/255, green: 187/255, blue: 106/255, alpha: 1)
+    fileprivate let yellowColor = UIColor(red: 255/255, green: 202/255, blue: 40/255, alpha: 1)
+    fileprivate let blackColor = UIColor.black
+    
+    fileprivate var lastTouch: UITouch!
+    fileprivate var firstTouch: UITouch!
+    
+    fileprivate var originalImage: UIImage?
+    
+    fileprivate var line: Bool!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.isUserInteractionEnabled = true
+        
         self.lineWidth = mediumLineWidth
+        self.line = false
         
         self.backgroundColor = self.paperColor
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touch = touches.first
+        self.firstTouch = touches.first
+        self.originalImage = image
         
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         
@@ -38,7 +52,7 @@ class PaperView: UIImageView {
         
         image?.draw(in: bounds)
         
-        drawPoint(context, touch: touch)
+        drawPoint(context, touch: self.firstTouch)
         
         image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -61,22 +75,47 @@ class PaperView: UIImageView {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.touch = touches.first
+        self.lastTouch = touches.first
         
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         
         let context = UIGraphicsGetCurrentContext()
         
-        image?.draw(in: bounds)
+        if self.line == false {
+            image?.draw(in: bounds)
         
-        drawStroke(context, touch: touch)
+            drawStroke(context, touch: self.lastTouch)
+        } else {
+            self.originalImage?.draw(in: bounds)
+            
+            drawLine(context, touch: self.lastTouch)
+        }
+        
         
         image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     
+    fileprivate func drawLine(_ context: CGContext?, touch: UITouch) {
+        let previousLocation = self.firstTouch.location(in: self)
+        
+        let location = touch.location(in: self)
+        
+        drawColor.setStroke()
+        
+        context?.setLineWidth(self.lineWidth)
+        context?.setLineCap(.round)
+        
+        
+        context?.move(to: CGPoint(x: previousLocation.x, y: previousLocation.y))
+        context?.addLine(to: CGPoint(x: location.x, y: location.y))
+        
+        context?.strokePath()
+    }
+    
     fileprivate func drawStroke(_ context: CGContext?, touch: UITouch) {
         let previousLocation = touch.previousLocation(in: self)
+       
         let location = touch.location(in: self)
         
         drawColor.setStroke()
@@ -102,6 +141,10 @@ class PaperView: UIImageView {
         }
     }
     
+    public func lineSelected() {
+        self.line = true
+    }
+    
     public func useEraser() {
         // Todo: this actually won't work most likely because the image is clear
         // and we draw on it with the paper color so we aren't really deleting the line.
@@ -112,5 +155,19 @@ class PaperView: UIImageView {
     
     public func deleteNote() {
         image = nil
+    }
+    
+    public func setDrawColor(color: String) {
+        if color == "red" {
+            self.drawColor = self.redColor
+        } else if color == "green" {
+            self.drawColor = self.greenColor
+        } else if color == "blue" {
+            self.drawColor = self.blueColor
+        } else if color == "yellow" {
+            self.drawColor = self.yellowColor
+        } else if color == "black" {
+            self.drawColor = self.blackColor
+        }
     }
 }
