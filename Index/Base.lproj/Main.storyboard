@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-D5-nBy" customClass="PaperView" customModule="Index" customModuleProvider="target">
-                                <frame key="frameInset" minX="-3.5" minY="62.5" width="100.34%" height="101.06%"/>
+                                <frame key="frameInset" minX="-3.5" minY="62" width="100.34%" height="101.06%"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVB-6Z-f2m">
@@ -102,9 +102,10 @@
                                     <action selector="largeButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="pvt-Ih-3xj"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aP0-gA-HMJ" customClass="IndexSearchBar" customModule="Index" customModuleProvider="target">
-                                <frame key="frameInset" minX="-3.5" minY="20" height="44" maxX="-1.5"/>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aP0-gA-HMJ" customClass="IndexSearchBar" customModule="Index" customModuleProvider="target">
+                                <frame key="frameInset" minX="-3.5" minY="20" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.97647058823529409" green="0.6588235294117647" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ZYk-J7-HKN"/>
