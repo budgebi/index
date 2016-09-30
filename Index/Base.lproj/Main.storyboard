@@ -102,15 +102,6 @@
                                     <action selector="largeButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="pvt-Ih-3xj"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aP0-gA-HMJ" customClass="IndexSearchBar" customModule="Index" customModuleProvider="target">
-                                <frame key="frameInset" minY="20" height="44" maxX="-0.5"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" red="0.97647058823529409" green="0.6588235294117647" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="ZYk-J7-HKN"/>
-                                </connections>
-                            </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJH-HD-t3S">
                                 <frame key="frameInset" minX="23" minY="359" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -135,6 +126,12 @@
                                     <action selector="freeDraw" destination="BYZ-38-t0r" eventType="touchUpInside" id="xJg-rJ-iJt"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnh-JP-Jpy">
+                                <frame key="frameInset" minY="20" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.0039215686269999999" green="0.3411764706" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -147,7 +144,6 @@
                 <searchDisplayController id="cjo-na-Hko">
                     <connections>
                         <outlet property="delegate" destination="BYZ-38-t0r" id="VA8-Mw-HvC"/>
-                        <outlet property="searchBar" destination="aP0-gA-HMJ" id="Bzi-Xz-zcK"/>
                         <outlet property="searchContentsController" destination="BYZ-38-t0r" id="t23-Tk-uRy"/>
                         <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="5pt-bt-Ze2"/>
                         <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="35H-fO-5Uy"/>
