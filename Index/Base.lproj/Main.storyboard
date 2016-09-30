@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-D5-nBy" customClass="PaperView" customModule="Index" customModuleProvider="target">
-                                <frame key="frameInset" minX="-3.5" minY="62" width="100.34%" height="101.06%"/>
+                                <frame key="frameInset" minX="-4.5" minY="62" width="100.29%" height="100.99%"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVB-6Z-f2m">
@@ -103,7 +103,7 @@
                                 </connections>
                             </button>
                             <searchBar contentMode="redraw" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aP0-gA-HMJ" customClass="IndexSearchBar" customModule="Index" customModuleProvider="target">
-                                <frame key="frameInset" minX="-3.5" minY="20" height="44"/>
+                                <frame key="frameInset" minY="20" height="44" maxX="-0.5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="barTintColor" red="0.97647058823529409" green="0.6588235294117647" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -125,6 +125,14 @@
                                 <state key="normal" image="trash"/>
                                 <connections>
                                     <action selector="deleteNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="x4U-eO-Tek"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uum-wz-Brp">
+                                <frame key="frameInset" minX="23" minY="329" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="freedraw"/>
+                                <connections>
+                                    <action selector="freeDraw" destination="BYZ-38-t0r" eventType="touchUpInside" id="xJg-rJ-iJt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -153,6 +161,7 @@
         <image name="black" width="22" height="22"/>
         <image name="blue" width="22" height="22"/>
         <image name="eraser" width="22" height="22"/>
+        <image name="freedraw" width="22" height="22"/>
         <image name="green" width="22" height="22"/>
         <image name="largewidth" width="21" height="21"/>
         <image name="line" width="22" height="22"/>

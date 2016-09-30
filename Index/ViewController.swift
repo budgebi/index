@@ -41,7 +41,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawLine() {
-        self.paperView.lineSelected()
+        self.paperView.lineSelected(true)
+    }
+    
+    @IBAction func freeDraw() {
+        self.paperView.lineSelected(false)
     }
     
     @IBAction func setDrawColorRed() {

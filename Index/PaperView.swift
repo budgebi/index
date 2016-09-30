@@ -26,7 +26,7 @@ class PaperView: UIImageView {
     fileprivate let blackColor = UIColor.black
     
     fileprivate var lastTouch: UITouch!
-    fileprivate var firstTouch: UITouch!
+    fileprivate var firstTouchLocation: CGPoint!
     
     fileprivate var originalImage: UIImage?
     
@@ -43,7 +43,7 @@ class PaperView: UIImageView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.firstTouch = touches.first
+        self.firstTouchLocation = touches.first?.location(in: self)
         self.originalImage = image
         
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
@@ -52,15 +52,13 @@ class PaperView: UIImageView {
         
         image?.draw(in: bounds)
         
-        drawPoint(context, touch: self.firstTouch)
+        drawPoint(context, touchLocation: self.firstTouchLocation)
         
         image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     
-    fileprivate func drawPoint(_ context: CGContext?, touch: UITouch) {
-        let previousLocation = touch.location(in: self)
-        let location = touch.location(in: self)
+    fileprivate func drawPoint(_ context: CGContext?, touchLocation: CGPoint) {
         
         drawColor.setStroke()
         
@@ -68,15 +66,15 @@ class PaperView: UIImageView {
         context?.setLineCap(.round)
         
         
-        context?.move(to: CGPoint(x: previousLocation.x, y: previousLocation.y))
-        context?.addLine(to: CGPoint(x: location.x, y: location.y))
+        context?.move(to: CGPoint(x: touchLocation.x, y: touchLocation.y))
+        context?.addLine(to: CGPoint(x: touchLocation.x, y: touchLocation.y))
         
         context?.strokePath()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.lastTouch = touches.first
-        
+
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         
         let context = UIGraphicsGetCurrentContext()
@@ -97,7 +95,7 @@ class PaperView: UIImageView {
     }
     
     fileprivate func drawLine(_ context: CGContext?, touch: UITouch) {
-        let previousLocation = self.firstTouch.location(in: self)
+        let previousLocation = self.firstTouchLocation!
         
         let location = touch.location(in: self)
         
@@ -141,8 +139,8 @@ class PaperView: UIImageView {
         }
     }
     
-    public func lineSelected() {
-        self.line = true
+    public func lineSelected(_ selected: Bool) {
+        self.line = selected
     }
     
     public func useEraser() {
