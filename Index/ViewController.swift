@@ -67,5 +67,9 @@ class ViewController: UIViewController {
     @IBAction func setDrawColorBlack() {
         self.paperView.setDrawColor(color: "black")
     }
+    
+    @IBAction func undoButtonPressed() {
+        self.paperView.undo()
+    }
 }
 

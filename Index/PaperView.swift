@@ -168,4 +168,27 @@ class PaperView: UIImageView {
             self.drawColor = self.blackColor
         }
     }
+    
+    public func undo() {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+        
+        let context = UIGraphicsGetCurrentContext()
+        
+        self.originalImage?.draw(in: bounds)
+                
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        paperColor.setStroke()
+        
+        context?.setLineWidth(self.lineWidth)
+        context?.setLineCap(.round)
+        
+        
+        context?.move(to: CGPoint(x: firstTouchLocation.x, y: firstTouchLocation.y))
+        context?.addLine(to: CGPoint(x: firstTouchLocation.x, y: firstTouchLocation.y))
+        
+        context?.strokePath()
+        
+        UIGraphicsEndImageContext()
+    }
 }
