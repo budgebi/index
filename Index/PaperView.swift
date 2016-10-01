@@ -139,6 +139,7 @@ class PaperView: UIImageView {
         } else {
             self.lineWidth = self.largeLineWidth
         }
+        self.previousLineWidth = self.lineWidth
     }
     
     public func lineSelected(_ selected: Bool) {
