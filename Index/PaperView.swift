@@ -14,7 +14,9 @@ class PaperView: UIImageView {
     fileprivate let mediumLineWidth: CGFloat = 4
     fileprivate let largeLineWidth: CGFloat = 6
     fileprivate let eraseLineWidth: CGFloat = 20
+    
     fileprivate var lineWidth: CGFloat!
+    fileprivate var previousLineWidth: CGFloat?
     
     fileprivate let paperColor: UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
     fileprivate var drawColor: UIColor = UIColor.black
@@ -147,6 +149,10 @@ class PaperView: UIImageView {
         // Todo: this actually won't work most likely because the image is clear
         // and we draw on it with the paper color so we aren't really deleting the line.
         // maybe draw on it with clear?
+        if (self.previousLineWidth == nil || self.lineWidth != self.eraseLineWidth) {
+            self.previousLineWidth = self.lineWidth
+        }
+        self.line = false
         self.lineWidth = self.eraseLineWidth
         self.drawColor = self.paperColor
     }
@@ -156,6 +162,9 @@ class PaperView: UIImageView {
     }
     
     public func setDrawColor(color: String) {
+        if (self.previousLineWidth != nil) {
+            self.lineWidth = self.previousLineWidth
+        }
         if color == "red" {
             self.drawColor = self.redColor
         } else if color == "green" {
@@ -175,7 +184,7 @@ class PaperView: UIImageView {
         let context = UIGraphicsGetCurrentContext()
         
         self.originalImage?.draw(in: bounds)
-                
+        
         image = UIGraphicsGetImageFromCurrentImageContext()
         
         paperColor.setStroke()
