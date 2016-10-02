@@ -44,6 +44,7 @@ class PaperView: UIImageView {
         self.backgroundColor = self.paperColor
     }
     
+    // Touches Began - Draw Point
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.firstTouchLocation = touches.first?.location(in: self)
         self.originalImage = image
@@ -74,6 +75,7 @@ class PaperView: UIImageView {
         context?.strokePath()
     }
     
+    // Touches Moved - Draw Stroke or Line
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.lastTouch = touches.first
 
@@ -130,6 +132,35 @@ class PaperView: UIImageView {
         context?.strokePath()
     }
     
+    // Undo and Delete
+    public func undo() {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+        
+        let context = UIGraphicsGetCurrentContext()
+        
+        self.originalImage?.draw(in: bounds)
+        
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        paperColor.setStroke()
+        
+        context?.setLineWidth(self.lineWidth)
+        context?.setLineCap(.round)
+        
+        
+        context?.move(to: CGPoint(x: firstTouchLocation.x, y: firstTouchLocation.y))
+        context?.addLine(to: CGPoint(x: firstTouchLocation.x, y: firstTouchLocation.y))
+        
+        context?.strokePath()
+        
+        UIGraphicsEndImageContext()
+    }
+    
+    public func deleteNote() {
+        image = nil
+    }
+    
+    // Setters from View Controller
     public func setLineWidth(lWidth: String) {
         self.drawColor = UIColor.black
         if lWidth == "small" {
@@ -158,10 +189,6 @@ class PaperView: UIImageView {
         self.drawColor = self.paperColor
     }
     
-    public func deleteNote() {
-        image = nil
-    }
-    
     public func setDrawColor(color: String) {
         if (self.previousLineWidth != nil) {
             self.lineWidth = self.previousLineWidth
@@ -177,28 +204,5 @@ class PaperView: UIImageView {
         } else if color == "black" {
             self.drawColor = self.blackColor
         }
-    }
-    
-    public func undo() {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        self.originalImage?.draw(in: bounds)
-        
-        image = UIGraphicsGetImageFromCurrentImageContext()
-        
-        paperColor.setStroke()
-        
-        context?.setLineWidth(self.lineWidth)
-        context?.setLineCap(.round)
-        
-        
-        context?.move(to: CGPoint(x: firstTouchLocation.x, y: firstTouchLocation.y))
-        context?.addLine(to: CGPoint(x: firstTouchLocation.x, y: firstTouchLocation.y))
-        
-        context?.strokePath()
-        
-        UIGraphicsEndImageContext()
     }
 }
