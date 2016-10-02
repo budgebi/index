@@ -22,7 +22,7 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-D5-nBy" customClass="PaperView" customModule="Index" customModuleProvider="target">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1000" id="lUB-r2-G9m"/>
+                                            <constraint firstAttribute="height" constant="704" id="I0Z-Yk-Nw7"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -33,6 +33,7 @@
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="leading" secondItem="FpY-b6-GjV" secondAttribute="leading" id="gep-i6-mPg"/>
                                     <constraint firstAttribute="trailing" secondItem="0eb-D5-nBy" secondAttribute="trailing" id="j5C-G9-yL9"/>
                                     <constraint firstAttribute="bottom" secondItem="0eb-D5-nBy" secondAttribute="bottom" id="lOg-uO-wPC"/>
+                                    <constraint firstAttribute="bottom" secondItem="0eb-D5-nBy" secondAttribute="bottom" id="wWa-xT-NIF"/>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVB-6Z-f2m">
@@ -149,6 +150,7 @@
                             <constraint firstItem="fnh-JP-Jpy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HKW-CZ-fku"/>
                             <constraint firstItem="ORh-Ol-ad2" firstAttribute="centerX" secondItem="Kje-4L-XTy" secondAttribute="centerX" id="Jac-TB-AKT"/>
                             <constraint firstAttribute="bottom" secondItem="tIQ-qK-Wfl" secondAttribute="bottom" constant="20" symbolic="YES" id="Jou-5n-Pu2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FpY-b6-GjV" secondAttribute="bottom" id="N5f-k9-xP8"/>
                             <constraint firstAttribute="bottom" secondItem="b0F-cM-Pow" secondAttribute="bottom" constant="114" id="QEQ-ha-cjW"/>
                             <constraint firstItem="ORh-Ol-ad2" firstAttribute="centerX" secondItem="Uum-wz-Brp" secondAttribute="centerX" id="S37-2H-zal"/>
                             <constraint firstItem="ORh-Ol-ad2" firstAttribute="centerX" secondItem="dZx-be-hik" secondAttribute="centerX" id="Tf6-Wx-oag"/>

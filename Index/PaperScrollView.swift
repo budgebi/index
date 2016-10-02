@@ -22,5 +22,8 @@ class PaperScrollView: UIScrollView {
         super.init(coder: aDecoder)!
         panGestureRecognizer.minimumNumberOfTouches = 2;
         panGestureRecognizer.maximumNumberOfTouches = 2;
+        panGestureRecognizer.delaysTouchesBegan = false;
+        panGestureRecognizer.delaysTouchesEnded = false;
+        self.delaysContentTouches = false;
     }
 }
