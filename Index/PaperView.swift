@@ -34,6 +34,8 @@ class PaperView: UIImageView {
     
     fileprivate var line: Bool!
     
+    fileprivate var maxY: CGFloat?
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.isUserInteractionEnabled = true
@@ -42,6 +44,8 @@ class PaperView: UIImageView {
         self.line = false
         
         self.backgroundColor = self.paperColor
+        
+        self.maxY = 0
     }
     
     // Touches Began - Draw Point

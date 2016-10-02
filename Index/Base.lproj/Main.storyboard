@@ -22,7 +22,7 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-D5-nBy" customClass="PaperView" customModule="Index" customModuleProvider="target">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="704" id="I0Z-Yk-Nw7"/>
+                                            <constraint firstAttribute="height" constant="3520" id="mlT-FC-x8R"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
