@@ -193,6 +193,7 @@ class PaperView: UIImageView {
         self.drawColor = self.paperColor
     }
     
+    /*
     public func setDrawColor(color: String) {
         if (self.previousLineWidth != nil) {
             self.lineWidth = self.previousLineWidth
@@ -208,5 +209,5 @@ class PaperView: UIImageView {
         } else if color == "black" {
             self.drawColor = self.blackColor
         }
-    }
+    } */
 }

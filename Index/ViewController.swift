@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var paperView: PaperView!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -48,24 +50,12 @@ class ViewController: UIViewController {
         self.paperView.lineSelected(false)
     }
     
-    @IBAction func setDrawColorRed() {
-        self.paperView.setDrawColor(color: "red")
-    }
-    
-    @IBAction func setDrawColorGreen() {
-        self.paperView.setDrawColor(color: "green")
-    }
-    
-    @IBAction func setDrawColorBlue() {
-        self.paperView.setDrawColor(color: "blue")
-    }
-    
-    @IBAction func setDrawColorYellow() {
-        self.paperView.setDrawColor(color: "yellow")
-    }
-    
-    @IBAction func setDrawColorBlack() {
-        self.paperView.setDrawColor(color: "black")
+    @IBAction func colorPrimaryCommand() {
+        for i in 11 ..< 15 {
+            let colorOption: UIButton = self.view.viewWithTag(i) as! UIButton
+            colorOption.isEnabled = true
+            colorOption.isHidden = false
+        }
     }
     
     @IBAction func undoButtonPressed() {
