@@ -10,9 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var colorOptionsDisplayed = false
+    
     @IBOutlet weak var paperView: PaperView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,16 +50,91 @@ class ViewController: UIViewController {
         self.paperView.lineSelected(false)
     }
     
-    @IBAction func colorPrimaryCommand() {
-        for i in 11 ..< 15 {
-            let colorOption: UIButton = self.view.viewWithTag(i) as! UIButton
-            colorOption.isEnabled = true
-            colorOption.isHidden = false
+    @IBAction func colorCommand(sender: AnyObject) {
+        let colorButton = sender as! UIButton
+        if(colorButton.tag != 10) {
+            let selectedColor = self.view.viewWithTag(10) as! UIButton
+            let prevImage = selectedColor.image(for: .normal)
+            let prevColor = selectedColor.accessibilityIdentifier
+            
+            let newColorImage = colorButton.image(for: .normal)
+            selectedColor.setImage(newColorImage, for: .normal)
+            selectedColor.accessibilityIdentifier = colorButton.accessibilityIdentifier
+            
+            paperView.setDrawColor(color: colorButton.accessibilityIdentifier!)
+            
+            colorButton.setImage(prevImage, for: .normal)
+            colorButton.accessibilityIdentifier = prevColor
         }
+        animateColorOptions(hide: colorOptionsDisplayed)
+        colorOptionsDisplayed = !colorOptionsDisplayed
     }
     
     @IBAction func undoButtonPressed() {
         self.paperView.undo()
+    }
+    
+    func animateColorOptions(hide: Bool) {
+        let start: CGFloat!
+        let end: CGFloat!
+        let tagInc: Int!
+        var beginTag: Int!
+        if hide == true {
+            start = 1
+            end = 0
+            tagInc = -1
+            beginTag = 15
+            
+        } else {
+            start = 0
+            end = 1
+            tagInc = 1
+            beginTag = 10
+        }
+        
+        beginTag = beginTag + tagInc
+        var colorOption = self.view.viewWithTag(beginTag) as! UIButton
+        colorOption.alpha = start
+        
+        let delay: TimeInterval = 0.01
+        let duration: TimeInterval = 0.01
+        
+        UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+            colorOption.isEnabled = true
+            colorOption.isHidden = false
+            colorOption.alpha = end
+            }, completion: { finished in
+                beginTag = beginTag + tagInc
+                colorOption = self.view.viewWithTag(beginTag) as! UIButton
+                colorOption.alpha = start
+                UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+                    colorOption.isEnabled = true
+                    colorOption.isHidden = false
+                    colorOption.alpha = end
+                    }, completion: { finished in
+                        beginTag = beginTag + tagInc
+                        colorOption = self.view.viewWithTag(beginTag) as! UIButton
+                        colorOption.alpha = start
+                        UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+                            colorOption.isEnabled = true
+                            colorOption.isHidden = false
+                            colorOption.alpha = end
+                            }, completion: { finished in
+                                beginTag = beginTag + tagInc
+                                colorOption = self.view.viewWithTag(beginTag) as! UIButton
+                                colorOption.alpha = start
+                                UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+                                    colorOption.isEnabled = true
+                                    colorOption.isHidden = false
+                                    colorOption.alpha = end
+                                    }, completion: nil
+                                )
+                            }
+                        )
+                    }
+                )
+            }
+        )
     }
 }
 
