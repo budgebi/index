@@ -25,6 +25,13 @@
                                             <constraint firstAttribute="height" constant="3520" id="mlT-FC-x8R"/>
                                         </constraints>
                                     </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Untitled" textAlignment="center" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="IVs-MB-8vC">
+                                        <rect key="frame" x="0.0" y="8" width="1024" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="top" secondItem="FpY-b6-GjV" secondAttribute="top" id="6zJ-n0-MaW"/>
