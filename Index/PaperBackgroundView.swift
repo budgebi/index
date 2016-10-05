@@ -21,19 +21,35 @@ class PaperBackgroundView: UIImageView {
         for i in 1...32 {
             let index: CGFloat = CGFloat(i)
             let multiplier: CGFloat = 32
-            drawHorizontalLines(xLocation: index*multiplier, context: context!)
+            drawVerticalLines(xLocation: index*multiplier, context: context!, drawColor: blueLineColor)
         }
         for i in 1...62 {
             let index: CGFloat = CGFloat(i)
             let multiplier: CGFloat = 32
-            drawVerticalLines(yLocation: index*multiplier, context: context!)
+            drawHorizontalLines(yLocation: index*multiplier, context: context!, drawColor: blueLineColor)
         }
         image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
+    
+    public func drawLinedPaper() {
+        self.image = nil
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+        let context = UIGraphicsGetCurrentContext()
+        image?.draw(in: bounds)
+        let multiplier: CGFloat = 32
+
+        for i in 2...62 {
+            let index: CGFloat = CGFloat(i)
+            drawHorizontalLines(yLocation: index*multiplier, context: context!, drawColor: blueLineColor)
+        }
+        drawVerticalLines(xLocation: CGFloat(3)*multiplier, context: context!, drawColor: redLineColor)
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
         
-    fileprivate func drawHorizontalLines(xLocation: CGFloat, context: CGContext) {
-        blueLineColor.setStroke()
+    fileprivate func drawVerticalLines(xLocation: CGFloat, context: CGContext, drawColor: UIColor) {
+        drawColor.setStroke()
         
         context.setLineWidth(1)
         context.setLineCap(.round)
@@ -46,8 +62,8 @@ class PaperBackgroundView: UIImageView {
     
     }
     
-    fileprivate func drawVerticalLines(yLocation: CGFloat, context: CGContext) {
-        blueLineColor.setStroke()
+    fileprivate func drawHorizontalLines(yLocation: CGFloat, context: CGContext, drawColor: UIColor) {
+        drawColor.setStroke()
         
         context.setLineWidth(1)
         context.setLineCap(.round)

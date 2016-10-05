@@ -18,7 +18,7 @@ class PaperView: UIImageView {
     fileprivate var lineWidth: CGFloat!
     fileprivate var previousLineWidth: CGFloat?
     
-    fileprivate let paperColor: UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+    fileprivate let paperColor: UIColor = UIColor.clear
     fileprivate var drawColor: UIColor = UIColor.black
     
     fileprivate let redColor = UIColor(red: 239/255, green: 83/255, blue: 80/255, alpha: 1)
