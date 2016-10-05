@@ -47,6 +47,10 @@ class PaperBackgroundView: UIImageView {
         image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
+    
+    public func drawPlainPaper() {
+        image = nil
+    }
         
     fileprivate func drawVerticalLines(xLocation: CGFloat, context: CGContext, drawColor: UIColor) {
         drawColor.setStroke()
