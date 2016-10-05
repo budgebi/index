@@ -43,7 +43,7 @@ class PaperView: UIImageView {
         self.lineWidth = mediumLineWidth
         self.line = false
         
-        self.backgroundColor = self.paperColor
+        self.backgroundColor = UIColor.clear
         
         self.maxY = 0
     }

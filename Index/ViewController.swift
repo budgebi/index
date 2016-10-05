@@ -10,12 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var colorOptionsDisplayed = false
-    
+    fileprivate var colorOptionsDisplayed = false
+    fileprivate let paperColor: UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+
     @IBOutlet weak var paperView: PaperView!
+    @IBOutlet weak var paperBackground: PaperBackgroundView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        paperBackground.backgroundColor = paperColor
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        paperBackground.drawGridPaper()
     }
 
     override func didReceiveMemoryWarning() {
