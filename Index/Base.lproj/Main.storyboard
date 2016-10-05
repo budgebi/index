@@ -167,6 +167,21 @@
                                     <action selector="freeDraw" destination="BYZ-38-t0r" eventType="touchUpInside" id="xJg-rJ-iJt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7RD-Fr-RwM">
+                                <frame key="frameInset" minX="16" minY="212" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="paper"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imc-FL-LY1">
+                                <frame key="frameInset" minX="54" minY="212" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="papergrid"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moE-TC-JDH">
+                                <frame key="frameInset" minX="92" minY="212" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="paperlined"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -209,6 +224,9 @@
         <image name="largewidth" width="21" height="21"/>
         <image name="line" width="22" height="22"/>
         <image name="mediumwidth" width="21" height="21"/>
+        <image name="paper" width="22" height="22"/>
+        <image name="papergrid" width="22" height="22"/>
+        <image name="paperlined" width="22" height="22"/>
         <image name="red" width="22" height="22"/>
         <image name="smallwidth" width="21" height="21"/>
         <image name="trash" width="22" height="22"/>

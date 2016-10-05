@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        paperBackground.drawGridPaper()
+        paperBackground.drawLinedPaper()
     }
 
     override func didReceiveMemoryWarning() {
