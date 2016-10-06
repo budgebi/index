@@ -177,8 +177,8 @@ class PaperView: UIImageView {
         self.previousLineWidth = self.lineWidth
     }
     
-    public func lineSelected(_ selected: Bool) {
-        self.line = selected
+    public func setDrawStyle(style: String) {
+        self.line = (style == "line")
     }
     
     public func useEraser() {

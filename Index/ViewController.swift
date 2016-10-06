@@ -11,6 +11,10 @@ import UIKit
 class ViewController: UIViewController {
 
     fileprivate var colorOptionsDisplayed = false
+    fileprivate var sizeOptionsDisplayed = false
+    fileprivate var paperOptionsDisplayed = false
+    fileprivate var drawStyleOptionsDisplayed = false
+    
     fileprivate let paperColor: UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
 
     @IBOutlet weak var paperView: PaperView!
@@ -22,23 +26,11 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        paperBackground.drawLinedPaper()
+        paperBackground.drawPlainPaper()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-
-    @IBAction func smallButtonPressed() {
-        self.paperView.setLineWidth(lWidth: "small")
-    }
-    
-    @IBAction func mediumButtonPressed() {
-        self.paperView.setLineWidth(lWidth: "medium")
-    }
-    
-    @IBAction func largeButtonPressed() {
-        self.paperView.setLineWidth(lWidth: "large")
     }
     
     @IBAction func deleteNote() {
@@ -49,12 +41,66 @@ class ViewController: UIViewController {
         self.paperView.useEraser()
     }
     
-    @IBAction func drawLine() {
-        self.paperView.lineSelected(true)
+    @IBAction func paperButtonPressed(sender: AnyObject) {
+        let paperButton = sender as! UIButton
+        if(paperButton.tag != 60) {
+            let selectedPaper = self.view.viewWithTag(60) as! UIButton
+            let prevImage = selectedPaper.image(for: .normal)
+            let prevStyle = selectedPaper.accessibilityIdentifier
+            
+            let newStyleImage = paperButton.image(for: .normal)
+            selectedPaper.setImage(newStyleImage, for: .normal)
+            selectedPaper.accessibilityIdentifier = paperButton.accessibilityIdentifier
+            
+            paperBackground.setPaper(paper: paperButton.accessibilityIdentifier!)
+            
+            paperButton.setImage(prevImage, for: .normal)
+            paperButton.accessibilityIdentifier = prevStyle
+        }
+        animateOptions(hide: paperOptionsDisplayed, startTag: 60, endTag: 62)
+        paperOptionsDisplayed = !paperOptionsDisplayed
+
     }
     
-    @IBAction func freeDraw() {
-        self.paperView.lineSelected(false)
+    @IBAction func drawStyleButtonPressed(sender: AnyObject) {
+        let drawStyleButton = sender as! UIButton
+        if(drawStyleButton.tag != 1) {
+            let selectedStyle = self.view.viewWithTag(1) as! UIButton
+            let prevImage = selectedStyle.image(for: .normal)
+            let prevStyle = selectedStyle.accessibilityIdentifier
+            
+            let newStyleImage = drawStyleButton.image(for: .normal)
+            selectedStyle.setImage(newStyleImage, for: .normal)
+            selectedStyle.accessibilityIdentifier = drawStyleButton.accessibilityIdentifier
+            
+            paperView.setDrawStyle(style: drawStyleButton.accessibilityIdentifier!)
+            
+            drawStyleButton.setImage(prevImage, for: .normal)
+            drawStyleButton.accessibilityIdentifier = prevStyle
+        }
+        animateOptions(hide: drawStyleOptionsDisplayed, startTag: 1, endTag: 2)
+        drawStyleOptionsDisplayed = !drawStyleOptionsDisplayed
+    }
+    
+    @IBAction func sizeButtonPressed(sender: AnyObject) {
+        let sizeButton = sender as! UIButton
+        if(sizeButton.tag != 20) {
+            let selectedSize = self.view.viewWithTag(20) as! UIButton
+            let prevImage = selectedSize.image(for: .normal)
+            let prevSize = selectedSize.accessibilityIdentifier
+            
+            let newSizeImage = sizeButton.image(for: .normal)
+            selectedSize.setImage(newSizeImage, for: .normal)
+            selectedSize.accessibilityIdentifier = sizeButton.accessibilityIdentifier
+            
+            paperView.setLineWidth(lWidth: sizeButton.accessibilityIdentifier!)
+            
+            sizeButton.setImage(prevImage, for: .normal)
+            sizeButton.accessibilityIdentifier = prevSize
+        }
+        animateOptions(hide: sizeOptionsDisplayed, startTag: 20, endTag: 22)
+        sizeOptionsDisplayed = !sizeOptionsDisplayed
+
     }
     
     @IBAction func colorCommand(sender: AnyObject) {
@@ -73,7 +119,7 @@ class ViewController: UIViewController {
             colorButton.setImage(prevImage, for: .normal)
             colorButton.accessibilityIdentifier = prevColor
         }
-        animateColorOptions(hide: colorOptionsDisplayed)
+        animateOptions(hide: colorOptionsDisplayed, startTag: 10, endTag: 14)
         colorOptionsDisplayed = !colorOptionsDisplayed
     }
     
@@ -81,7 +127,7 @@ class ViewController: UIViewController {
         self.paperView.undo()
     }
     
-    func animateColorOptions(hide: Bool) {
+    func animateOptions(hide: Bool, startTag: Int, endTag: Int) {
         let start: CGFloat!
         let end: CGFloat!
         let tagInc: Int!
@@ -90,26 +136,28 @@ class ViewController: UIViewController {
             start = 1
             end = 0
             tagInc = -1
-            beginTag = 15
+            beginTag = endTag + 1
             
         } else {
             start = 0
             end = 1
             tagInc = 1
-            beginTag = 10
+            beginTag = startTag
         }
         
-        let delay: TimeInterval = 0.1
-        let duration: TimeInterval = 0.5
+        let steps = endTag - startTag
+        
+        let delay: TimeInterval = 0.0
+        let duration: TimeInterval = Double(steps+1) * 0.05
         
         UIView.animateKeyframes(withDuration: duration, delay: delay, options: .calculationModeLinear, animations: {
             
-            for i in 0...3 {
+            for i in 1...steps {
                 beginTag = beginTag + tagInc
                 let colorOption = self.view.viewWithTag(beginTag) as! UIButton
                 colorOption.alpha = start
 
-                UIView.addKeyframe(withRelativeStartTime: Double(i)/5, relativeDuration: 1/5, animations: {
+                UIView.addKeyframe(withRelativeStartTime: Double(i)/Double(steps+1), relativeDuration: Double(1)/Double(steps+1), animations: {
                     colorOption.isEnabled = true
                     colorOption.isHidden = false
                     colorOption.alpha = end
@@ -118,44 +166,6 @@ class ViewController: UIViewController {
             
             }, completion: {finished in
         })
-        
-        
-        //        UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
-        //            colorOption.isEnabled = true
-        //            colorOption.isHidden = false
-        //            colorOption.alpha = end
-        //            }, completion: { finished in
-        //                beginTag = beginTag + tagInc
-        //                colorOption = self.view.viewWithTag(beginTag) as! UIButton
-        //                colorOption.alpha = start
-        //                UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
-        //                    colorOption.isEnabled = true
-        //                    colorOption.isHidden = false
-        //                    colorOption.alpha = end
-        //                    }, completion: { finished in
-        //                        beginTag = beginTag + tagInc
-        //                        colorOption = self.view.viewWithTag(beginTag) as! UIButton
-        //                        colorOption.alpha = start
-        //                        UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
-        //                            colorOption.isEnabled = true
-        //                            colorOption.isHidden = false
-        //                            colorOption.alpha = end
-        //                            }, completion: { finished in
-        //                                beginTag = beginTag + tagInc
-        //                                colorOption = self.view.viewWithTag(beginTag) as! UIButton
-        //                                colorOption.alpha = start
-        //                                UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
-        //                                    colorOption.isEnabled = true
-        //                                    colorOption.isHidden = false
-        //                                    colorOption.alpha = end
-        //                                    }, completion: nil
-        //                                )
-        //                            }
-        //                        )
-        //                    }
-        //                )
-        //            }
-        //        )
     }
 }
 

@@ -71,12 +71,13 @@
                                     <action selector="colorCommandWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y56-S1-A1e"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJH-HD-t3S">
+                            <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJH-HD-t3S">
                                 <frame key="frameInset" minX="54" minY="256" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="line"/>
                                 <state key="normal" image="line"/>
                                 <connections>
-                                    <action selector="drawLine" destination="BYZ-38-t0r" eventType="touchUpInside" id="dRb-9v-vHk"/>
+                                    <action selector="drawStyleButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d0d-5b-2Dc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORh-Ol-ad2">
@@ -118,29 +119,32 @@
                             <button opaque="NO" tag="20" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Un8-Qg-U1b">
                                 <frame key="frameInset" minX="16" minY="344" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="small"/>
                                 <state key="normal" image="smallwidth"/>
                                 <state key="disabled" image="smallwidth"/>
                                 <state key="selected" image="smallwidth"/>
                                 <state key="highlighted" image="smallwidth"/>
                                 <state key="focused" image="smallwidth"/>
                                 <connections>
-                                    <action selector="smallButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qgn-uZ-L8Q"/>
+                                    <action selector="sizeButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j22-kh-3j0"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="21" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVB-6Z-f2m">
                                 <frame key="frameInset" minX="54" minY="344" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="medium"/>
                                 <state key="normal" image="mediumwidth"/>
                                 <connections>
-                                    <action selector="mediumButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ts1-98-ThI"/>
+                                    <action selector="sizeButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mxr-FD-SYY"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="22" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0F-cM-Pow">
                                 <frame key="frameInset" minX="92" minY="344" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="large"/>
                                 <state key="normal" image="largewidth"/>
                                 <connections>
-                                    <action selector="largeButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="pvt-Ih-3xj"/>
+                                    <action selector="sizeButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SVa-F8-Ea4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="40" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRu-7o-TBp">
@@ -159,28 +163,41 @@
                                     <action selector="deleteNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="x4U-eO-Tek"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uum-wz-Brp">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uum-wz-Brp">
                                 <frame key="frameInset" minX="16" minY="256" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="squiggle"/>
                                 <state key="normal" image="freedraw"/>
                                 <connections>
-                                    <action selector="freeDraw" destination="BYZ-38-t0r" eventType="touchUpInside" id="xJg-rJ-iJt"/>
+                                    <action selector="drawStyleButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xqr-i0-BKe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="60" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7RD-Fr-RwM">
                                 <frame key="frameInset" minX="16" minY="212" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="plain"/>
                                 <state key="normal" image="paper"/>
+                                <connections>
+                                    <action selector="paperButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aQ0-sa-iiI"/>
+                                </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="61" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imc-FL-LY1">
                                 <frame key="frameInset" minX="54" minY="212" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="grid"/>
                                 <state key="normal" image="papergrid"/>
+                                <connections>
+                                    <action selector="paperButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QaI-J5-k92"/>
+                                </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="62" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moE-TC-JDH">
                                 <frame key="frameInset" minX="92" minY="212" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="lined"/>
                                 <state key="normal" image="paperlined"/>
+                                <connections>
+                                    <action selector="paperButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MDs-oC-Ljw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

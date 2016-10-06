@@ -13,6 +13,16 @@ class PaperBackgroundView: UIImageView {
     fileprivate let blueLineColor: UIColor = UIColor.init(red: 173/255, green: 216/255, blue: 230/255, alpha: 1);
     fileprivate let redLineColor: UIColor = UIColor.init(red: 255/255, green: 102/255, blue: 102/255, alpha: 1);
     
+    public func setPaper(paper: String) {
+        if paper == "plain" {
+            drawPlainPaper()
+        } else if paper == "lined" {
+            drawLinedPaper()
+        } else if paper == "grid" {
+            drawGridPaper()
+        }
+    }
+    
     public func drawGridPaper() {
         self.image = nil
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
