@@ -99,49 +99,63 @@ class ViewController: UIViewController {
             beginTag = 10
         }
         
-        beginTag = beginTag + tagInc
-        var colorOption = self.view.viewWithTag(beginTag) as! UIButton
-        colorOption.alpha = start
+        let delay: TimeInterval = 0.1
+        let duration: TimeInterval = 0.5
         
-        let delay: TimeInterval = 0.01
-        let duration: TimeInterval = 0.01
-        
-        UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
-            colorOption.isEnabled = true
-            colorOption.isHidden = false
-            colorOption.alpha = end
-            }, completion: { finished in
+        UIView.animateKeyframes(withDuration: duration, delay: delay, options: .calculationModeLinear, animations: {
+            
+            for i in 0...3 {
                 beginTag = beginTag + tagInc
-                colorOption = self.view.viewWithTag(beginTag) as! UIButton
+                let colorOption = self.view.viewWithTag(beginTag) as! UIButton
                 colorOption.alpha = start
-                UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+
+                UIView.addKeyframe(withRelativeStartTime: Double(i)/5, relativeDuration: 1/5, animations: {
                     colorOption.isEnabled = true
                     colorOption.isHidden = false
                     colorOption.alpha = end
-                    }, completion: { finished in
-                        beginTag = beginTag + tagInc
-                        colorOption = self.view.viewWithTag(beginTag) as! UIButton
-                        colorOption.alpha = start
-                        UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
-                            colorOption.isEnabled = true
-                            colorOption.isHidden = false
-                            colorOption.alpha = end
-                            }, completion: { finished in
-                                beginTag = beginTag + tagInc
-                                colorOption = self.view.viewWithTag(beginTag) as! UIButton
-                                colorOption.alpha = start
-                                UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
-                                    colorOption.isEnabled = true
-                                    colorOption.isHidden = false
-                                    colorOption.alpha = end
-                                    }, completion: nil
-                                )
-                            }
-                        )
-                    }
-                )
+                })
             }
-        )
+            
+            }, completion: {finished in
+        })
+        
+        
+        //        UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+        //            colorOption.isEnabled = true
+        //            colorOption.isHidden = false
+        //            colorOption.alpha = end
+        //            }, completion: { finished in
+        //                beginTag = beginTag + tagInc
+        //                colorOption = self.view.viewWithTag(beginTag) as! UIButton
+        //                colorOption.alpha = start
+        //                UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+        //                    colorOption.isEnabled = true
+        //                    colorOption.isHidden = false
+        //                    colorOption.alpha = end
+        //                    }, completion: { finished in
+        //                        beginTag = beginTag + tagInc
+        //                        colorOption = self.view.viewWithTag(beginTag) as! UIButton
+        //                        colorOption.alpha = start
+        //                        UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+        //                            colorOption.isEnabled = true
+        //                            colorOption.isHidden = false
+        //                            colorOption.alpha = end
+        //                            }, completion: { finished in
+        //                                beginTag = beginTag + tagInc
+        //                                colorOption = self.view.viewWithTag(beginTag) as! UIButton
+        //                                colorOption.alpha = start
+        //                                UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+        //                                    colorOption.isEnabled = true
+        //                                    colorOption.isHidden = false
+        //                                    colorOption.alpha = end
+        //                                    }, completion: nil
+        //                                )
+        //                            }
+        //                        )
+        //                    }
+        //                )
+        //            }
+        //        )
     }
 }
 
