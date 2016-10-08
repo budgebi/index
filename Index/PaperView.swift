@@ -14,12 +14,14 @@ class PaperView: UIImageView {
     fileprivate let mediumLineWidth: CGFloat = 4
     fileprivate let largeLineWidth: CGFloat = 6
     fileprivate let eraseLineWidth: CGFloat = 20
+    fileprivate let hugeEraserLineWidth: CGFloat = 40
     
     fileprivate var lineWidth: CGFloat!
     fileprivate var previousLineWidth: CGFloat?
     
     fileprivate let paperColor: UIColor = UIColor.clear
     fileprivate var drawColor: UIColor = UIColor.black
+    fileprivate var previousDrawColor: UIColor?
     
     fileprivate let redColor = UIColor(red: 239/255, green: 83/255, blue: 80/255, alpha: 1)
     fileprivate let blueColor = UIColor(red: 66/255, green: 165/255, blue: 245/255, alpha: 1)
@@ -43,6 +45,9 @@ class PaperView: UIImageView {
         self.lineWidth = smallLineWidth
         self.line = false
         
+        self.previousDrawColor = blackColor
+        self.previousLineWidth = smallLineWidth
+        
         self.backgroundColor = UIColor.clear
         
         self.maxY = 0
@@ -59,20 +64,30 @@ class PaperView: UIImageView {
         
         image?.draw(in: bounds)
         
-        drawPoint(context, touchLocation: self.firstTouchLocation)
+        drawPoint(context, touch: touches.first!)
         
         image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     
-    fileprivate func drawPoint(_ context: CGContext?, touchLocation: CGPoint) {
+    fileprivate func drawPoint(_ context: CGContext?, touch: UITouch) {
+        
+        if touch.type != .stylus {
+            self.lineWidth = hugeEraserLineWidth
+            context!.setBlendMode(.clear)
+        } else if drawColor == UIColor.clear {
+            context!.setBlendMode(.clear)
+        } else {
+            self.lineWidth = self.previousLineWidth
+            context!.setBlendMode(.color)
+        }
         
         drawColor.setStroke()
         
         context?.setLineWidth(self.lineWidth)
         context?.setLineCap(.round)
         
-        
+        let touchLocation = touch.location(in: self)
         context?.move(to: CGPoint(x: touchLocation.x, y: touchLocation.y))
         context?.addLine(to: CGPoint(x: touchLocation.x, y: touchLocation.y))
         
@@ -141,11 +156,20 @@ class PaperView: UIImageView {
        
         let location = touch.location(in: self)
         
+        if touch.type != .stylus {
+            self.lineWidth = hugeEraserLineWidth
+            context!.setBlendMode(.clear)
+        } else if drawColor == UIColor.clear {
+            context!.setBlendMode(.clear)
+        } else {
+            self.lineWidth = self.previousLineWidth
+            context!.setBlendMode(.color)
+        }
+        
         drawColor.setStroke()
         
         context?.setLineWidth(self.lineWidth)
         context?.setLineCap(.round)
-        
         
         context?.move(to: CGPoint(x: previousLocation.x, y: previousLocation.y))
         context?.addLine(to: CGPoint(x: location.x, y: location.y))
@@ -183,7 +207,7 @@ class PaperView: UIImageView {
     
     // Setters from View Controller
     public func setLineWidth(lWidth: String) {
-        self.drawColor = UIColor.black
+        self.drawColor = self.previousDrawColor!
         if lWidth == "small" {
             self.lineWidth = self.smallLineWidth
         } else if lWidth == "medium" {
@@ -205,9 +229,14 @@ class PaperView: UIImageView {
         if (self.previousLineWidth == nil || self.lineWidth != self.eraseLineWidth) {
             self.previousLineWidth = self.lineWidth
         }
+        
+        if (self.previousDrawColor == nil || self.drawColor != UIColor.clear) {
+            self.previousDrawColor = self.drawColor
+        }
+        
         self.line = false
         self.lineWidth = self.eraseLineWidth
-        self.drawColor = self.paperColor
+        self.drawColor = UIColor.clear
     }
     
     
