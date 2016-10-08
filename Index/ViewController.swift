@@ -43,6 +43,8 @@ class ViewController: UIViewController {
     
     @IBAction func paperButtonPressed(sender: AnyObject) {
         let paperButton = sender as! UIButton
+        paperBackground.setPaper(paper: paperButton.accessibilityIdentifier!)
+
         if(paperButton.tag != 60) {
             let selectedPaper = self.view.viewWithTag(60) as! UIButton
             let prevImage = selectedPaper.image(for: .normal)
@@ -52,11 +54,10 @@ class ViewController: UIViewController {
             selectedPaper.setImage(newStyleImage, for: .normal)
             selectedPaper.accessibilityIdentifier = paperButton.accessibilityIdentifier
             
-            paperBackground.setPaper(paper: paperButton.accessibilityIdentifier!)
-            
             paperButton.setImage(prevImage, for: .normal)
             paperButton.accessibilityIdentifier = prevStyle
         }
+        
         animateOptions(hide: paperOptionsDisplayed, startTag: 60, endTag: 62)
         paperOptionsDisplayed = !paperOptionsDisplayed
 
@@ -64,6 +65,8 @@ class ViewController: UIViewController {
     
     @IBAction func drawStyleButtonPressed(sender: AnyObject) {
         let drawStyleButton = sender as! UIButton
+        paperView.setDrawStyle(style: drawStyleButton.accessibilityIdentifier!)
+
         if(drawStyleButton.tag != 1) {
             let selectedStyle = self.view.viewWithTag(1) as! UIButton
             let prevImage = selectedStyle.image(for: .normal)
@@ -73,17 +76,18 @@ class ViewController: UIViewController {
             selectedStyle.setImage(newStyleImage, for: .normal)
             selectedStyle.accessibilityIdentifier = drawStyleButton.accessibilityIdentifier
             
-            paperView.setDrawStyle(style: drawStyleButton.accessibilityIdentifier!)
-            
             drawStyleButton.setImage(prevImage, for: .normal)
             drawStyleButton.accessibilityIdentifier = prevStyle
         }
+        
         animateOptions(hide: drawStyleOptionsDisplayed, startTag: 1, endTag: 2)
         drawStyleOptionsDisplayed = !drawStyleOptionsDisplayed
     }
     
     @IBAction func sizeButtonPressed(sender: AnyObject) {
         let sizeButton = sender as! UIButton
+        paperView.setLineWidth(lWidth: sizeButton.accessibilityIdentifier!)
+
         if(sizeButton.tag != 20) {
             let selectedSize = self.view.viewWithTag(20) as! UIButton
             let prevImage = selectedSize.image(for: .normal)
@@ -92,8 +96,6 @@ class ViewController: UIViewController {
             let newSizeImage = sizeButton.image(for: .normal)
             selectedSize.setImage(newSizeImage, for: .normal)
             selectedSize.accessibilityIdentifier = sizeButton.accessibilityIdentifier
-            
-            paperView.setLineWidth(lWidth: sizeButton.accessibilityIdentifier!)
             
             sizeButton.setImage(prevImage, for: .normal)
             sizeButton.accessibilityIdentifier = prevSize
@@ -105,6 +107,8 @@ class ViewController: UIViewController {
     
     @IBAction func colorCommand(sender: AnyObject) {
         let colorButton = sender as! UIButton
+        paperView.setDrawColor(color: colorButton.accessibilityIdentifier!)
+
         if(colorButton.tag != 10) {
             let selectedColor = self.view.viewWithTag(10) as! UIButton
             let prevImage = selectedColor.image(for: .normal)
@@ -114,11 +118,10 @@ class ViewController: UIViewController {
             selectedColor.setImage(newColorImage, for: .normal)
             selectedColor.accessibilityIdentifier = colorButton.accessibilityIdentifier
             
-            paperView.setDrawColor(color: colorButton.accessibilityIdentifier!)
-            
             colorButton.setImage(prevImage, for: .normal)
             colorButton.accessibilityIdentifier = prevColor
         }
+        
         animateOptions(hide: colorOptionsDisplayed, startTag: 10, endTag: 14)
         colorOptionsDisplayed = !colorOptionsDisplayed
     }
