@@ -81,16 +81,33 @@ class PaperView: UIImageView {
     
     // Touches Moved - Draw Stroke or Line
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        
+        guard (touches.first != nil), (event != nil) else
+        {
+            return
+        }
+        
         self.lastTouch = touches.first
 
+        var touches = [UITouch]()
+
+        if let coalescedTouches = event?.coalescedTouches(for: self.lastTouch) {
+            touches = coalescedTouches
+        } else {
+            touches.append(self.lastTouch)
+        }
+        
+        
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         
         let context = UIGraphicsGetCurrentContext()
         
         if self.line == false {
             image?.draw(in: bounds)
-        
-            drawStroke(context, touch: self.lastTouch)
+            for touch in touches {
+                drawStroke(context, touch: touch)
+            }
         } else {
             self.originalImage?.draw(in: bounds)
             
