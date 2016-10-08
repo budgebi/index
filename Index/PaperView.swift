@@ -55,7 +55,7 @@ class PaperView: UIImageView {
     
     // Touches Began - Draw Point
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.firstTouchLocation = touches.first?.location(in: self)
+        self.firstTouchLocation = touches.first?.preciseLocation(in: self)
         self.originalImage = image
         
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
@@ -87,7 +87,7 @@ class PaperView: UIImageView {
         context?.setLineWidth(self.lineWidth)
         context?.setLineCap(.round)
         
-        let touchLocation = touch.location(in: self)
+        let touchLocation = touch.preciseLocation(in: self)
         context?.move(to: CGPoint(x: touchLocation.x, y: touchLocation.y))
         context?.addLine(to: CGPoint(x: touchLocation.x, y: touchLocation.y))
         
@@ -137,7 +137,7 @@ class PaperView: UIImageView {
     fileprivate func drawLine(_ context: CGContext?, touch: UITouch) {
         let previousLocation = self.firstTouchLocation!
         
-        let location = touch.location(in: self)
+        let location = touch.preciseLocation(in: self)
         
         drawColor.setStroke()
         
@@ -152,9 +152,9 @@ class PaperView: UIImageView {
     }
     
     fileprivate func drawStroke(_ context: CGContext?, touch: UITouch) {
-        let previousLocation = touch.previousLocation(in: self)
+        let previousLocation = touch.precisePreviousLocation(in: self)
        
-        let location = touch.location(in: self)
+        let location = touch.preciseLocation(in: self)
         
         if touch.type != .stylus {
             self.lineWidth = hugeEraserLineWidth
