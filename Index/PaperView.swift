@@ -10,7 +10,7 @@ import UIKit
 
 class PaperView: UIImageView {
     
-    fileprivate let smallLineWidth: CGFloat = 2
+    fileprivate let smallLineWidth: CGFloat = 1
     fileprivate let mediumLineWidth: CGFloat = 4
     fileprivate let largeLineWidth: CGFloat = 6
     fileprivate let eraseLineWidth: CGFloat = 20
@@ -40,7 +40,7 @@ class PaperView: UIImageView {
         super.init(coder: aDecoder)!
         self.isUserInteractionEnabled = true
         
-        self.lineWidth = mediumLineWidth
+        self.lineWidth = smallLineWidth
         self.line = false
         
         self.backgroundColor = UIColor.clear
