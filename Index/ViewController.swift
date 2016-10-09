@@ -45,42 +45,15 @@ class ViewController: UIViewController {
         let paperButton = sender as! UIButton
         paperBackground.setPaper(paper: paperButton.accessibilityIdentifier!)
 
-        if(paperButton.tag != 60) {
-            let selectedPaper = self.view.viewWithTag(60) as! UIButton
-            let prevImage = selectedPaper.image(for: .normal)
-            let prevStyle = selectedPaper.accessibilityIdentifier
-            
-            let newStyleImage = paperButton.image(for: .normal)
-            selectedPaper.setImage(newStyleImage, for: .normal)
-            selectedPaper.accessibilityIdentifier = paperButton.accessibilityIdentifier
-            
-            paperButton.setImage(prevImage, for: .normal)
-            paperButton.accessibilityIdentifier = prevStyle
-        }
-        
-        animateOptions(hide: paperOptionsDisplayed, startTag: 60, endTag: 62)
+        animateOptionSlide(button: paperButton, start: 60, end: 62, hide: paperOptionsDisplayed)
         paperOptionsDisplayed = !paperOptionsDisplayed
-
     }
     
     @IBAction func drawStyleButtonPressed(sender: AnyObject) {
         let drawStyleButton = sender as! UIButton
         paperView.setDrawStyle(style: drawStyleButton.accessibilityIdentifier!)
 
-        if(drawStyleButton.tag != 1) {
-            let selectedStyle = self.view.viewWithTag(1) as! UIButton
-            let prevImage = selectedStyle.image(for: .normal)
-            let prevStyle = selectedStyle.accessibilityIdentifier
-            
-            let newStyleImage = drawStyleButton.image(for: .normal)
-            selectedStyle.setImage(newStyleImage, for: .normal)
-            selectedStyle.accessibilityIdentifier = drawStyleButton.accessibilityIdentifier
-            
-            drawStyleButton.setImage(prevImage, for: .normal)
-            drawStyleButton.accessibilityIdentifier = prevStyle
-        }
-        
-        animateOptions(hide: drawStyleOptionsDisplayed, startTag: 1, endTag: 2)
+        animateOptionSlide(button: drawStyleButton, start: 1, end: 2, hide: drawStyleOptionsDisplayed)
         drawStyleOptionsDisplayed = !drawStyleOptionsDisplayed
     }
     
@@ -88,46 +61,37 @@ class ViewController: UIViewController {
         let sizeButton = sender as! UIButton
         paperView.setLineWidth(lWidth: sizeButton.accessibilityIdentifier!)
 
-        if(sizeButton.tag != 20) {
-            let selectedSize = self.view.viewWithTag(20) as! UIButton
-            let prevImage = selectedSize.image(for: .normal)
-            let prevSize = selectedSize.accessibilityIdentifier
-            
-            let newSizeImage = sizeButton.image(for: .normal)
-            selectedSize.setImage(newSizeImage, for: .normal)
-            selectedSize.accessibilityIdentifier = sizeButton.accessibilityIdentifier
-            
-            sizeButton.setImage(prevImage, for: .normal)
-            sizeButton.accessibilityIdentifier = prevSize
-        }
-        animateOptions(hide: sizeOptionsDisplayed, startTag: 20, endTag: 22)
+        animateOptionSlide(button: sizeButton, start: 20, end: 22, hide: sizeOptionsDisplayed)
         sizeOptionsDisplayed = !sizeOptionsDisplayed
-
     }
     
     @IBAction func colorCommand(sender: AnyObject) {
         let colorButton = sender as! UIButton
         paperView.setDrawColor(color: colorButton.accessibilityIdentifier!)
-
-        if(colorButton.tag != 10) {
-            let selectedColor = self.view.viewWithTag(10) as! UIButton
-            let prevImage = selectedColor.image(for: .normal)
-            let prevColor = selectedColor.accessibilityIdentifier
-            
-            let newColorImage = colorButton.image(for: .normal)
-            selectedColor.setImage(newColorImage, for: .normal)
-            selectedColor.accessibilityIdentifier = colorButton.accessibilityIdentifier
-            
-            colorButton.setImage(prevImage, for: .normal)
-            colorButton.accessibilityIdentifier = prevColor
-        }
         
-        animateOptions(hide: colorOptionsDisplayed, startTag: 10, endTag: 14)
+        animateOptionSlide(button: colorButton, start: 10, end: 14, hide: colorOptionsDisplayed)
         colorOptionsDisplayed = !colorOptionsDisplayed
     }
     
     @IBAction func undoButtonPressed() {
         self.paperView.undo()
+    }
+    
+    func animateOptionSlide(button: UIButton, start: Int, end: Int, hide: Bool) {
+        if(button.tag != start) {
+            let selectedOption = self.view.viewWithTag(start) as! UIButton
+            let prevImage = selectedOption.image(for: .normal)
+            let prevIdentifier = selectedOption.accessibilityIdentifier
+            
+            let newImage = button.image(for: .normal)
+            selectedOption.setImage(newImage, for: .normal)
+            selectedOption.accessibilityIdentifier = button.accessibilityIdentifier
+            
+            button.setImage(prevImage, for: .normal)
+            button.accessibilityIdentifier = prevIdentifier
+        }
+        
+        animateOptions(hide: hide, startTag: start, endTag: end)
     }
     
     func animateOptions(hide: Bool, startTag: Int, endTag: Int) {
