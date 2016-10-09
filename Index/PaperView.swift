@@ -10,6 +10,7 @@ import UIKit
 
 class PaperView: UIImageView {
     
+    // Line widths
     fileprivate let smallLineWidth: CGFloat = 1
     fileprivate let mediumLineWidth: CGFloat = 4
     fileprivate let largeLineWidth: CGFloat = 6
@@ -19,6 +20,7 @@ class PaperView: UIImageView {
     fileprivate var lineWidth: CGFloat!
     fileprivate var previousLineWidth: CGFloat?
     
+    // Colors
     fileprivate let paperColor: UIColor = UIColor.clear
     fileprivate var drawColor: UIColor = UIColor.black
     fileprivate var previousDrawColor: UIColor?
@@ -29,14 +31,8 @@ class PaperView: UIImageView {
     fileprivate let yellowColor = UIColor(red: 255/255, green: 202/255, blue: 40/255, alpha: 1)
     fileprivate let blackColor = UIColor.black
     
-    fileprivate var lastTouch: UITouch!
-    fileprivate var firstTouchLocation: CGPoint!
-    
-    fileprivate var originalImage: UIImage?
-    
+    // Draw style
     fileprivate var line: Bool!
-    
-    fileprivate var maxY: CGFloat?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -49,160 +45,30 @@ class PaperView: UIImageView {
         self.previousLineWidth = smallLineWidth
         
         self.backgroundColor = UIColor.clear
-        
-        self.maxY = 0
     }
     
-    // Touches Began - Draw Point
+    // Handle Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.firstTouchLocation = touches.first?.preciseLocation(in: self)
-        self.originalImage = image
-        
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        image?.draw(in: bounds)
-        
-        drawPoint(context, touch: touches.first!)
-        
-        image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
     }
     
-    fileprivate func drawPoint(_ context: CGContext?, touch: UITouch) {
-        
-        if touch.type != .stylus {
-            self.lineWidth = hugeEraserLineWidth
-            context!.setBlendMode(.clear)
-        } else if drawColor == UIColor.clear {
-            context!.setBlendMode(.clear)
-        } else {
-            self.lineWidth = self.previousLineWidth
-            context!.setBlendMode(.color)
-        }
-        
-        drawColor.setStroke()
-        
-        context?.setLineWidth(self.lineWidth)
-        context?.setLineCap(.round)
-        
-        let touchLocation = touch.preciseLocation(in: self)
-        context?.move(to: CGPoint(x: touchLocation.x, y: touchLocation.y))
-        context?.addLine(to: CGPoint(x: touchLocation.x, y: touchLocation.y))
-        
-        context?.strokePath()
-    }
-    
-    // Touches Moved - Draw Stroke or Line
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        
-        guard (touches.first != nil), (event != nil) else
-        {
-            return
-        }
-        
-        self.lastTouch = touches.first
-
-        var touches = [UITouch]()
-
-        if let coalescedTouches = event?.coalescedTouches(for: self.lastTouch) {
-            touches = coalescedTouches
-        } else {
-            touches.append(self.lastTouch)
-        }
-        
-        
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        if self.line == false {
-            image?.draw(in: bounds)
-            for touch in touches {
-                drawStroke(context, touch: touch)
-            }
-        } else {
-            self.originalImage?.draw(in: bounds)
-            
-            drawLine(context, touch: self.lastTouch)
-        }
-        
-        
-        image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+    }
+    
+    // Handle Drawing
+    fileprivate func drawPoint(_ context: CGContext?, touch: UITouch) {
     }
     
     fileprivate func drawLine(_ context: CGContext?, touch: UITouch) {
-        let previousLocation = self.firstTouchLocation!
-        
-        let location = touch.preciseLocation(in: self)
-        
-        drawColor.setStroke()
-        
-        context?.setLineWidth(self.lineWidth)
-        context?.setLineCap(.round)
-        
-        
-        context?.move(to: CGPoint(x: previousLocation.x, y: previousLocation.y))
-        context?.addLine(to: CGPoint(x: location.x, y: location.y))
-        
-        context?.strokePath()
     }
     
     fileprivate func drawStroke(_ context: CGContext?, touch: UITouch) {
-        let previousLocation = touch.precisePreviousLocation(in: self)
-       
-        let location = touch.preciseLocation(in: self)
-        
-        if touch.type != .stylus {
-            self.lineWidth = hugeEraserLineWidth
-            context!.setBlendMode(.clear)
-        } else if drawColor == UIColor.clear {
-            context!.setBlendMode(.clear)
-        } else {
-            self.lineWidth = self.previousLineWidth
-            context!.setBlendMode(.color)
-        }
-        
-        drawColor.setStroke()
-        
-        context?.setLineWidth(self.lineWidth)
-        context?.setLineCap(.round)
-        
-        context?.move(to: CGPoint(x: previousLocation.x, y: previousLocation.y))
-        context?.addLine(to: CGPoint(x: location.x, y: location.y))
-
-        context?.strokePath()
     }
     
     // Undo and Delete
     public func undo() {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        self.originalImage?.draw(in: bounds)
-        
-        image = UIGraphicsGetImageFromCurrentImageContext()
-        
-        paperColor.setStroke()
-        
-        context?.setLineWidth(self.lineWidth)
-        context?.setLineCap(.round)
-        
-        
-        context?.move(to: CGPoint(x: firstTouchLocation.x, y: firstTouchLocation.y))
-        context?.addLine(to: CGPoint(x: firstTouchLocation.x, y: firstTouchLocation.y))
-        
-        context?.strokePath()
-        
-        UIGraphicsEndImageContext()
     }
     
     public func deleteNote() {
-        image = nil
     }
     
     // Setters from View Controller
