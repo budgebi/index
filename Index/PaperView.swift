@@ -52,12 +52,13 @@ class PaperView: UIImageView {
         
         self.backgroundColor = UIColor.clear
         
-        mainPath = UIBezierPath()
-        
         addDrawLayer()
     }
     
     func addDrawLayer() {
+        
+        mainPath = UIBezierPath()
+
         drawLayer = CAShapeLayer()
         drawLayer?.frame = layer.bounds
         drawLayer?.lineCap = kCALineCapButt
