@@ -31,6 +31,12 @@ class PaperView: UIImageView {
     fileprivate let yellowColor = UIColor(red: 255/255, green: 202/255, blue: 40/255, alpha: 1)
     fileprivate let blackColor = UIColor.black
     
+    fileprivate var drawLayer: CAShapeLayer?
+    fileprivate var persistentLayer: CAShapeLayer?
+    fileprivate var points: [CGPoint]?
+    fileprivate var mainPath: UIBezierPath?
+    fileprivate var drawPath: UIBezierPath?
+    
     // Draw style
     fileprivate var line: Bool!
     
@@ -45,13 +51,66 @@ class PaperView: UIImageView {
         self.previousLineWidth = smallLineWidth
         
         self.backgroundColor = UIColor.clear
+        
+        mainPath = UIBezierPath()
+        
+        addDrawLayer()
+    }
+    
+    func addDrawLayer() {
+        drawLayer = CAShapeLayer()
+        drawLayer?.frame = layer.bounds
+        drawLayer?.lineCap = kCALineCapButt
+        drawLayer?.lineJoin = kCALineJoinRound
+        drawLayer?.fillColor = UIColor.clear.cgColor
+        drawLayer?.strokeColor = drawColor.cgColor
+        drawLayer?.lineWidth = lineWidth
+        drawLayer?.backgroundColor = UIColor.clear.cgColor
+        
+        layer.addSublayer(drawLayer!)
+        
+        persistentLayer = CAShapeLayer()
+        persistentLayer?.frame = layer.bounds
+        persistentLayer?.lineCap = kCALineCapButt
+        persistentLayer?.lineJoin = kCALineJoinRound
+        persistentLayer?.fillColor = UIColor.clear.cgColor
+        persistentLayer?.strokeColor = drawColor.cgColor
+        persistentLayer?.lineWidth = lineWidth
+        persistentLayer?.backgroundColor = UIColor.clear.cgColor
+        
+        layer.addSublayer(persistentLayer!)
     }
     
     // Handle Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        points = [(touches.first?.location(in: self))!]
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        let touch = touches.first
+        if let coalescedTouches = event?.coalescedTouches(for: touch!) {
+            points? += coalescedTouches.map { $0.preciseLocation(in: self) }
+        } else {
+            points?.append((touch?.preciseLocation(in: self))!)
+        }
+
+        if let predictedTouches = event?.predictedTouches(for: touch!) {
+            points? += predictedTouches.map { $0.preciseLocation(in: self) }
+        }
+        
+        drawPath = UIBezierPath()
+        drawPath?.move(to: (points?.first)!)
+        for point in points! {
+            drawPath?.addLine(to: point)
+        }
+        
+        drawLayer?.path = drawPath?.cgPath
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        mainPath?.append(drawPath!)
+        persistentLayer?.path = mainPath?.cgPath
     }
     
     // Handle Drawing
@@ -69,6 +128,9 @@ class PaperView: UIImageView {
     }
     
     public func deleteNote() {
+        drawLayer?.removeFromSuperlayer()
+        persistentLayer?.removeFromSuperlayer()
+        addDrawLayer()
     }
     
     // Setters from View Controller
