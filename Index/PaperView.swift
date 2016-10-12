@@ -36,6 +36,7 @@ class PaperView: UIImageView {
     fileprivate var points: [CGPoint]?
     fileprivate var mainPath: UIBezierPath?
     fileprivate var drawPath: UIBezierPath?
+    fileprivate var predictedDrawPath: UIBezierPath?
     
     // Draw style
     fileprivate var line: Bool!
@@ -65,7 +66,6 @@ class PaperView: UIImageView {
         drawLayer?.lineJoin = kCALineJoinRound
         drawLayer?.fillColor = UIColor.clear.cgColor
         drawLayer?.strokeColor = drawColor.cgColor
-        drawLayer?.lineWidth = lineWidth
         drawLayer?.backgroundColor = UIColor.clear.cgColor
         
         layer.addSublayer(drawLayer!)
@@ -73,10 +73,9 @@ class PaperView: UIImageView {
         persistentLayer = CAShapeLayer()
         persistentLayer?.frame = layer.bounds
         persistentLayer?.lineCap = kCALineCapButt
-        persistentLayer?.lineJoin = kCALineJoinRound
+        persistentLayer?.lineJoin = kCALineJoinBevel
         persistentLayer?.fillColor = UIColor.clear.cgColor
         persistentLayer?.strokeColor = drawColor.cgColor
-        persistentLayer?.lineWidth = lineWidth
         persistentLayer?.backgroundColor = UIColor.clear.cgColor
         
         layer.addSublayer(persistentLayer!)
@@ -96,10 +95,6 @@ class PaperView: UIImageView {
             points?.append((touch?.preciseLocation(in: self))!)
         }
 
-        if let predictedTouches = event?.predictedTouches(for: touch!) {
-            points? += predictedTouches.map { $0.preciseLocation(in: self) }
-        }
-        
         drawPath = UIBezierPath()
         drawPath?.move(to: (points?.first)!)
         for point in points! {
@@ -112,6 +107,7 @@ class PaperView: UIImageView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         mainPath?.append(drawPath!)
         persistentLayer?.path = mainPath?.cgPath
+        drawLayer?.path = nil
     }
     
     // Handle Drawing
