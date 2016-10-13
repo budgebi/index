@@ -32,11 +32,8 @@ class PaperView: UIImageView {
     fileprivate let blackColor = UIColor.black
     
     fileprivate var drawLayer: CAShapeLayer?
-    fileprivate var persistentLayer: CAShapeLayer?
     fileprivate var points: [CGPoint]?
-    fileprivate var mainPath: UIBezierPath?
     fileprivate var drawPath: UIBezierPath?
-    fileprivate var predictedDrawPath: UIBezierPath?
     
     // Draw style
     fileprivate var line: Bool!
@@ -58,8 +55,6 @@ class PaperView: UIImageView {
     
     func addDrawLayer() {
         
-        mainPath = UIBezierPath()
-
         drawLayer = CAShapeLayer()
         drawLayer?.frame = layer.bounds
         drawLayer?.lineCap = kCALineCapButt
@@ -70,15 +65,6 @@ class PaperView: UIImageView {
         
         layer.addSublayer(drawLayer!)
         
-        persistentLayer = CAShapeLayer()
-        persistentLayer?.frame = layer.bounds
-        persistentLayer?.lineCap = kCALineCapButt
-        persistentLayer?.lineJoin = kCALineJoinBevel
-        persistentLayer?.fillColor = UIColor.clear.cgColor
-        persistentLayer?.strokeColor = drawColor.cgColor
-        persistentLayer?.backgroundColor = UIColor.clear.cgColor
-        
-        layer.addSublayer(persistentLayer!)
     }
     
     // Handle Touches
@@ -87,6 +73,9 @@ class PaperView: UIImageView {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        drawLayer?.strokeColor = drawColor.cgColor
+        drawLayer?.lineWidth = lineWidth
         
         let touch = touches.first
         if let coalescedTouches = event?.coalescedTouches(for: touch!) {
@@ -102,12 +91,28 @@ class PaperView: UIImageView {
         }
         
         drawLayer?.path = drawPath?.cgPath
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        mainPath?.append(drawPath!)
-        persistentLayer?.path = mainPath?.cgPath
-        drawLayer?.path = nil
+        
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setLineCap(.round)
+        context!.setLineWidth(lineWidth)
+        context!.setStrokeColor(drawColor.cgColor)
+        context!.setLineJoin(.round)
+        
+        image?.draw(in: self.bounds)
+        
+        drawPath?.stroke()
+        
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        drawLayer?.removeFromSuperlayer()
+        addDrawLayer()
     }
     
     // Handle Drawing
@@ -126,8 +131,8 @@ class PaperView: UIImageView {
     
     public func deleteNote() {
         drawLayer?.removeFromSuperlayer()
-        persistentLayer?.removeFromSuperlayer()
         addDrawLayer()
+        image = nil
     }
     
     // Setters from View Controller
