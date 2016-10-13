@@ -57,7 +57,7 @@ class PaperView: UIImageView {
         
         drawLayer = CAShapeLayer()
         drawLayer?.frame = layer.bounds
-        drawLayer?.lineCap = kCALineCapButt
+        drawLayer?.lineCap = kCALineCapRound
         drawLayer?.lineJoin = kCALineJoinRound
         drawLayer?.fillColor = UIColor.clear.cgColor
         drawLayer?.strokeColor = drawColor.cgColor
@@ -97,13 +97,13 @@ class PaperView: UIImageView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
-        let context = UIGraphicsGetCurrentContext()
-        context!.setLineCap(.round)
-        context!.setLineWidth(lineWidth)
-        context!.setStrokeColor(drawColor.cgColor)
-        context!.setLineJoin(.round)
-        
+//        let context = UIGraphicsGetCurrentContext()
         image?.draw(in: self.bounds)
+        
+        drawColor.setStroke()
+        drawPath?.lineJoinStyle = .round
+        drawPath?.lineCapStyle = .round
+        drawPath?.lineWidth = lineWidth
         
         drawPath?.stroke()
         
