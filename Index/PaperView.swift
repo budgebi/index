@@ -60,8 +60,9 @@ class PaperView: UIImageView {
         drawLayer?.lineCap = kCALineCapRound
         drawLayer?.lineJoin = kCALineJoinRound
         drawLayer?.fillColor = UIColor.clear.cgColor
-        drawLayer?.strokeColor = drawColor.cgColor
         drawLayer?.backgroundColor = UIColor.clear.cgColor
+        drawLayer?.lineWidth = lineWidth
+        drawLayer?.strokeColor = drawColor.cgColor
         
         layer.addSublayer(drawLayer!)
         
@@ -73,9 +74,6 @@ class PaperView: UIImageView {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        drawLayer?.strokeColor = drawColor.cgColor
-        drawLayer?.lineWidth = lineWidth
         
         let touch = touches.first
         if let coalescedTouches = event?.coalescedTouches(for: touch!) {
@@ -97,7 +95,6 @@ class PaperView: UIImageView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
-//        let context = UIGraphicsGetCurrentContext()
         image?.draw(in: self.bounds)
         
         drawColor.setStroke()
@@ -138,6 +135,7 @@ class PaperView: UIImageView {
     // Setters from View Controller
     public func setLineWidth(lWidth: String) {
         self.drawColor = self.previousDrawColor!
+        drawLayer?.strokeColor = drawColor.cgColor
         if lWidth == "small" {
             self.lineWidth = self.smallLineWidth
         } else if lWidth == "medium" {
@@ -146,6 +144,7 @@ class PaperView: UIImageView {
             self.lineWidth = self.largeLineWidth
         }
         self.previousLineWidth = self.lineWidth
+        drawLayer?.lineWidth = lineWidth
     }
     
     public func setDrawStyle(style: String) {
@@ -173,6 +172,7 @@ class PaperView: UIImageView {
     public func setDrawColor(color: String) {
         if (self.previousLineWidth != nil) {
             self.lineWidth = self.previousLineWidth
+            drawLayer?.lineWidth = lineWidth
         }
         if color == "red" {
             self.drawColor = self.redColor
@@ -185,5 +185,7 @@ class PaperView: UIImageView {
         } else if color == "black" {
             self.drawColor = self.blackColor
         }
+        self.previousDrawColor = drawColor
+        drawLayer?.strokeColor = drawColor.cgColor
     }
 }
