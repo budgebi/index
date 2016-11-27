@@ -11,8 +11,8 @@ import UIKit
 class PaperView: UIImageView {
     
     // Line widths
-    fileprivate let smallLineWidth: CGFloat = 1
-    fileprivate let mediumLineWidth: CGFloat = 3
+    fileprivate let smallLineWidth: CGFloat = 2
+    fileprivate let mediumLineWidth: CGFloat = 4
     fileprivate let largeLineWidth: CGFloat = 6
     fileprivate let eraseLineWidth: CGFloat = 20
     fileprivate let hugeEraserLineWidth: CGFloat = 40
@@ -34,6 +34,10 @@ class PaperView: UIImageView {
     fileprivate var drawLayer: CAShapeLayer?
     fileprivate var points: [CGPoint]?
     fileprivate var drawPath: UIBezierPath?
+    
+    fileprivate var prevImage: UIImage?
+    
+    fileprivate var firstPoint: CGPoint?
     
     // Draw style
     fileprivate var line: Bool!
@@ -70,29 +74,38 @@ class PaperView: UIImageView {
     
     // Handle Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        points = [(touches.first?.location(in: self))!]
+        firstPoint = (touches.first?.location(in: self))!
+        points = [firstPoint!]
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         let touch = touches.first
-        if let coalescedTouches = event?.coalescedTouches(for: touch!) {
+        if(!self.line) {
+            if let coalescedTouches = event?.coalescedTouches(for: touch!) {
             points? += coalescedTouches.map { $0.preciseLocation(in: self) }
-        } else {
-            points?.append((touch?.preciseLocation(in: self))!)
-        }
+            } else {
+                points?.append((touch?.preciseLocation(in: self))!)
+            }
 
-        drawPath = UIBezierPath()
-        drawPath?.move(to: (points?.first)!)
-        for point in points! {
+            drawPath = UIBezierPath()
+            drawPath?.move(to: (points?.first)!)
+            for point in points! {
+                drawPath?.addLine(to: point)
+            }
+        
+            drawLayer?.path = drawPath?.cgPath
+        } else {
+            let point = (touch?.preciseLocation(in: self))!
+            drawPath = UIBezierPath()
+            drawPath?.move(to: firstPoint!)
             drawPath?.addLine(to: point)
+            drawLayer?.path = drawPath?.cgPath
         }
-        
-        drawLayer?.path = drawPath?.cgPath
-        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.prevImage = image
         
         UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
         image?.draw(in: self.bounds)
@@ -124,9 +137,14 @@ class PaperView: UIImageView {
     
     // Undo and Delete
     public func undo() {
+        image = self.prevImage
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
+        image?.draw(in: self.bounds)
+        UIGraphicsEndImageContext()
     }
     
     public func deleteNote() {
+        drawPath = nil
         drawLayer?.removeFromSuperlayer()
         addDrawLayer()
         image = nil
@@ -165,7 +183,8 @@ class PaperView: UIImageView {
         
         self.line = false
         self.lineWidth = self.eraseLineWidth
-        self.drawColor = UIColor.clear
+        self.drawColor = paperColor
+        drawLayer?.strokeColor = drawColor.cgColor
     }
     
     
