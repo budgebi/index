@@ -10,6 +10,11 @@ import UIKit
 
 class PaperView: UIImageView {
     
+    @IBOutlet weak var titleTextField: UITextField?;
+    
+    // Delegate
+    weak var delegate:PaperViewDelegate?
+    
     // Line widths
     fileprivate let smallLineWidth: CGFloat = 2
     fileprivate let mediumLineWidth: CGFloat = 4
@@ -123,16 +128,13 @@ class PaperView: UIImageView {
         
         drawLayer?.removeFromSuperlayer()
         addDrawLayer()
+        
+        saveNote()
     }
     
-    // Handle Drawing
-    fileprivate func drawPoint(_ context: CGContext?, touch: UITouch) {
-    }
-    
-    fileprivate func drawLine(_ context: CGContext?, touch: UITouch) {
-    }
-    
-    fileprivate func drawStroke(_ context: CGContext?, touch: UITouch) {
+    // Save File
+    fileprivate func saveNote() {
+        self.delegate?.saveNote(title: (titleTextField?.text)!, image: image!)
     }
     
     // Undo and Delete
@@ -206,5 +208,10 @@ class PaperView: UIImageView {
         }
         self.previousDrawColor = drawColor
         drawLayer?.strokeColor = drawColor.cgColor
+    }
+    
+    // Getters
+    public func getTitle() {
+        
     }
 }

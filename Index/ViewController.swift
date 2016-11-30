@@ -8,6 +8,25 @@
 
 import UIKit
 
+protocol PaperViewDelegate: class {
+    func saveNote(title: String, image: UIImage)
+}
+
+extension ViewController: PaperViewDelegate {
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    internal func saveNote(title: String, image: UIImage) {
+        let path = getDocumentsDirectory().appendingPathComponent(title + ".png")
+        let data = UIImagePNGRepresentation(image)
+        try? data?.write(to: path)
+    }
+}
+
 class ViewController: UIViewController {
 
     fileprivate var colorOptionsDisplayed = false
@@ -22,6 +41,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.paperView.delegate = self
         paperBackground.backgroundColor = paperColor
     }
     

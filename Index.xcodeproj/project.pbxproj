@@ -15,6 +15,8 @@
 		4A119AE51D98A85B00672D79 /* PaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A119AE41D98A85B00672D79 /* PaperView.swift */; };
 		4A119AE71D98ABED00672D79 /* IndexSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A119AE61D98ABED00672D79 /* IndexSearchBar.swift */; };
 		4A4F123A1DA46F8700A6F25E /* PaperBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F12391DA46F8700A6F25E /* PaperBackgroundView.swift */; };
+		4A8BD49D1DED1FA1000C8A44 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8BD49C1DED1FA1000C8A44 /* CoreData.framework */; };
+		4A8BD4A11DED2110000C8A44 /* Index.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BD49F1DED2110000C8A44 /* Index.xcdatamodeld */; };
 		4A962B671DA1ABFE0015B4B1 /* PaperScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A962B661DA1ABFE0015B4B1 /* PaperScrollView.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +31,8 @@
 		4A119AE41D98A85B00672D79 /* PaperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperView.swift; sourceTree = "<group>"; };
 		4A119AE61D98ABED00672D79 /* IndexSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexSearchBar.swift; sourceTree = "<group>"; };
 		4A4F12391DA46F8700A6F25E /* PaperBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperBackgroundView.swift; sourceTree = "<group>"; };
+		4A8BD49C1DED1FA1000C8A44 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4A8BD4A01DED2110000C8A44 /* Index.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Index.xcdatamodel; sourceTree = "<group>"; };
 		4A962B661DA1ABFE0015B4B1 /* PaperScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -37,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A8BD49D1DED1FA1000C8A44 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +53,7 @@
 			children = (
 				4A119AD11D98A82E00672D79 /* Index */,
 				4A119AD01D98A82E00672D79 /* Products */,
+				4A8BD49B1DED1FA1000C8A44 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +68,7 @@
 		4A119AD11D98A82E00672D79 /* Index */ = {
 			isa = PBXGroup;
 			children = (
+				4A8BD49E1DED1FE6000C8A44 /* CoreData */,
 				4A119AD21D98A82E00672D79 /* AppDelegate.swift */,
 				4A119AD41D98A82E00672D79 /* ViewController.swift */,
 				4A119AE41D98A85B00672D79 /* PaperView.swift */,
@@ -72,8 +79,24 @@
 				4A119AD91D98A82E00672D79 /* Assets.xcassets */,
 				4A119ADB1D98A82E00672D79 /* LaunchScreen.storyboard */,
 				4A119ADE1D98A82E00672D79 /* Info.plist */,
+				4A8BD49F1DED2110000C8A44 /* Index.xcdatamodeld */,
 			);
 			path = Index;
+			sourceTree = "<group>";
+		};
+		4A8BD49B1DED1FA1000C8A44 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4A8BD49C1DED1FA1000C8A44 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4A8BD49E1DED1FE6000C8A44 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +178,7 @@
 				4A4F123A1DA46F8700A6F25E /* PaperBackgroundView.swift in Sources */,
 				4A119AE71D98ABED00672D79 /* IndexSearchBar.swift in Sources */,
 				4A119AE51D98A85B00672D79 /* PaperView.swift in Sources */,
+				4A8BD4A11DED2110000C8A44 /* Index.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +349,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4A8BD49F1DED2110000C8A44 /* Index.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4A8BD4A01DED2110000C8A44 /* Index.xcdatamodel */,
+			);
+			currentVersion = 4A8BD4A01DED2110000C8A44 /* Index.xcdatamodel */;
+			path = Index.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4A119AC71D98A82E00672D79 /* Project object */;
 }
