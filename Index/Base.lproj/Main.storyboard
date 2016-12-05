@@ -34,6 +34,7 @@
                                             <constraint firstAttribute="height" constant="2000" id="mlT-FC-x8R"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="tagTextField" destination="rbG-Xn-lQS" id="1i6-AT-2ai"/>
                                             <outlet property="titleTextField" destination="IVs-MB-8vC" id="Orj-4K-KhK"/>
                                         </connections>
                                     </imageView>
@@ -44,6 +45,21 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tags (separated by commas)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rbG-Xn-lQS">
+                                        <rect key="frame" x="0.0" y="32" width="1024" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK3-oi-nct">
+                                        <rect key="frame" x="15" y="102" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="saveNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bp4-3f-RPA"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="top" secondItem="FpY-b6-GjV" secondAttribute="top" id="6zJ-n0-MaW"/>

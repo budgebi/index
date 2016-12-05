@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
 protocol PaperViewDelegate: class {
-    func saveNote(title: String, image: UIImage)
+    func saveNote(title: String, tags: String, image: UIImage)
 }
 
 extension ViewController: PaperViewDelegate {
@@ -20,10 +21,52 @@ extension ViewController: PaperViewDelegate {
         return documentsDirectory
     }
     
-    internal func saveNote(title: String, image: UIImage) {
+    internal func saveNote(title: String, tags: String, image: UIImage) {
         let path = getDocumentsDirectory().appendingPathComponent(title + ".png")
+        print(path)
         let data = UIImagePNGRepresentation(image)
         try? data?.write(to: path)
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedContext)!
+        
+        let note = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        note.setValue(title, forKeyPath: "title")
+        note.setValue(tags, forKeyPath: "tags")
+        note.setValue(path.absoluteString, forKeyPath: "imagePath")
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    internal func fetchNote() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Note")
+        
+        do {
+            let notes = try managedContext.fetch(fetchRequest)
+            print(notes)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
     }
 }
 
@@ -55,6 +98,10 @@ class ViewController: UIViewController {
     
     @IBAction func deleteNote() {
         self.paperView.deleteNote()
+    }
+    
+    @IBAction func saveNote() {
+        self.paperView.saveNote()
     }
     
     @IBAction func eraserButtonPressed() {

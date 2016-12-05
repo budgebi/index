@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didChangeStatusBarOrientation oldStatusBarOrientation: UIInterfaceOrientation) {
         addStatusBar.frame = CGRect.init(x: 0, y: 0, width: (self.window?.bounds.width)!, height: 20)
     }
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "Index")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if((error) != nil) {
+                fatalError("Unresolved error in persistent container in App Delegate")
+            }
+        })
+        return container
+    }()
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

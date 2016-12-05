@@ -11,6 +11,7 @@ import UIKit
 class PaperView: UIImageView {
     
     @IBOutlet weak var titleTextField: UITextField?;
+    @IBOutlet weak var tagTextField: UITextField?;
     
     // Delegate
     weak var delegate:PaperViewDelegate?
@@ -85,6 +86,7 @@ class PaperView: UIImageView {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
+        
         if(!self.line) {
             if let coalescedTouches = event?.coalescedTouches(for: touch!) {
             points? += coalescedTouches.map { $0.preciseLocation(in: self) }
@@ -97,8 +99,12 @@ class PaperView: UIImageView {
             for point in points! {
                 drawPath?.addLine(to: point)
             }
-        
-            drawLayer?.path = drawPath?.cgPath
+            
+            if(drawColor == paperColor) {
+                drawStroke()
+            } else {
+                drawLayer?.path = drawPath?.cgPath
+            }
         } else {
             let point = (touch?.preciseLocation(in: self))!
             drawPath = UIBezierPath()
@@ -109,11 +115,19 @@ class PaperView: UIImageView {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        drawStroke()
+    }
+    
+    fileprivate func drawStroke() {
         self.prevImage = image
         
         UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
         image?.draw(in: self.bounds)
+        
+        if(drawColor == paperColor) {
+            let context = UIGraphicsGetCurrentContext()
+            context?.setBlendMode(CGBlendMode.clear)
+        }
         
         drawColor.setStroke()
         drawPath?.lineJoinStyle = .round
@@ -128,13 +142,11 @@ class PaperView: UIImageView {
         
         drawLayer?.removeFromSuperlayer()
         addDrawLayer()
-        
-        saveNote()
     }
     
     // Save File
-    fileprivate func saveNote() {
-        self.delegate?.saveNote(title: (titleTextField?.text)!, image: image!)
+    public func saveNote() {
+        self.delegate?.saveNote(title: (titleTextField?.text)!, tags: (tagTextField?.text)!, image: image!)
     }
     
     // Undo and Delete
@@ -146,6 +158,9 @@ class PaperView: UIImageView {
     }
     
     public func deleteNote() {
+        titleTextField?.text = ""
+        tagTextField?.text = ""
+        
         drawPath = nil
         drawLayer?.removeFromSuperlayer()
         addDrawLayer()
@@ -208,10 +223,5 @@ class PaperView: UIImageView {
         }
         self.previousDrawColor = drawColor
         drawLayer?.strokeColor = drawColor.cgColor
-    }
-    
-    // Getters
-    public func getTitle() {
-        
     }
 }
