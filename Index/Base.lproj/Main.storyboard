@@ -60,6 +60,14 @@
                                             <action selector="saveNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bp4-3f-RPA"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ee-ba-Iho">
+                                        <rect key="frame" x="15" y="70" width="31" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="New"/>
+                                        <connections>
+                                            <action selector="newNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="HBg-St-uCt"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="top" secondItem="FpY-b6-GjV" secondAttribute="top" id="6zJ-n0-MaW"/>

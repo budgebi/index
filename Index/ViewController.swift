@@ -47,27 +47,10 @@ extension ViewController: PaperViewDelegate {
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+        
+        currNote = note
     }
     
-    internal func fetchNote() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Note")
-        
-        do {
-            let notes = try managedContext.fetch(fetchRequest)
-            print(notes)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-    }
 }
 
 class ViewController: UIViewController {
@@ -81,6 +64,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var paperView: PaperView!
     @IBOutlet weak var paperBackground: PaperBackgroundView!
+    
+    fileprivate var currNote: NSManagedObject?;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,13 +81,53 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func deleteNote() {
+    @IBAction func newNote() {
+        currNote = nil
         self.paperView.deleteNote()
+    }
+    
+    @IBAction func deleteNote() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+
+        if(currNote != nil) {
+            managedContext.delete(currNote!)
+            currNote = nil
+        }
+
+        self.paperView.deleteNote()
+
     }
     
     @IBAction func saveNote() {
         self.paperView.saveNote()
     }
+    
+//    func fetchNote() {
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+//        
+//        let managedContext =
+//            appDelegate.persistentContainer.viewContext
+//        
+//        let fetchRequest =
+//            NSFetchRequest<NSManagedObject>(entityName: "Note")
+//        
+//        do {
+//            let notes = try managedContext.fetch(fetchRequest)
+//            return notes;
+//        } catch let error as NSError {
+//            print("Could not fetch. \(error), \(error.userInfo)")
+//        }
+//    }
+
     
     @IBAction func eraserButtonPressed() {
         self.paperView.useEraser()
