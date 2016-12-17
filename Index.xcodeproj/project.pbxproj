@@ -13,7 +13,6 @@
 		4A119ADA1D98A82E00672D79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A119AD91D98A82E00672D79 /* Assets.xcassets */; };
 		4A119ADD1D98A82E00672D79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A119ADB1D98A82E00672D79 /* LaunchScreen.storyboard */; };
 		4A119AE51D98A85B00672D79 /* PaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A119AE41D98A85B00672D79 /* PaperView.swift */; };
-		4A119AE71D98ABED00672D79 /* IndexSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A119AE61D98ABED00672D79 /* IndexSearchBar.swift */; };
 		4A4F123A1DA46F8700A6F25E /* PaperBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F12391DA46F8700A6F25E /* PaperBackgroundView.swift */; };
 		4A8BD49D1DED1FA1000C8A44 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8BD49C1DED1FA1000C8A44 /* CoreData.framework */; };
 		4A8BD4A11DED2110000C8A44 /* Index.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BD49F1DED2110000C8A44 /* Index.xcdatamodeld */; };
@@ -29,7 +28,6 @@
 		4A119ADC1D98A82E00672D79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A119ADE1D98A82E00672D79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A119AE41D98A85B00672D79 /* PaperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperView.swift; sourceTree = "<group>"; };
-		4A119AE61D98ABED00672D79 /* IndexSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexSearchBar.swift; sourceTree = "<group>"; };
 		4A4F12391DA46F8700A6F25E /* PaperBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperBackgroundView.swift; sourceTree = "<group>"; };
 		4A8BD49C1DED1FA1000C8A44 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4A8BD4A01DED2110000C8A44 /* Index.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Index.xcdatamodel; sourceTree = "<group>"; };
@@ -72,7 +70,6 @@
 				4A119AD21D98A82E00672D79 /* AppDelegate.swift */,
 				4A119AD41D98A82E00672D79 /* ViewController.swift */,
 				4A119AE41D98A85B00672D79 /* PaperView.swift */,
-				4A119AE61D98ABED00672D79 /* IndexSearchBar.swift */,
 				4A962B661DA1ABFE0015B4B1 /* PaperScrollView.swift */,
 				4A4F12391DA46F8700A6F25E /* PaperBackgroundView.swift */,
 				4A119AD61D98A82E00672D79 /* Main.storyboard */,
@@ -176,7 +173,6 @@
 				4A119AD51D98A82E00672D79 /* ViewController.swift in Sources */,
 				4A119AD31D98A82E00672D79 /* AppDelegate.swift in Sources */,
 				4A4F123A1DA46F8700A6F25E /* PaperBackgroundView.swift in Sources */,
-				4A119AE71D98ABED00672D79 /* IndexSearchBar.swift in Sources */,
 				4A119AE51D98A85B00672D79 /* PaperView.swift in Sources */,
 				4A8BD4A11DED2110000C8A44 /* Index.xcdatamodeld in Sources */,
 			);

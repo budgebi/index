@@ -53,6 +53,12 @@ extension ViewController: PaperViewDelegate {
     
 }
 
+extension ViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+}
+
 class ViewController: UIViewController {
 
     fileprivate var colorOptionsDisplayed = false
@@ -64,13 +70,28 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var paperView: PaperView!
     @IBOutlet weak var paperBackground: PaperBackgroundView!
+    @IBOutlet weak var topView: UIView!
+    
+    var tableViewController: UITableViewController!
+    var searchController: UISearchController!
     
     fileprivate var currNote: NSManagedObject?;
+    
+    fileprivate var searchResults = [Note]();
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.paperView.delegate = self
         paperBackground.backgroundColor = paperColor
+        
+        searchController = UISearchController(searchResultsController: tableViewController)
+        self.searchController.searchResultsUpdater = self
+        self.searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        
+        self.topView.addSubview(self.searchController.searchBar)
+        self.searchController.searchBar.sizeToFit()
+        self.searchController.searchBar.frame.size.width = self.view.frame.size.width
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -108,25 +129,26 @@ class ViewController: UIViewController {
         self.paperView.saveNote()
     }
     
-//    func fetchNote() {
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return
-//        }
-//        
-//        let managedContext =
-//            appDelegate.persistentContainer.viewContext
-//        
-//        let fetchRequest =
-//            NSFetchRequest<NSManagedObject>(entityName: "Note")
-//        
-//        do {
-//            let notes = try managedContext.fetch(fetchRequest)
-//            return notes;
-//        } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//        }
-//    }
+    func fetchNotes() -> [Note] {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return [];
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Note")
+        
+        do {
+            let notes = try managedContext.fetch(fetchRequest)
+            return notes as! [Note];
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return [];
+        }
+    }
 
     
     @IBAction func eraserButtonPressed() {
@@ -225,6 +247,16 @@ class ViewController: UIViewController {
             
             }, completion: {finished in
         })
+    }
+    
+    // Searching Stuffs
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        let notes = fetchNotes()
+        searchResults = notes.filter{ note in
+            return (note.title?.lowercased().contains(searchText.lowercased()))!
+        }
+        print(notes)
+        tableViewController.tableView.reloadData()
     }
 }
 

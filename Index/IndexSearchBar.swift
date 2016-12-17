@@ -17,5 +17,4 @@ class IndexSearchBar: UISearchBar {
         // Drawing code
     }
     */
-
 }
