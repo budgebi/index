@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,30 +53,14 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK3-oi-nct">
-                                        <rect key="frame" x="15" y="102" width="34" height="30"/>
-                                        <state key="normal" title="Save"/>
-                                        <connections>
-                                            <action selector="saveNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bp4-3f-RPA"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ee-ba-Iho">
-                                        <rect key="frame" x="15" y="70" width="31" height="30"/>
-                                        <state key="normal" title="New"/>
-                                        <connections>
-                                            <action selector="newNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="HBg-St-uCt"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="trailing" secondItem="L8t-Pc-zqk" secondAttribute="trailing" id="1QI-jE-It3"/>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="top" secondItem="FpY-b6-GjV" secondAttribute="top" id="6zJ-n0-MaW"/>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="leading" secondItem="rbG-Xn-lQS" secondAttribute="leading" id="72b-wD-kX1"/>
-                                    <constraint firstItem="7Ee-ba-Iho" firstAttribute="leading" secondItem="FpY-b6-GjV" secondAttribute="leading" constant="15" id="BdO-In-Xgt"/>
-                                    <constraint firstItem="dK3-oi-nct" firstAttribute="top" secondItem="7Ee-ba-Iho" secondAttribute="bottom" constant="2" id="FVP-8Z-w0r"/>
+                                    <constraint firstItem="rbG-Xn-lQS" firstAttribute="top" secondItem="IVs-MB-8vC" secondAttribute="bottom" constant="7" id="7Pu-3J-Nfx"/>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="trailing" secondItem="rbG-Xn-lQS" secondAttribute="trailing" id="HZJ-r0-FDj"/>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="leading" secondItem="L8t-Pc-zqk" secondAttribute="leading" id="KIg-Uq-fnJ"/>
-                                    <constraint firstItem="7Ee-ba-Iho" firstAttribute="top" secondItem="rbG-Xn-lQS" secondAttribute="bottom" constant="8" symbolic="YES" id="Od8-an-94x"/>
                                     <constraint firstAttribute="width" constant="1024" id="QVd-R5-CCl"/>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="trailing" secondItem="IVs-MB-8vC" secondAttribute="trailing" id="W7f-7J-Tm9"/>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="top" secondItem="L8t-Pc-zqk" secondAttribute="top" id="YCI-ko-cWB"/>
@@ -88,8 +72,6 @@
                                     <constraint firstItem="IVs-MB-8vC" firstAttribute="top" secondItem="FpY-b6-GjV" secondAttribute="topMargin" id="uhN-Zn-Npp"/>
                                     <constraint firstItem="0eb-D5-nBy" firstAttribute="leading" secondItem="IVs-MB-8vC" secondAttribute="leading" id="vuH-cY-By6"/>
                                     <constraint firstAttribute="bottom" secondItem="0eb-D5-nBy" secondAttribute="bottom" id="wWa-xT-NIF"/>
-                                    <constraint firstItem="7Ee-ba-Iho" firstAttribute="leading" secondItem="dK3-oi-nct" secondAttribute="leading" id="yw9-UN-K5T"/>
-                                    <constraint firstItem="7Ee-ba-Iho" firstAttribute="top" secondItem="IVs-MB-8vC" secondAttribute="bottom" constant="32" id="zyi-hq-NAJ"/>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" tag="30" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbW-vW-nq2">
@@ -98,6 +80,22 @@
                                 <state key="normal" image="eraser"/>
                                 <connections>
                                     <action selector="eraserButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="TFP-P7-5r3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ee-ba-Iho">
+                                <rect key="frame" x="16" y="124" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="New"/>
+                                <connections>
+                                    <action selector="newNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="HBg-St-uCt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK3-oi-nct">
+                                <rect key="frame" x="16" y="168" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bp4-3f-RPA"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="14" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFh-K4-ggg">

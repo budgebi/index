@@ -59,7 +59,7 @@ extension ViewController: UISearchResultsUpdating {
     }
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     fileprivate var colorOptionsDisplayed = false
     fileprivate var sizeOptionsDisplayed = false
@@ -72,19 +72,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var paperBackground: PaperBackgroundView!
     @IBOutlet weak var topView: UIView!
     
-    var tableViewController: UITableViewController!
+    var tableView: UITableView!
     var searchController: UISearchController!
     
     fileprivate var currNote: NSManagedObject?;
     
     fileprivate var searchResults = [Note]();
     
+    // Lifecycle Hooks
     override func viewDidLoad() {
         super.viewDidLoad()
         self.paperView.delegate = self
         paperBackground.backgroundColor = paperColor
         
-        searchController = UISearchController(searchResultsController: tableViewController)
+        searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
@@ -100,6 +101,19 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // TableView Stuffs
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
     @IBAction func newNote() {
@@ -255,8 +269,8 @@ class ViewController: UIViewController {
         searchResults = notes.filter{ note in
             return (note.title?.lowercased().contains(searchText.lowercased()))!
         }
-        print(notes)
-        tableViewController.tableView.reloadData()
+        print(searchResults)
+//      tableViewController.tableView.reloadData()
     }
 }
 
