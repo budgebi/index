@@ -17,6 +17,7 @@
 		4A8BD49D1DED1FA1000C8A44 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8BD49C1DED1FA1000C8A44 /* CoreData.framework */; };
 		4A8BD4A11DED2110000C8A44 /* Index.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BD49F1DED2110000C8A44 /* Index.xcdatamodeld */; };
 		4A962B671DA1ABFE0015B4B1 /* PaperScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A962B661DA1ABFE0015B4B1 /* PaperScrollView.swift */; };
+		4AF0A15C1E19B44C00954218 /* IndexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF0A15B1E19B44C00954218 /* IndexTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		4A8BD49C1DED1FA1000C8A44 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4A8BD4A01DED2110000C8A44 /* Index.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Index.xcdatamodel; sourceTree = "<group>"; };
 		4A962B661DA1ABFE0015B4B1 /* PaperScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperScrollView.swift; sourceTree = "<group>"; };
+		4AF0A15B1E19B44C00954218 /* IndexTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				4A119ADB1D98A82E00672D79 /* LaunchScreen.storyboard */,
 				4A119ADE1D98A82E00672D79 /* Info.plist */,
 				4A8BD49F1DED2110000C8A44 /* Index.xcdatamodeld */,
+				4AF0A15B1E19B44C00954218 /* IndexTableViewController.swift */,
 			);
 			path = Index;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 				4A119AD31D98A82E00672D79 /* AppDelegate.swift in Sources */,
 				4A4F123A1DA46F8700A6F25E /* PaperBackgroundView.swift in Sources */,
 				4A119AE51D98A85B00672D79 /* PaperView.swift in Sources */,
+				4AF0A15C1E19B44C00954218 /* IndexTableViewController.swift in Sources */,
 				4A8BD4A11DED2110000C8A44 /* Index.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -74,15 +74,6 @@
                                     <constraint firstAttribute="bottom" secondItem="0eb-D5-nBy" secondAttribute="bottom" id="wWa-xT-NIF"/>
                                 </constraints>
                             </scrollView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aZ8-8E-1KA">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="6cX-uu-KX3"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="7DV-hu-Kxw"/>
-                                </connections>
-                            </tableView>
                             <button opaque="NO" tag="30" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbW-vW-nq2">
                                 <rect key="frame" x="16" y="388" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -263,7 +254,6 @@
                     <connections>
                         <outlet property="paperBackground" destination="L8t-Pc-zqk" id="fef-r4-Dtt"/>
                         <outlet property="paperView" destination="0eb-D5-nBy" id="IK6-9z-1p4"/>
-                        <outlet property="tableView" destination="aZ8-8E-1KA" id="ShL-Xh-s7Z"/>
                         <outlet property="topView" destination="t4x-Sh-d3o" id="Ko6-SK-DCD"/>
                     </connections>
                 </viewController>

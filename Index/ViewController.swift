@@ -53,13 +53,29 @@ extension ViewController: PaperViewDelegate {
     
 }
 
+protocol IndexTableViewDelegate: class {
+    func noteCount() -> Int
+    
+    func noteForIndexPath(indexPath: IndexPath) -> Note
+}
+
+extension ViewController: IndexTableViewDelegate {
+    internal func noteCount() -> Int{
+        return self.searchResults.count
+    }
+    
+    internal func noteForIndexPath(indexPath: IndexPath) -> Note {
+        return self.searchResults[indexPath.row]
+    }
+}
+
 extension ViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
 }
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
 
     fileprivate var colorOptionsDisplayed = false
     fileprivate var sizeOptionsDisplayed = false
@@ -72,7 +88,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var paperBackground: PaperBackgroundView!
     @IBOutlet weak var topView: UIView!
     
-    @IBOutlet weak var tableView: UITableView!
+    var tableViewController: IndexTableViewController!
     var searchController: UISearchController!
     
     fileprivate var currNote: NSManagedObject?;
@@ -85,7 +101,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.paperView.delegate = self
         paperBackground.backgroundColor = paperColor
         
-        searchController = UISearchController(searchResultsController: nil)
+        self.tableViewController = IndexTableViewController(style: .plain)
+        self.tableViewController.delegate = self
+        
+        searchController = UISearchController(searchResultsController: tableViewController)
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
@@ -93,9 +112,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.topView.addSubview(self.searchController.searchBar)
         self.searchController.searchBar.sizeToFit()
         self.searchController.searchBar.frame.size.width = self.view.frame.size.width
-        
-        self.tableView.isHidden = true
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,23 +120,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    // TableView Stuffs
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.searchResults.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        
-        cell.textLabel?.text = self.searchResults[indexPath.row].title
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
     
     @IBAction func newNote() {
@@ -277,9 +276,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return (note.title?.lowercased().contains(searchText.lowercased()))!
         }
         print(searchResults)
-        self.tableView.isHidden = false
-
-        tableView.reloadData()
+        
+        tableViewController.tableView.isHidden = false
+        tableViewController.tableView.reloadData()
     }
 }
 
