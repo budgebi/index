@@ -22,34 +22,39 @@ extension ViewController: PaperViewDelegate {
     }
     
     internal func saveNote(title: String, tags: String, image: UIImage) {
-        let path = getDocumentsDirectory().appendingPathComponent(title + ".png")
-
-        let data = UIImagePNGRepresentation(image)
-        try? data?.write(to: path)
-        
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
+
+        let path = getDocumentsDirectory().appendingPathComponent(title + ".png")
+        let data = UIImagePNGRepresentation(image)
+        try? data?.write(to: path)
+
+        if currNote == nil {
+            let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedContext)!
         
-        let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedContext)!
+            let note = NSManagedObject(entity: entity, insertInto: managedContext)
         
-        let note = NSManagedObject(entity: entity, insertInto: managedContext)
+            note.setValue(title, forKeyPath: "title")
+            note.setValue(tags, forKeyPath: "tags")
+            note.setValue(path.absoluteString, forKeyPath: "imagePath")
+            note.setValue(Date(), forKey: "date")
         
-        note.setValue(title, forKeyPath: "title")
-        note.setValue(tags, forKeyPath: "tags")
-        note.setValue(path.absoluteString, forKeyPath: "imagePath")
-        note.setValue(Date(), forKey: "date")
+            currNote = note
+        } else {
+            currNote?.setValue(title, forKeyPath: "title")
+            currNote?.setValue(tags, forKeyPath: "tags")
+            currNote?.setValue(Date(), forKey: "date")
+        }
         
         do {
             try managedContext.save()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-        
-        currNote = note
     }
     
 }
@@ -72,7 +77,8 @@ extension ViewController: IndexTableViewDelegate {
     }
     
     internal func loadNoteForIndexPath(indexPath: IndexPath) {
-        self.paperView.loadNote(note: self.searchResults[indexPath.row])
+        self.currNote = self.searchResults[indexPath.row]
+        self.paperView.loadNote(note: self.currNote as! Note)
     }
 }
 
