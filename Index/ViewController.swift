@@ -41,6 +41,7 @@ extension ViewController: PaperViewDelegate {
         note.setValue(title, forKeyPath: "title")
         note.setValue(tags, forKeyPath: "tags")
         note.setValue(path.absoluteString, forKeyPath: "imagePath")
+        note.setValue(Date(), forKey: "date")
         
         do {
             try managedContext.save()
@@ -278,11 +279,17 @@ class ViewController: UIViewController {
     // Searching Stuffs
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         let notes = fetchNotes()
-        // searchResults = notes
+        searchResults = notes
         if searchText != "" {
             searchResults = notes.filter{ note in
                 return (note.title?.lowercased().contains(searchText.lowercased()))!
             }
+        } else {
+            tableViewController.tableView.isHidden = false
+        }
+        
+        searchResults.sort {a,b in
+            a.date?.compare(b.date as! Date) == ComparisonResult.orderedDescending
         }
         
         tableViewController.tableView.reloadData()
