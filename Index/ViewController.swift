@@ -285,7 +285,7 @@ class ViewController: UIViewController {
             }
         }
         
-//        tableViewController.tableView.reloadData()
+        tableViewController.tableView.reloadData()
     }
 }
 
