@@ -17,7 +17,6 @@ class IndexTableViewController: UITableViewController {
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,13 +35,20 @@ class IndexTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let reuseIdentifier = "cell"
+        var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
+        if (cell == nil)
+        {
+            cell = UITableViewCell(style: .subtitle,
+                                   reuseIdentifier: reuseIdentifier)
+        }
         
         let note = delegate?.noteForIndexPath(indexPath: indexPath)
         
-        cell.textLabel?.text = note?.title
+        cell?.textLabel?.text = note?.title
+        cell?.detailTextLabel?.text = note?.tags
         
-        return cell
+        return cell!
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

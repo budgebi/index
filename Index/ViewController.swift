@@ -288,7 +288,7 @@ class ViewController: UIViewController {
         searchResults = notes
         if searchText != "" {
             searchResults = notes.filter{ note in
-                return (note.title?.lowercased().contains(searchText.lowercased()))!
+                return (note.title?.lowercased().contains(searchText.lowercased()))! || (note.tags?.lowercased().contains(searchText.lowercased()))!
             }
         } else {
             tableViewController.tableView.isHidden = false
