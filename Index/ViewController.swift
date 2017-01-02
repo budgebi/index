@@ -122,6 +122,8 @@ class ViewController: UIViewController {
         self.searchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         
+        self.searchController.searchBar.barTintColor = UIColor.init(red: 96/255, green: 125/255, blue: 139/255, alpha: 1)
+        self.searchController.searchBar.tintColor = UIColor.white
         self.topView.addSubview(self.searchController.searchBar)
         self.searchController.searchBar.sizeToFit()
         self.searchController.searchBar.frame.size.width = self.view.frame.size.width
