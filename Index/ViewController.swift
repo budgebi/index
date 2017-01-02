@@ -23,7 +23,7 @@ extension ViewController: PaperViewDelegate {
     
     internal func saveNote(title: String, tags: String, image: UIImage) {
         let path = getDocumentsDirectory().appendingPathComponent(title + ".png")
-        print(path)
+
         let data = UIImagePNGRepresentation(image)
         try? data?.write(to: path)
         
@@ -57,6 +57,8 @@ protocol IndexTableViewDelegate: class {
     func noteCount() -> Int
     
     func noteForIndexPath(indexPath: IndexPath) -> Note
+    
+    func loadNoteForIndexPath(indexPath: IndexPath)
 }
 
 extension ViewController: IndexTableViewDelegate {
@@ -66,6 +68,10 @@ extension ViewController: IndexTableViewDelegate {
     
     internal func noteForIndexPath(indexPath: IndexPath) -> Note {
         return self.searchResults[indexPath.row]
+    }
+    
+    internal func loadNoteForIndexPath(indexPath: IndexPath) {
+        self.paperView.loadNote(note: self.searchResults[indexPath.row])
     }
 }
 
@@ -106,7 +112,7 @@ class ViewController: UIViewController {
         
         searchController = UISearchController(searchResultsController: tableViewController)
         self.searchController.searchResultsUpdater = self
-        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         
         self.topView.addSubview(self.searchController.searchBar)
@@ -272,13 +278,14 @@ class ViewController: UIViewController {
     // Searching Stuffs
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         let notes = fetchNotes()
-        searchResults = notes.filter{ note in
-            return (note.title?.lowercased().contains(searchText.lowercased()))!
+        // searchResults = notes
+        if searchText != "" {
+            searchResults = notes.filter{ note in
+                return (note.title?.lowercased().contains(searchText.lowercased()))!
+            }
         }
-        print(searchResults)
         
-        tableViewController.tableView.isHidden = false
-        tableViewController.tableView.reloadData()
+//        tableViewController.tableView.reloadData()
     }
 }
 

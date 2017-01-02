@@ -14,7 +14,7 @@ class PaperView: UIImageView {
     @IBOutlet weak var tagTextField: UITextField?;
     
     // Delegate
-    weak var delegate:PaperViewDelegate?
+    weak var delegate: PaperViewDelegate?
     
     // Line widths
     fileprivate let smallLineWidth: CGFloat = 2
@@ -223,5 +223,22 @@ class PaperView: UIImageView {
         }
         self.previousDrawColor = drawColor
         drawLayer?.strokeColor = drawColor.cgColor
+    }
+    
+    // Load Note
+    public func loadNote(note: Note) {
+        
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
+        
+        let url = NSURL(string: note.imagePath!)
+        let data = NSData(contentsOf: url! as URL)
+        image = UIImage(data: data! as Data)
+        
+        image?.draw(in: self.bounds)
+        UIGraphicsEndImageContext()
+        
+
+        tagTextField?.text = note.tags
+        titleTextField?.text = note.title
     }
 }

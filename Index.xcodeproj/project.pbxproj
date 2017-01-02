@@ -74,12 +74,12 @@
 				4A119AE41D98A85B00672D79 /* PaperView.swift */,
 				4A962B661DA1ABFE0015B4B1 /* PaperScrollView.swift */,
 				4A4F12391DA46F8700A6F25E /* PaperBackgroundView.swift */,
+				4AF0A15B1E19B44C00954218 /* IndexTableViewController.swift */,
 				4A119AD61D98A82E00672D79 /* Main.storyboard */,
 				4A119AD91D98A82E00672D79 /* Assets.xcassets */,
 				4A119ADB1D98A82E00672D79 /* LaunchScreen.storyboard */,
 				4A119ADE1D98A82E00672D79 /* Info.plist */,
 				4A8BD49F1DED2110000C8A44 /* Index.xcdatamodeld */,
-				4AF0A15B1E19B44C00954218 /* IndexTableViewController.swift */,
 			);
 			path = Index;
 			sourceTree = "<group>";
