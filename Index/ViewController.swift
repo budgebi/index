@@ -42,12 +42,13 @@ extension ViewController: PaperViewDelegate {
             note.setValue(tags, forKeyPath: "tags")
             note.setValue(path.absoluteString, forKeyPath: "imagePath")
             note.setValue(Date(), forKey: "date")
-        
+            note.setValue(paperType, forKey: "paperType")
             currNote = note
         } else {
             currNote?.setValue(title, forKeyPath: "title")
             currNote?.setValue(tags, forKeyPath: "tags")
             currNote?.setValue(Date(), forKey: "date")
+            currNote?.setValue(paperType, forKey: "paperType")
         }
         
         do {
@@ -79,6 +80,10 @@ extension ViewController: IndexTableViewDelegate {
     internal func loadNoteForIndexPath(indexPath: IndexPath) {
         self.currNote = self.searchResults[indexPath.row]
         self.paperView.loadNote(note: self.currNote as! Note)
+        paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
+        
+        self.searchController.searchBar.resignFirstResponder()
+        self.searchController.searchBar.showsCancelButton = false
     }
 }
 
@@ -105,7 +110,8 @@ class ViewController: UIViewController {
     var searchController: UISearchController!
     
     fileprivate var currNote: NSManagedObject?;
-    
+    fileprivate var paperType: String = "plain";
+
     fileprivate var searchResults = [Note]();
     
     // Lifecycle Hooks
@@ -185,14 +191,14 @@ class ViewController: UIViewController {
         }
     }
 
-    
     @IBAction func eraserButtonPressed() {
         self.paperView.useEraser()
     }
     
     @IBAction func paperButtonPressed(sender: AnyObject) {
         let paperButton = sender as! UIButton
-        paperBackground.setPaper(paper: paperButton.accessibilityIdentifier!)
+        paperType =  paperButton.accessibilityIdentifier!
+        paperBackground.setPaper(paper: paperType)
 
         animateOptionSlide(button: paperButton, start: 60, end: 62, hide: paperOptionsDisplayed)
         paperOptionsDisplayed = !paperOptionsDisplayed
@@ -302,5 +308,7 @@ class ViewController: UIViewController {
         
         tableViewController.tableView.reloadData()
     }
+    
+    
 }
 
