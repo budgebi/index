@@ -226,12 +226,12 @@ class PaperView: UIImageView {
     }
     
     // Load Note
-    public func loadNote(note: Note) {
+    public func loadNote(note: Note, documentsDirectory: URL) {
         
         UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
         
-        let url = NSURL(string: note.imagePath!)
-        let data = NSData(contentsOf: url! as URL)
+        let url = documentsDirectory.appendingPathComponent(note.imagePath!)
+        let data = NSData(contentsOf: url)
         image = UIImage(data: data! as Data)
         
         image?.draw(in: self.bounds)

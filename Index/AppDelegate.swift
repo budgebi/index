@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         addStatusBar.frame = CGRect.init(x: 0, y: 0, width: (self.window?.bounds.width)!, height: 20)
         addStatusBar.backgroundColor = UIColor.init(red: 69/255, green: 90/255, blue: 100/255, alpha: 1)
         self.window?.rootViewController?.view.addSubview(addStatusBar)
-
+        self.window?.rootViewController?.extendedLayoutIncludesOpaqueBars = true
+        
         return true
     }
 

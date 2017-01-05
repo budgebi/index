@@ -17,6 +17,8 @@ class IndexTableViewController: UITableViewController {
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.edgesForExtendedLayout = .top
     }
 
     override func didReceiveMemoryWarning() {

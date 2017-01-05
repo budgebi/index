@@ -29,7 +29,9 @@ extension ViewController: PaperViewDelegate {
         
         let managedContext = appDelegate.persistentContainer.viewContext
 
-        let path = getDocumentsDirectory().appendingPathComponent(title + ".png")
+        let fileName = title + ".png"
+        let path = getDocumentsDirectory().appendingPathComponent(fileName)
+        
         let data = UIImagePNGRepresentation(image)
         try? data?.write(to: path)
 
@@ -40,7 +42,7 @@ extension ViewController: PaperViewDelegate {
         
             note.setValue(title, forKeyPath: "title")
             note.setValue(tags, forKeyPath: "tags")
-            note.setValue(path.absoluteString, forKeyPath: "imagePath")
+            note.setValue(fileName, forKeyPath: "imagePath")
             note.setValue(Date(), forKey: "date")
             note.setValue(paperType, forKey: "paperType")
             currNote = note
@@ -79,7 +81,7 @@ extension ViewController: IndexTableViewDelegate {
     
     internal func loadNoteForIndexPath(indexPath: IndexPath) {
         self.currNote = self.searchResults[indexPath.row]
-        self.paperView.loadNote(note: self.currNote as! Note)
+        self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
         paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
         
         self.searchController.searchBar.resignFirstResponder()
@@ -126,6 +128,9 @@ class ViewController: UIViewController {
         searchController = UISearchController(searchResultsController: tableViewController)
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = true
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.extendedLayoutIncludesOpaqueBars = true
+        extendedLayoutIncludesOpaqueBars = true
         definesPresentationContext = true
         
         self.searchController.searchBar.barTintColor = UIColor.init(red: 96/255, green: 125/255, blue: 139/255, alpha: 1)
