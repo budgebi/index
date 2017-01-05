@@ -149,25 +149,49 @@ class ViewController: UIViewController {
     }
     
     @IBAction func newNote() {
-        currNote = nil
-        self.paperView.deleteNote()
+        let newAlert = UIAlertController(title: "New Note", message: "Any unsaved changes will be lost!", preferredStyle: UIAlertControllerStyle.alert)
+        
+        newAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            self.currNote = nil
+            self.paperView.deleteNote()
+        }))
+        
+        newAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            return
+        }))
+        
+        present(newAlert, animated: true, completion: nil)
     }
     
     @IBAction func deleteNote() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
         
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-
-        if(currNote != nil) {
-            managedContext.delete(currNote!)
-            currNote = nil
-        }
-
-        self.paperView.deleteNote()
+        let deleteAlert = UIAlertController(title: "Delete Note", message: "The note will be permanently deleted!", preferredStyle: UIAlertControllerStyle.alert)
+        
+        deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+                    return
+            }
+            
+            let managedContext =
+                appDelegate.persistentContainer.viewContext
+            
+            if(self.currNote != nil) {
+                managedContext.delete(self.currNote!)
+                self.currNote = nil
+            }
+            do {
+                try managedContext.save()
+            } catch _ {
+            }
+            self.paperView.deleteNote()
+        }))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            return
+        }))
+        
+        present(deleteAlert, animated: true, completion: nil)
 
     }
     
