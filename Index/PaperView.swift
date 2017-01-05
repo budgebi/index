@@ -41,7 +41,7 @@ class PaperView: UIImageView {
     fileprivate var points: [CGPoint]?
     fileprivate var drawPath: UIBezierPath?
     
-    fileprivate var prevImage: UIImage?
+    fileprivate var prevImages: [UIImage?] = []
     
     fileprivate var firstPoint: CGPoint?
     
@@ -119,7 +119,11 @@ class PaperView: UIImageView {
     }
     
     fileprivate func drawStroke() {
-        self.prevImage = image
+        if self.prevImages.count > 20 {
+            self.prevImages.remove(at: 0)
+        }
+        self.prevImages.append(image)
+
         
         UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
         image?.draw(in: self.bounds)
@@ -151,7 +155,12 @@ class PaperView: UIImageView {
     
     // Undo and Delete
     public func undo() {
-        image = self.prevImage
+        if self.prevImages.count == 0 {
+            return
+        }
+        image = self.prevImages.last!
+        self.prevImages.remove(at: prevImages.count-1)
+        
         UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
         image?.draw(in: self.bounds)
         UIGraphicsEndImageContext()
@@ -164,6 +173,7 @@ class PaperView: UIImageView {
         drawPath = nil
         drawLayer?.removeFromSuperlayer()
         addDrawLayer()
+        self.prevImages = []
         image = nil
     }
     
