@@ -17,8 +17,8 @@ class PaperView: UIImageView {
     weak var delegate: PaperViewDelegate?
     
     // Line widths
-    fileprivate let smallLineWidth: CGFloat = 2
-    fileprivate let mediumLineWidth: CGFloat = 4
+    fileprivate let smallLineWidth: CGFloat = 1
+    fileprivate let mediumLineWidth: CGFloat = 3
     fileprivate let largeLineWidth: CGFloat = 6
     fileprivate let eraseLineWidth: CGFloat = 20
     fileprivate let hugeEraserLineWidth: CGFloat = 40
