@@ -82,10 +82,10 @@
                                     <action selector="eraserButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="TFP-P7-5r3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ee-ba-Iho">
-                                <rect key="frame" x="16" y="124" width="31" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ee-ba-Iho">
+                                <rect key="frame" x="16" y="124" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="New"/>
+                                <state key="normal" image="New"/>
                                 <connections>
                                     <action selector="newNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="HBg-St-uCt"/>
                                 </connections>
@@ -268,6 +268,7 @@
         <image name="Grid" width="33" height="33"/>
         <image name="Line" width="33" height="33"/>
         <image name="Lined" width="33" height="33"/>
+        <image name="New" width="33" height="33"/>
         <image name="Trash" width="33" height="33"/>
         <image name="Undo" width="33" height="33"/>
         <image name="black" width="22" height="22"/>
