@@ -218,19 +218,19 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="61" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imc-FL-LY1">
-                                <rect key="frame" x="54" y="212" width="22" height="22"/>
+                                <rect key="frame" x="54" y="212" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="grid"/>
-                                <state key="normal" image="papergrid"/>
+                                <state key="normal" image="Grid"/>
                                 <connections>
                                     <action selector="paperButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QaI-J5-k92"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="62" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moE-TC-JDH">
-                                <rect key="frame" x="92" y="212" width="22" height="22"/>
+                                <rect key="frame" x="92" y="212" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="lined"/>
-                                <state key="normal" image="paperlined"/>
+                                <state key="normal" image="Lined"/>
                                 <connections>
                                     <action selector="paperButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MDs-oC-Ljw"/>
                                 </connections>
@@ -264,6 +264,8 @@
     </scenes>
     <resources>
         <image name="Eraser" width="33" height="33"/>
+        <image name="Grid" width="33" height="33"/>
+        <image name="Lined" width="33" height="33"/>
         <image name="Trash" width="33" height="33"/>
         <image name="Undo" width="33" height="33"/>
         <image name="black" width="22" height="22"/>
@@ -274,8 +276,6 @@
         <image name="line" width="22" height="22"/>
         <image name="mediumwidth" width="21" height="21"/>
         <image name="paper" width="22" height="22"/>
-        <image name="papergrid" width="22" height="22"/>
-        <image name="paperlined" width="22" height="22"/>
         <image name="red" width="22" height="22"/>
         <image name="smallwidth" width="21" height="21"/>
         <image name="yellow" width="22" height="22"/>
