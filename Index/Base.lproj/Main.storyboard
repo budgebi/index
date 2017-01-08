@@ -209,10 +209,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="60" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7RD-Fr-RwM">
-                                <rect key="frame" x="16" y="212" width="22" height="22"/>
+                                <rect key="frame" x="16" y="212" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="plain"/>
-                                <state key="normal" image="paper"/>
+                                <state key="normal" image="Blank"/>
                                 <connections>
                                     <action selector="paperButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aQ0-sa-iiI"/>
                                 </connections>
@@ -263,6 +263,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Blank" width="33" height="33"/>
         <image name="Edit" width="33" height="33"/>
         <image name="Eraser" width="33" height="33"/>
         <image name="Grid" width="33" height="33"/>
@@ -276,7 +277,6 @@
         <image name="green" width="22" height="22"/>
         <image name="largewidth" width="21" height="21"/>
         <image name="mediumwidth" width="21" height="21"/>
-        <image name="paper" width="22" height="22"/>
         <image name="red" width="22" height="22"/>
         <image name="smallwidth" width="21" height="21"/>
         <image name="yellow" width="22" height="22"/>
