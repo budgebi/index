@@ -108,10 +108,10 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJH-HD-t3S">
-                                <rect key="frame" x="54" y="256" width="22" height="22"/>
+                                <rect key="frame" x="54" y="256" width="22" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="line"/>
-                                <state key="normal" image="line"/>
+                                <state key="normal" image="Line"/>
                                 <connections>
                                     <action selector="drawStyleButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d0d-5b-2Dc"/>
                                 </connections>
@@ -200,10 +200,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uum-wz-Brp">
-                                <rect key="frame" x="16" y="256" width="22" height="22"/>
+                                <rect key="frame" x="16" y="256" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="squiggle"/>
-                                <state key="normal" image="freedraw"/>
+                                <state key="normal" image="Edit"/>
                                 <connections>
                                     <action selector="drawStyleButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xqr-i0-BKe"/>
                                 </connections>
@@ -263,17 +263,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Edit" width="33" height="33"/>
         <image name="Eraser" width="33" height="33"/>
         <image name="Grid" width="33" height="33"/>
+        <image name="Line" width="33" height="33"/>
         <image name="Lined" width="33" height="33"/>
         <image name="Trash" width="33" height="33"/>
         <image name="Undo" width="33" height="33"/>
         <image name="black" width="22" height="22"/>
         <image name="blue" width="22" height="22"/>
-        <image name="freedraw" width="22" height="22"/>
         <image name="green" width="22" height="22"/>
         <image name="largewidth" width="21" height="21"/>
-        <image name="line" width="22" height="22"/>
         <image name="mediumwidth" width="21" height="21"/>
         <image name="paper" width="22" height="22"/>
         <image name="red" width="22" height="22"/>
