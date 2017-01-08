@@ -75,9 +75,9 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" tag="30" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbW-vW-nq2">
-                                <rect key="frame" x="16" y="388" width="22" height="22"/>
+                                <rect key="frame" x="16" y="388" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="eraser"/>
+                                <state key="normal" image="Eraser"/>
                                 <connections>
                                     <action selector="eraserButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="TFP-P7-5r3"/>
                                 </connections>
@@ -184,17 +184,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="40" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRu-7o-TBp">
-                                <rect key="frame" x="16" y="432" width="22" height="22"/>
+                                <rect key="frame" x="16" y="432" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="undo"/>
+                                <state key="normal" image="Undo"/>
                                 <connections>
                                     <action selector="undoButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="J22-ue-d2m"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="50" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIQ-qK-Wfl">
-                                <rect key="frame" x="16" y="476" width="22" height="22"/>
+                                <rect key="frame" x="16" y="476" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="trash"/>
+                                <state key="normal" image="Trash"/>
                                 <connections>
                                     <action selector="deleteNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="x4U-eO-Tek"/>
                                 </connections>
@@ -263,9 +263,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Eraser" width="33" height="33"/>
+        <image name="Trash" width="33" height="33"/>
+        <image name="Undo" width="33" height="33"/>
         <image name="black" width="22" height="22"/>
         <image name="blue" width="22" height="22"/>
-        <image name="eraser" width="22" height="22"/>
         <image name="freedraw" width="22" height="22"/>
         <image name="green" width="22" height="22"/>
         <image name="largewidth" width="21" height="21"/>
@@ -276,8 +278,6 @@
         <image name="paperlined" width="22" height="22"/>
         <image name="red" width="22" height="22"/>
         <image name="smallwidth" width="21" height="21"/>
-        <image name="trash" width="22" height="22"/>
-        <image name="undo" width="22" height="22"/>
         <image name="yellow" width="22" height="22"/>
     </resources>
 </document>
