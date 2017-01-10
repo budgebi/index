@@ -150,7 +150,18 @@ class PaperView: UIImageView {
     
     // Save File
     public func saveNote() {
-        self.delegate?.saveNote(title: (titleTextField?.text)!, tags: (tagTextField?.text)!, image: image!)
+        if image == nil {
+            image = UIImage()
+        }
+        var title: String = "Untitled"
+        if titleTextField?.text != "" {
+            title = (titleTextField?.text)!
+        }
+        var tags: String = "Untitled"
+        if tagTextField?.text != "" {
+            tags = (tagTextField?.text)!
+        }
+        self.delegate?.saveNote(title: title, tags: tags, image: image!)
     }
     
     // Undo and Delete
@@ -242,7 +253,9 @@ class PaperView: UIImageView {
         
         let url = documentsDirectory.appendingPathComponent(note.imagePath!)
         let data = NSData(contentsOf: url)
-        image = UIImage(data: data! as Data)
+        if data != nil {
+            image = UIImage(data: data! as Data)
+        }
         
         image?.draw(in: self.bounds)
         UIGraphicsEndImageContext()
