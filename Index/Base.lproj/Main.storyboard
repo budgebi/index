@@ -90,19 +90,19 @@
                                     <action selector="newNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="HBg-St-uCt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK3-oi-nct">
-                                <rect key="frame" x="16" y="168" width="34" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK3-oi-nct">
+                                <rect key="frame" x="16" y="168" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save"/>
+                                <state key="normal" image="Save"/>
                                 <connections>
                                     <action selector="saveNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bp4-3f-RPA"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="14" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFh-K4-ggg">
-                                <rect key="frame" x="168" y="300" width="22" height="22"/>
+                                <rect key="frame" x="168" y="300" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="red"/>
-                                <state key="normal" image="red"/>
+                                <state key="normal" image="Red"/>
                                 <connections>
                                     <action selector="colorCommandWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y56-S1-A1e"/>
                                 </connections>
@@ -117,46 +117,46 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORh-Ol-ad2">
-                                <rect key="frame" x="16" y="300" width="22" height="22"/>
+                                <rect key="frame" x="16" y="300" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="black"/>
-                                <state key="normal" image="black"/>
+                                <state key="normal" image="Black"/>
                                 <connections>
                                     <action selector="colorCommandWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ISd-51-ghh"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="13" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kje-4L-XTy">
-                                <rect key="frame" x="130" y="300" width="22" height="22"/>
+                                <rect key="frame" x="130" y="300" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="green"/>
-                                <state key="normal" image="green"/>
+                                <state key="normal" image="Green"/>
                                 <connections>
                                     <action selector="colorCommandWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OaM-bC-O0f"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZp-Mi-zAG">
-                                <rect key="frame" x="54" y="300" width="22" height="22"/>
+                                <rect key="frame" x="54" y="300" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="blue"/>
-                                <state key="normal" image="blue"/>
+                                <state key="normal" image="Blue"/>
                                 <connections>
                                     <action selector="colorCommandWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b10-OI-AKb"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZx-be-hik">
-                                <rect key="frame" x="92" y="300" width="22" height="22"/>
+                                <rect key="frame" x="92" y="300" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="yellow"/>
-                                <state key="normal" image="yellow"/>
+                                <state key="normal" image="Yellow"/>
                                 <connections>
                                     <action selector="colorCommandWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cFn-bL-hqe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="20" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Un8-Qg-U1b">
-                                <rect key="frame" x="16" y="344" width="22" height="22"/>
+                                <rect key="frame" x="16" y="344" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="small"/>
-                                <state key="normal" image="smallwidth"/>
+                                <state key="normal" image="Small"/>
                                 <state key="disabled" image="smallwidth"/>
                                 <state key="selected" image="smallwidth"/>
                                 <state key="highlighted" image="smallwidth"/>
@@ -166,19 +166,19 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="21" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVB-6Z-f2m">
-                                <rect key="frame" x="54" y="344" width="22" height="22"/>
+                                <rect key="frame" x="54" y="344" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="medium"/>
-                                <state key="normal" image="mediumwidth"/>
+                                <state key="normal" image="Medium"/>
                                 <connections>
                                     <action selector="sizeButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mxr-FD-SYY"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="22" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0F-cM-Pow">
-                                <rect key="frame" x="92" y="344" width="22" height="22"/>
+                                <rect key="frame" x="92" y="344" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="large"/>
-                                <state key="normal" image="largewidth"/>
+                                <state key="normal" image="Large"/>
                                 <connections>
                                     <action selector="sizeButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SVa-F8-Ea4"/>
                                 </connections>
@@ -263,22 +263,24 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Black" width="33" height="33"/>
         <image name="Blank" width="33" height="33"/>
+        <image name="Blue" width="33" height="33"/>
         <image name="Edit" width="33" height="33"/>
         <image name="Eraser" width="33" height="33"/>
+        <image name="Green" width="33" height="33"/>
         <image name="Grid" width="33" height="33"/>
+        <image name="Large" width="33" height="33"/>
         <image name="Line" width="33" height="33"/>
         <image name="Lined" width="33" height="33"/>
+        <image name="Medium" width="33" height="33"/>
         <image name="New" width="33" height="33"/>
+        <image name="Red" width="33" height="33"/>
+        <image name="Save" width="33" height="33"/>
+        <image name="Small" width="33" height="33"/>
         <image name="Trash" width="33" height="33"/>
         <image name="Undo" width="33" height="33"/>
-        <image name="black" width="22" height="22"/>
-        <image name="blue" width="22" height="22"/>
-        <image name="green" width="22" height="22"/>
-        <image name="largewidth" width="21" height="21"/>
-        <image name="mediumwidth" width="21" height="21"/>
-        <image name="red" width="22" height="22"/>
+        <image name="Yellow" width="33" height="33"/>
         <image name="smallwidth" width="21" height="21"/>
-        <image name="yellow" width="22" height="22"/>
     </resources>
 </document>
