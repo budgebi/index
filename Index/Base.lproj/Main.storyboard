@@ -82,8 +82,13 @@
                                     <action selector="eraserButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="TFP-P7-5r3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMC-X9-ejr">
+                                <rect key="frame" x="16" y="263" width="33" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Link"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ee-ba-Iho">
-                                <rect key="frame" x="16" y="214" width="33" height="33"/>
+                                <rect key="frame" x="16" y="165" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="New"/>
                                 <connections>
@@ -91,7 +96,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK3-oi-nct">
-                                <rect key="frame" x="16" y="263" width="33" height="33"/>
+                                <rect key="frame" x="16" y="214" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Save"/>
                                 <connections>
@@ -273,6 +278,7 @@
         <image name="Large" width="33" height="33"/>
         <image name="Line" width="33" height="33"/>
         <image name="Lined" width="33" height="33"/>
+        <image name="Link" width="33" height="33"/>
         <image name="Medium" width="33" height="33"/>
         <image name="New" width="33" height="33"/>
         <image name="Red" width="33" height="33"/>
