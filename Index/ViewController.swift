@@ -176,10 +176,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func deleteNote() {
+        if self.currNote == nil {
+            return
+        }
         
         let deleteAlert = UIAlertController(title: "Delete Note", message: "The note will be permanently deleted!", preferredStyle: UIAlertControllerStyle.alert)
         
         deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            
+            if self.prevNotes.contains(self.currNote!) {
+                let index = self.prevNotes.index(of: self.currNote!)
+                self.prevNotes.remove(at: index!)
+            }
+            
             guard let appDelegate =
                 UIApplication.shared.delegate as? AppDelegate else {
                     return
@@ -197,6 +206,7 @@ class ViewController: UIViewController {
             } catch _ {
             }
             self.paperView.deleteNote()
+            
         }))
         
         deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
