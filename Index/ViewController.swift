@@ -80,6 +80,12 @@ extension ViewController: IndexTableViewDelegate {
     }
     
     internal func loadNoteForIndexPath(indexPath: IndexPath) {
+        if self.prevNotes.count > 20 {
+            self.prevNotes.remove(at: 0)
+        }
+        if self.currNote != nil {
+            self.prevNotes.append(self.currNote!)
+        }
         self.currNote = self.searchResults[indexPath.row]
         self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
         paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
@@ -112,6 +118,8 @@ class ViewController: UIViewController {
     var searchController: UISearchController!
     
     fileprivate var currNote: NSManagedObject?;
+    fileprivate var prevNotes: [NSManagedObject] = [];
+
     fileprivate var paperType: String = "plain";
 
     fileprivate var searchResults = [Note]();
@@ -152,6 +160,10 @@ class ViewController: UIViewController {
         let newAlert = UIAlertController(title: "New Note", message: "Any unsaved changes will be lost!", preferredStyle: UIAlertControllerStyle.alert)
         
         newAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            if self.prevNotes.count > 20 {
+                self.prevNotes.remove(at: 0)
+            }
+            self.prevNotes.append(self.currNote!)
             self.currNote = nil
             self.paperView.deleteNote()
         }))
@@ -259,6 +271,15 @@ class ViewController: UIViewController {
     
     @IBAction func undoButtonPressed() {
         self.paperView.undo()
+    }
+    
+    @IBAction func backButtonPressed() {
+        if self.prevNotes.count == 0 {
+            return
+        }
+        self.currNote = self.prevNotes[self.prevNotes.count-1]
+        self.prevNotes.remove(at: self.prevNotes.count-1)
+        self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
     }
     
     func animateOptionSlide(button: UIButton, start: Int, end: Int, hide: Bool) {

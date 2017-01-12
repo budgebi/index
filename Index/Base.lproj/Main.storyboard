@@ -91,6 +91,9 @@
                                 <rect key="frame" x="10" y="80" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Back"/>
+                                <connections>
+                                    <action selector="backButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="PPt-yf-zPf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMC-X9-ejr">
                                 <rect key="frame" x="16" y="263" width="33" height="33"/>
