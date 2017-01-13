@@ -99,6 +99,9 @@
                                 <rect key="frame" x="16" y="263" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Link"/>
+                                <connections>
+                                    <action selector="linkButtonPressedWithSender:event:" destination="BYZ-38-t0r" eventType="touchDown" id="eSe-uD-BUT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ee-ba-Iho">
                                 <rect key="frame" x="16" y="165" width="33" height="33"/>

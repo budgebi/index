@@ -117,17 +117,23 @@ class ViewController: UIViewController {
     var tableViewController: IndexTableViewController!
     var searchController: UISearchController!
     
-    fileprivate var currNote: NSManagedObject?;
-    fileprivate var prevNotes: [NSManagedObject] = [];
+    fileprivate var currNote: NSManagedObject?
+    fileprivate var prevNotes: [NSManagedObject] = []
 
-    fileprivate var paperType: String = "plain";
+    fileprivate var paperType: String = "plain"
 
-    fileprivate var searchResults = [Note]();
+    fileprivate var searchResults = [Note]()
+    
+    fileprivate var dragging: Bool = false
+    fileprivate var dragView: UIButton = UIButton()
     
     // Lifecycle Hooks
     override func viewDidLoad() {
         super.viewDidLoad()
         self.paperView.delegate = self
+        self.paperView.isUserInteractionEnabled = true
+        self.paperBackground.isUserInteractionEnabled = true
+        self.view.isUserInteractionEnabled = true
         paperBackground.backgroundColor = paperColor
         
         self.tableViewController = IndexTableViewController(style: .plain)
@@ -156,6 +162,7 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    // Note creation and deletion
     @IBAction func newNote() {
         let newAlert = UIAlertController(title: "New Note", message: "Any unsaved changes will be lost!", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -243,6 +250,7 @@ class ViewController: UIViewController {
         }
     }
 
+    // Commands
     @IBAction func eraserButtonPressed() {
         self.paperView.useEraser()
     }
@@ -293,6 +301,50 @@ class ViewController: UIViewController {
         self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
     }
     
+    @IBAction func linkButtonPressed(sender: UIButton, event: UIEvent) {
+        let touches = event.touches(for: sender)
+        let touch = touches?.first
+        let touchPoint = touch?.location(in: sender)
+        
+        let origin = CGPoint(x: (touchPoint?.x)! + sender.frame.origin.x - 16, y: (touchPoint?.y)! + sender.frame.origin.y - 64 - 16)
+        
+        let icon = UIImage(named: "Link")
+        let gestureRecognizer = UIPanGestureRecognizer(target: self,action: #selector(drag(sender:)))
+        let draggableIcon = DraggableIcon(origin: origin, width: (icon?.size.width)!, height: (icon?.size.height)!, icon: icon!, gestureRecognizer: gestureRecognizer)
+        draggableIcon.view.layer.zPosition = 1
+        draggableIcon.view.addTarget(self, action: #selector(startDrag(button:event:)), for: .touchDown)
+        self.paperView.addSubview(draggableIcon.view)
+    }
+    
+    func startDrag(button: UIButton, event: UIEvent) {
+        self.dragging = true
+        self.dragView = button
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let location = touch?.location(in: self.paperView)
+        if (location?.x)! > self.dragView.frame.origin.x && (location?.x)! < self.dragView.frame.origin.x + self.dragView.frame.size.width && (location?.y)! > self.dragView.frame.origin.y
+            && (location?.y)! < self.dragView.frame.origin.y + self.dragView.frame.size.height {
+            
+            let previousLocation : CGPoint = touch!.previousLocation(in: self.dragView)
+            let location : CGPoint = touch!.location(in: self.dragView)
+            let delta_x :CGFloat = location.x - previousLocation.x
+            let delta_y :CGFloat = location.y - previousLocation.y
+            self.dragView.center.x = self.dragView.center.x + delta_x
+            self.dragView.center.y = self.dragView.center.y + delta_y
+        }
+    }
+    
+    func drag(sender: UIPanGestureRecognizer) {
+//        let translation = sender.translation(in: self.paperView)
+//
+//        sender.view!.center = CGPoint(x: sender.view!.center.x + translation.x, y: sender.view!.center.y + translation.y)
+//        
+//        sender.setTranslation(CGPoint.zero, in: self.paperView)
+    }
+    
+    // Animation stuffs
     func animateOptionSlide(button: UIButton, start: Int, end: Int, hide: Bool) {
         if(button.tag != start) {
             let selectedOption = self.view.viewWithTag(start) as! UIButton
