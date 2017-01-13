@@ -176,13 +176,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func deleteNote() {
-        if self.currNote == nil {
-            return
-        }
         
         let deleteAlert = UIAlertController(title: "Delete Note", message: "The note will be permanently deleted!", preferredStyle: UIAlertControllerStyle.alert)
         
-        deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+        deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action:UIAlertAction!) in
+            self.paperView.deleteNote()
+
+            if self.currNote == nil {
+                return
+            }
             
             if self.prevNotes.contains(self.currNote!) {
                 let index = self.prevNotes.index(of: self.currNote!)
@@ -205,7 +207,6 @@ class ViewController: UIViewController {
                 try managedContext.save()
             } catch _ {
             }
-            self.paperView.deleteNote()
             
         }))
         
