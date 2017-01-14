@@ -298,6 +298,19 @@ class ViewController: UIViewController {
         self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
     }
     
+    // Annotation stuffs
+    @IBAction func addButtonPressed() {
+        let newLink = self.view.viewWithTag(91) as! UIButton
+        newLink.isHidden = !newLink.isHidden
+    }
+    
+    @IBAction func addNewLink() {
+        let linkSearchModal = LinkSearchModalViewController(indexTableViewDelegate: self, searchResultsUpdater: self)
+        linkSearchModal.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        linkSearchModal.view.frame = CGRect(x: 262, y: 59, width: 500, height: 650)
+        present(linkSearchModal, animated: true, completion: nil)
+    }
+    
     // Animation stuffs
     func animateOptionSlide(button: UIButton, start: Int, end: Int, hide: Bool) {
         if(button.tag != start) {
