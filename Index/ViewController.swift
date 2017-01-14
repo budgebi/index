@@ -124,9 +124,6 @@ class ViewController: UIViewController {
 
     fileprivate var searchResults = [Note]()
     
-    fileprivate var dragging: Bool = false
-    fileprivate var dragView: UIButton = UIButton()
-    
     // Lifecycle Hooks
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -299,49 +296,6 @@ class ViewController: UIViewController {
         self.currNote = self.prevNotes[self.prevNotes.count-1]
         self.prevNotes.remove(at: self.prevNotes.count-1)
         self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
-    }
-    
-    @IBAction func linkButtonPressed(sender: UIButton, event: UIEvent) {
-        let touches = event.touches(for: sender)
-        let touch = touches?.first
-        let touchPoint = touch?.location(in: sender)
-        
-        let origin = CGPoint(x: (touchPoint?.x)! + sender.frame.origin.x - 16, y: (touchPoint?.y)! + sender.frame.origin.y - 64 - 16)
-        
-        let icon = UIImage(named: "Link")
-        let gestureRecognizer = UIPanGestureRecognizer(target: self,action: #selector(drag(sender:)))
-        let draggableIcon = DraggableIcon(origin: origin, width: (icon?.size.width)!, height: (icon?.size.height)!, icon: icon!, gestureRecognizer: gestureRecognizer)
-        draggableIcon.view.layer.zPosition = 1
-        draggableIcon.view.addTarget(self, action: #selector(startDrag(button:event:)), for: .touchDown)
-        self.paperView.addSubview(draggableIcon.view)
-    }
-    
-    func startDrag(button: UIButton, event: UIEvent) {
-        self.dragging = true
-        self.dragView = button
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        let location = touch?.location(in: self.paperView)
-        if (location?.x)! > self.dragView.frame.origin.x && (location?.x)! < self.dragView.frame.origin.x + self.dragView.frame.size.width && (location?.y)! > self.dragView.frame.origin.y
-            && (location?.y)! < self.dragView.frame.origin.y + self.dragView.frame.size.height {
-            
-            let previousLocation : CGPoint = touch!.previousLocation(in: self.dragView)
-            let location : CGPoint = touch!.location(in: self.dragView)
-            let delta_x :CGFloat = location.x - previousLocation.x
-            let delta_y :CGFloat = location.y - previousLocation.y
-            self.dragView.center.x = self.dragView.center.x + delta_x
-            self.dragView.center.y = self.dragView.center.y + delta_y
-        }
-    }
-    
-    func drag(sender: UIPanGestureRecognizer) {
-//        let translation = sender.translation(in: self.paperView)
-//
-//        sender.view!.center = CGPoint(x: sender.view!.center.x + translation.x, y: sender.view!.center.y + translation.y)
-//        
-//        sender.setTranslation(CGPoint.zero, in: self.paperView)
     }
     
     // Animation stuffs
