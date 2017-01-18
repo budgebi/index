@@ -137,7 +137,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJH-HD-t3S">
-                                <rect key="frame" x="54" y="361" width="22" height="33"/>
+                                <rect key="frame" x="54" y="361" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="line"/>
                                 <state key="normal" image="Line"/>

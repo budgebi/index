@@ -135,6 +135,7 @@ class ViewController: UIViewController {
         
         self.tableViewController = IndexTableViewController(style: .plain)
         self.tableViewController.delegate = self
+        self.tableViewController.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         
         searchController = UISearchController(searchResultsController: tableViewController)
         self.searchController.searchResultsUpdater = self
@@ -149,6 +150,7 @@ class ViewController: UIViewController {
         self.topView.addSubview(self.searchController.searchBar)
         self.searchController.searchBar.sizeToFit()
         self.searchController.searchBar.frame.size.width = self.view.frame.size.width
+        self.searchController.view.backgroundColor = UIColor.clear
     }
     
     override func viewDidAppear(_ animated: Bool) {

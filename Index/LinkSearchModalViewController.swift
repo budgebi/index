@@ -8,11 +8,22 @@
 
 import UIKit
 
+extension LinkSearchModalViewController: UISearchControllerDelegate {
+    func didPresentSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.showsCancelButton = false
+    }
+    
+    func willPresentSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.showsCancelButton = false
+    }
+}
+
 class LinkSearchModalViewController: UIViewController {
 
     var tableViewController: IndexTableViewController!
-    var searchController: UISearchController!
+    var searchController: LinkSearchController!
     var navBar: UINavigationBar!
+    var searchView: UIView!
     
     init(indexTableViewDelegate: IndexTableViewDelegate, searchResultsUpdater: UISearchResultsUpdating) {
         super.init(nibName: nil, bundle: nil)
@@ -20,12 +31,14 @@ class LinkSearchModalViewController: UIViewController {
         self.tableViewController = IndexTableViewController(style: .plain)
         self.tableViewController.delegate = indexTableViewDelegate
         
-        searchController = UISearchController(searchResultsController: tableViewController)
-        self.searchController.searchResultsUpdater = searchResultsUpdater
-        self.searchController.dimsBackgroundDuringPresentation = false
-        self.searchController.hidesNavigationBarDuringPresentation = false
+        searchController = LinkSearchController(searchResultsController: tableViewController)
+        searchController.searchResultsUpdater = searchResultsUpdater
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.searchBarStyle = .prominent
+        searchController.searchBar.showsCancelButton = false
+        searchController.delegate = self
         definesPresentationContext = true
-        
         self.navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
         
     }
@@ -46,15 +59,21 @@ class LinkSearchModalViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
+        self.searchView.sizeToFit()
         self.searchController.searchBar.sizeToFit()
         self.navBar.sizeToFit()
+        self.tableViewController.tableView.sizeToFit()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+                        
+        searchView = UIView(frame: CGRect(x: 0, y: 44, width: Int(self.view.frame.size.width) , height: 44))
         
-        self.searchController.searchBar.frame = CGRect(x: 0, y: 44, width: self.view.frame.size.width , height: 44)
-        self.view.addSubview(self.searchController.searchBar)
+        self.searchController.searchBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: 44)
+        self.searchView.addSubview(self.searchController.searchBar)
+
+        self.view.addSubview(searchView)
 
         navBar.barTintColor = UIColor.white
         
@@ -67,11 +86,12 @@ class LinkSearchModalViewController: UIViewController {
         cancelItem.setTitleTextAttributes([NSFontAttributeName: navBarFontLight], for: .normal)
         navItem.leftBarButtonItem = cancelItem;
         navBar.setItems([navItem], animated: false)
+        
         self.view.addSubview(navBar)
         
-        self.searchController.extendedLayoutIncludesOpaqueBars = !navBar.isTranslucent
-        extendedLayoutIncludesOpaqueBars = !navBar.isTranslucent
-
+        self.searchController.searchBar.isTranslucent = false
+        self.searchController.extendedLayoutIncludesOpaqueBars = true
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,7 +100,12 @@ class LinkSearchModalViewController: UIViewController {
     }
     
     func dismissSelf() {
-        self.dismiss(animated: true, completion: nil)
+        if self.view.isFirstResponder {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.dismiss(animated: false, completion: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
     /*
