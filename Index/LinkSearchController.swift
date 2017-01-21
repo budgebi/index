@@ -32,18 +32,18 @@ class LinkSearchController: UISearchController, UISearchBarDelegate {
     }
     */
     
-    var _searchBar: LinkSearchBar {
-        get {
-            let result = LinkSearchBar(frame: CGRect.zero)
-            result.delegate = self
-            
-            return result
-        }
-    }
+    var _searchBar: LinkSearchBar?
     
     override var searchBar: UISearchBar {
         get {
-            return _searchBar
+            if _searchBar == nil {
+                _searchBar = LinkSearchBar(frame: CGRect.zero)
+                _searchBar?.delegate = self
+                
+                return _searchBar!
+            } else {
+                return _searchBar!
+            }
         }
     }
 

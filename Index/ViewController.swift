@@ -309,7 +309,6 @@ class ViewController: UIViewController {
     @IBAction func addNewLink() {
         let linkSearchModal = LinkSearchModalViewController(indexTableViewDelegate: self, searchResultsUpdater: self)
         linkSearchModal.modalPresentationStyle = UIModalPresentationStyle.formSheet
-        linkSearchModal.view.frame = CGRect(x: 262, y: 59, width: 500, height: 650)
         
         present(linkSearchModal, animated: true, completion: nil)
     }

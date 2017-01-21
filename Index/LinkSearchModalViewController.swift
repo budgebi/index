@@ -39,7 +39,7 @@ class LinkSearchModalViewController: UIViewController {
         searchController.searchBar.showsCancelButton = false
         searchController.delegate = self
         definesPresentationContext = true
-        self.navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        self.navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 500, height: 44))
         
     }
     
@@ -54,7 +54,7 @@ class LinkSearchModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.preferredContentSize = CGSize(width: 500, height: 600)
         self.view.backgroundColor = UIColor.white
     }
 
@@ -67,17 +67,17 @@ class LinkSearchModalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                        
-        searchView = UIView(frame: CGRect(x: 0, y: 44, width: Int(self.view.frame.size.width) , height: 44))
+        searchView = UIView(frame: CGRect(x: 0, y: 44, width: 500 , height: 44))
         
-        self.searchController.searchBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: 44)
+        self.searchController.searchBar.frame = CGRect(x: 0, y: 0, width: 500 , height: 44)
+        
         self.searchView.addSubview(self.searchController.searchBar)
 
         self.view.addSubview(searchView)
 
         navBar.barTintColor = UIColor.white
         
-        let navBarFont = UIFont(name: "HelveticaNeue", size: 20.0)!
+        let navBarFont = UIFont(name: "HelveticaNeue-Light", size: 20.0)!
         navBar.titleTextAttributes = [NSFontAttributeName: navBarFont]
         
         let navBarFontLight = UIFont(name: "HelveticaNeue-Light", size: 18.0)!
