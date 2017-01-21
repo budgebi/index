@@ -30,6 +30,9 @@ class LinkSearchModalViewController: UIViewController {
         
         self.tableViewController = IndexTableViewController(style: .plain)
         self.tableViewController.delegate = indexTableViewDelegate
+        self.tableViewController.extendedLayoutIncludesOpaqueBars = true
+        self.tableViewController.tableView.backgroundColor = UIColor.clear
+        self.tableViewController.tableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
         
         searchController = LinkSearchController(searchResultsController: tableViewController)
         searchController.searchResultsUpdater = searchResultsUpdater
@@ -38,7 +41,8 @@ class LinkSearchModalViewController: UIViewController {
         searchController.searchBar.searchBarStyle = .prominent
         searchController.searchBar.showsCancelButton = false
         searchController.delegate = self
-        definesPresentationContext = true
+        searchController.definesPresentationContext = true
+//        definesPresentationContext = true
         self.navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 500, height: 44))
         
     }
