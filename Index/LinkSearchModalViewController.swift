@@ -22,7 +22,6 @@ class LinkSearchModalViewController: UIViewController {
 
     var tableViewController: IndexTableViewController!
     var searchController: LinkSearchController!
-    var navBar: UINavigationBar!
     var searchView: UIView!
     
     init(indexTableViewDelegate: IndexTableViewDelegate, searchResultsUpdater: UISearchResultsUpdating) {
@@ -31,8 +30,6 @@ class LinkSearchModalViewController: UIViewController {
         self.tableViewController = IndexTableViewController(style: .plain)
         self.tableViewController.delegate = indexTableViewDelegate
         self.tableViewController.extendedLayoutIncludesOpaqueBars = true
-        self.tableViewController.tableView.backgroundColor = UIColor.clear
-        self.tableViewController.tableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
         
         searchController = LinkSearchController(searchResultsController: tableViewController)
         searchController.searchResultsUpdater = searchResultsUpdater
@@ -42,8 +39,7 @@ class LinkSearchModalViewController: UIViewController {
         searchController.searchBar.showsCancelButton = false
         searchController.delegate = self
         searchController.definesPresentationContext = true
-//        definesPresentationContext = true
-        self.navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 500, height: 44))
+        definesPresentationContext = true
         
     }
     
@@ -52,46 +48,30 @@ class LinkSearchModalViewController: UIViewController {
     }
 
     override func viewWillLayoutSubviews() {
-        self.view.superview?.layer.cornerRadius = 5.0
+        self.view.superview?.layer.cornerRadius = 0.0
         self.view.superview?.layer.masksToBounds = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.preferredContentSize = CGSize(width: 500, height: 600)
         self.view.backgroundColor = UIColor.white
     }
 
     override func viewDidLayoutSubviews() {
         self.searchView.sizeToFit()
         self.searchController.searchBar.sizeToFit()
-        self.navBar.sizeToFit()
         self.tableViewController.tableView.sizeToFit()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        searchView = UIView(frame: CGRect(x: 0, y: 44, width: 500 , height: 44))
+        searchView = UIView(frame: CGRect(x: 0, y: 0, width: 250 , height: 44))
         
-        self.searchController.searchBar.frame = CGRect(x: 0, y: 0, width: 500 , height: 44)
+        self.searchController.searchBar.frame = CGRect(x: 0, y: 0, width: 250, height: 44)
         
         self.searchView.addSubview(self.searchController.searchBar)
 
         self.view.addSubview(searchView)
-
-        navBar.barTintColor = UIColor.white
-        
-        let navBarFont = UIFont(name: "HelveticaNeue-Light", size: 20.0)!
-        navBar.titleTextAttributes = [NSFontAttributeName: navBarFont]
-        
-        let navBarFontLight = UIFont(name: "HelveticaNeue-Light", size: 18.0)!
-        let navItem = UINavigationItem(title: "Link Selection");
-        let cancelItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissSelf));
-        cancelItem.setTitleTextAttributes([NSFontAttributeName: navBarFontLight], for: .normal)
-        navItem.leftBarButtonItem = cancelItem;
-        navBar.setItems([navItem], animated: false)
-        
-        self.view.addSubview(navBar)
         
         self.searchController.searchBar.isTranslucent = false
         self.searchController.extendedLayoutIncludesOpaqueBars = true
@@ -103,15 +83,6 @@ class LinkSearchModalViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func dismissSelf() {
-        if self.view.isFirstResponder {
-            self.dismiss(animated: true, completion: nil)
-        } else {
-            self.dismiss(animated: false, completion: nil)
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-
     /*
     // MARK: - Navigation
 

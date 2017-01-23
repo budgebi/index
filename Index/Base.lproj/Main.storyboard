@@ -87,7 +87,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Add-Link"/>
                                 <connections>
-                                    <action selector="addNewLink" destination="BYZ-38-t0r" eventType="touchUpInside" id="XtY-9l-KWc"/>
+                                    <action selector="addNewLinkWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bf5-jo-68c"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="90" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McZ-I5-xta">

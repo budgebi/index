@@ -101,6 +101,10 @@ extension ViewController: UISearchResultsUpdating {
     }
 }
 
+extension ViewController: UIPopoverPresentationControllerDelegate {
+    
+}
+
 class ViewController: UIViewController {
 
     fileprivate var colorOptionsDisplayed = false
@@ -306,11 +310,25 @@ class ViewController: UIViewController {
         newLink.isHidden = !newLink.isHidden
     }
     
-    @IBAction func addNewLink() {
+    @IBAction func addNewLink(sender: UIButton) {
         let linkSearchModal = LinkSearchModalViewController(indexTableViewDelegate: self, searchResultsUpdater: self)
-        linkSearchModal.modalPresentationStyle = UIModalPresentationStyle.formSheet
         
-        present(linkSearchModal, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: linkSearchModal)
+        nav.modalPresentationStyle = .popover
+        nav.navigationBar.isHidden = true
+        
+        let popover = nav.popoverPresentationController
+        
+        linkSearchModal.preferredContentSize = CGSize(width: 250, height: 325)
+        popover?.delegate = self
+        popover?.sourceView = sender
+        popover?.sourceRect = sender.bounds
+        
+        present(nav, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
     // Animation stuffs
