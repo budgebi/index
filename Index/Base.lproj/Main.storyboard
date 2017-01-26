@@ -281,6 +281,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="linkButton" destination="R6I-7V-fVH" id="3Py-n9-5bF"/>
                         <outlet property="paperBackground" destination="L8t-Pc-zqk" id="fef-r4-Dtt"/>
                         <outlet property="paperView" destination="0eb-D5-nBy" id="IK6-9z-1p4"/>
                         <outlet property="topView" destination="t4x-Sh-d3o" id="Ko6-SK-DCD"/>

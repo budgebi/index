@@ -95,15 +95,52 @@ extension ViewController: IndexTableViewDelegate {
     }
 }
 
+protocol LinkSearchModalDelegate: class {
+    func linkCount() -> Int
+    
+    func linkForIndexPath(indexPath: IndexPath) -> Note
+    
+    func setLinkForNoteAtIndexPath(indexPath: IndexPath)
+}
+
+extension ViewController: LinkSearchModalDelegate {
+    internal func linkCount() -> Int{
+        return self.searchResults.count
+    }
+    
+    internal func linkForIndexPath(indexPath: IndexPath) -> Note {
+        return self.searchResults[indexPath.row]
+    }
+    
+    internal func setLinkForNoteAtIndexPath(indexPath: IndexPath) {
+        let note: Note = self.searchResults[indexPath.row]
+        let origin = CGPoint(x: self.linkButton.frame.origin.x, y: self.linkButton.frame.origin.y - 64)
+        let link = Link(origin: origin, note: note, index: self.links.count)
+        link.delegate = self
+
+        self.paperView.addSubview(link.button)
+        self.linkButton.isHidden = true
+        self.links.append(link)
+    }
+}
+
+protocol LinkDelegate: class {
+    func loadLink(index: Int)
+}
+
+extension ViewController: LinkDelegate {
+    internal func loadLink(index: Int) {
+        self.loadNoteForIndexPath(indexPath: IndexPath(row: index, section: 1))
+    }
+}
+
 extension ViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
 }
 
-extension ViewController: UIPopoverPresentationControllerDelegate {
-    
-}
+extension ViewController: UIPopoverPresentationControllerDelegate {}
 
 class ViewController: UIViewController {
 
@@ -117,6 +154,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var paperView: PaperView!
     @IBOutlet weak var paperBackground: PaperBackgroundView!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var linkButton: UIButton!
     
     var tableViewController: IndexTableViewController!
     var searchController: UISearchController!
@@ -127,6 +165,8 @@ class ViewController: UIViewController {
     fileprivate var paperType: String = "plain"
 
     fileprivate var searchResults = [Note]()
+    
+    fileprivate var links = [Link]()
     
     // Lifecycle Hooks
     override func viewDidLoad() {
@@ -311,8 +351,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addNewLink(sender: UIButton) {
-        let linkSearchModal = LinkSearchModalViewController(indexTableViewDelegate: self, searchResultsUpdater: self)
-        
+        let linkSearchModal = LinkSearchModalViewController(searchResultsUpdater: self)
+        linkSearchModal.delegate = self
         let nav = UINavigationController(rootViewController: linkSearchModal)
         nav.modalPresentationStyle = .popover
         nav.navigationBar.isHidden = true

@@ -18,17 +18,41 @@ extension LinkSearchModalViewController: UISearchControllerDelegate {
     }
 }
 
+protocol LinkTableViewDelegate: class {
+    func linkCount() -> Int
+    
+    func linkForIndexPath(indexPath: IndexPath) -> Note
+    
+    func setLinkForNoteAtIndexPath(indexPath: IndexPath)
+}
+
+extension LinkSearchModalViewController: LinkTableViewDelegate {
+    internal func linkCount() -> Int{
+        return (self.delegate?.linkCount())!
+    }
+    
+    internal func linkForIndexPath(indexPath: IndexPath) -> Note {
+        return (self.delegate?.linkForIndexPath(indexPath: indexPath))!
+    }
+    
+    internal func setLinkForNoteAtIndexPath(indexPath: IndexPath) {
+        self.delegate?.setLinkForNoteAtIndexPath(indexPath: indexPath)
+        self.parent?.dismiss(animated: true, completion: nil)
+    }
+}
+
 class LinkSearchModalViewController: UIViewController {
 
-    var tableViewController: IndexTableViewController!
+    var tableViewController: LinkTableViewController!
     var searchController: LinkSearchController!
     var searchView: UIView!
+    weak var delegate: LinkSearchModalDelegate?
     
-    init(indexTableViewDelegate: IndexTableViewDelegate, searchResultsUpdater: UISearchResultsUpdating) {
+    init(searchResultsUpdater: UISearchResultsUpdating) {
         super.init(nibName: nil, bundle: nil)
         
-        self.tableViewController = IndexTableViewController(style: .plain)
-        self.tableViewController.delegate = indexTableViewDelegate
+        self.tableViewController = LinkTableViewController(style: .plain)
+        self.tableViewController.delegate = self
         self.tableViewController.extendedLayoutIncludesOpaqueBars = true
         
         searchController = LinkSearchController(searchResultsController: tableViewController)
