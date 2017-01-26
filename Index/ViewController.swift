@@ -114,7 +114,7 @@ extension ViewController: LinkSearchModalDelegate {
     
     internal func setLinkForNoteAtIndexPath(indexPath: IndexPath) {
         let note: Note = self.searchResults[indexPath.row]
-        let origin = CGPoint(x: self.linkButton.frame.origin.x, y: self.linkButton.frame.origin.y - 64)
+        let origin = CGPoint(x: self.linkButton.frame.origin.x, y: self.linkButton.frame.origin.y - 64 + self.scrollView.contentOffset.y)
         let link = Link(origin: origin, note: note, index: self.links.count)
         link.delegate = self
 
@@ -155,6 +155,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var paperBackground: PaperBackgroundView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var linkButton: UIButton!
+    @IBOutlet weak var scrollView: PaperScrollView!
     
     var tableViewController: IndexTableViewController!
     var searchController: UISearchController!
