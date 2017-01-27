@@ -130,7 +130,17 @@ protocol LinkDelegate: class {
 
 extension ViewController: LinkDelegate {
     internal func loadLink(index: Int) {
-        self.loadNoteForIndexPath(indexPath: IndexPath(row: index, section: 1))
+        let link = self.links[index]
+        
+        if self.prevNotes.count > 20 {
+            self.prevNotes.remove(at: 0)
+        }
+        if self.currNote != nil {
+            self.prevNotes.append(self.currNote!)
+        }
+        self.currNote = link.note
+        self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
+        paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
     }
 }
 
