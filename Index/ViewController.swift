@@ -80,15 +80,7 @@ extension ViewController: IndexTableViewDelegate {
     }
     
     internal func loadNoteForIndexPath(indexPath: IndexPath) {
-        if self.prevNotes.count > 20 {
-            self.prevNotes.remove(at: 0)
-        }
-        if self.currNote != nil {
-            self.prevNotes.append(self.currNote!)
-        }
-        self.currNote = self.searchResults[indexPath.row]
-        self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
-        paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
+        self.loadNote(note: self.searchResults[indexPath.row])
         
         self.searchController.searchBar.resignFirstResponder()
         self.searchController.searchBar.showsCancelButton = false
@@ -131,16 +123,7 @@ protocol LinkDelegate: class {
 extension ViewController: LinkDelegate {
     internal func loadLink(index: Int) {
         let link = self.links[index]
-        
-        if self.prevNotes.count > 20 {
-            self.prevNotes.remove(at: 0)
-        }
-        if self.currNote != nil {
-            self.prevNotes.append(self.currNote!)
-        }
-        self.currNote = link.note
-        self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
-        paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
+        self.loadNote(note: link.note)
     }
 }
 
@@ -458,6 +441,19 @@ class ViewController: UIViewController {
         }
         
         tableViewController.tableView.reloadData()
+    }
+    
+    // Load Note
+    func loadNote(note: Note) {
+        if self.prevNotes.count > 20 {
+            self.prevNotes.remove(at: 0)
+        }
+        if self.currNote != nil {
+            self.prevNotes.append(self.currNote!)
+        }
+        self.currNote = note
+        self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
+        paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
     }
     
     
