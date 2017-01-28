@@ -11,17 +11,15 @@ import UIKit
 
 class Link: NSObject {
     public var origin: CGPoint!
-    public var note: Note!
+    public var noteTitle: String!
     public var button: UIButton!
-    public var index: Int!
     
     weak var delegate: LinkDelegate?
     
-    init(origin: CGPoint, note: Note, index: Int) {
+    init(origin: CGPoint, noteTitle: String) {
         super.init()
         self.origin = origin
-        self.note = note
-        self.index = index
+        self.noteTitle = noteTitle
     
         self.button = UIButton(type: .custom)
         let linkImage = UIImage(named: "Link-Set")
@@ -31,6 +29,6 @@ class Link: NSObject {
     }
     
     func loadLink() {
-        self.delegate?.loadLink(index: self.index)
+        self.delegate?.loadLink(link: self)
     }
 }

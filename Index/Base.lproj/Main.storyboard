@@ -186,9 +186,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="small"/>
                                 <state key="normal" image="Small"/>
-                                <state key="disabled" image="smallwidth"/>
-                                <state key="selected" image="smallwidth"/>
-                                <state key="highlighted" image="smallwidth"/>
+                                <state key="disabled" image="Small"/>
+                                <state key="selected" image="Small"/>
+                                <state key="highlighted" image="Small"/>
                                 <state key="focused" image="smallwidth"/>
                                 <connections>
                                     <action selector="sizeButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j22-kh-3j0"/>

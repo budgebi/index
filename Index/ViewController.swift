@@ -34,7 +34,7 @@ extension ViewController: PaperViewDelegate {
         
         let data = UIImagePNGRepresentation(image)
         try? data?.write(to: path)
-
+        
         if currNote == nil {
             let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedContext)!
         
@@ -45,12 +45,14 @@ extension ViewController: PaperViewDelegate {
             note.setValue(fileName, forKeyPath: "imagePath")
             note.setValue(Date(), forKey: "date")
             note.setValue(paperType, forKey: "paperType")
+            note.setValue(self.links.stringify(), forKey: "links")
             currNote = note
         } else {
             currNote?.setValue(title, forKeyPath: "title")
             currNote?.setValue(tags, forKeyPath: "tags")
             currNote?.setValue(Date(), forKey: "date")
             currNote?.setValue(paperType, forKey: "paperType")
+            currNote?.setValue(self.links.stringify(), forKey: "links")
         }
         
         do {
@@ -107,23 +109,23 @@ extension ViewController: LinkSearchModalDelegate {
     internal func setLinkForNoteAtIndexPath(indexPath: IndexPath) {
         let note: Note = self.searchResults[indexPath.row]
         let origin = CGPoint(x: self.linkButton.frame.origin.x, y: self.linkButton.frame.origin.y - 64 + self.scrollView.contentOffset.y)
-        let link = Link(origin: origin, note: note, index: self.links.count)
+        let link = Link(origin: origin, noteTitle: note.title!)
         link.delegate = self
 
         self.paperView.addSubview(link.button)
         self.linkButton.isHidden = true
-        self.links.append(link)
+        self.links.add(link)
     }
 }
 
 protocol LinkDelegate: class {
-    func loadLink(index: Int)
+    func loadLink(link: Link)
 }
 
 extension ViewController: LinkDelegate {
-    internal func loadLink(index: Int) {
-        let link = self.links[index]
-        self.loadNote(note: link.note)
+    internal func loadLink(link: Link) {
+        let note = self.findNoteByTitle(title: link.noteTitle)
+        self.loadNote(note: note)
     }
 }
 
@@ -160,7 +162,7 @@ class ViewController: UIViewController {
 
     fileprivate var searchResults = [Note]()
     
-    fileprivate var links = [Link]()
+    fileprivate var links: Links!
     
     // Lifecycle Hooks
     override func viewDidLoad() {
@@ -189,6 +191,8 @@ class ViewController: UIViewController {
         self.searchController.searchBar.sizeToFit()
         self.searchController.searchBar.frame.size.width = self.view.frame.size.width
         self.searchController.view.backgroundColor = UIColor.clear
+        
+        self.links = Links(links: [Link]())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -210,6 +214,7 @@ class ViewController: UIViewController {
             self.prevNotes.append(self.currNote!)
             self.currNote = nil
             self.paperView.deleteNote()
+            self.removeLinksFromView()
         }))
         
         newAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -224,6 +229,7 @@ class ViewController: UIViewController {
         let deleteAlert = UIAlertController(title: "Delete Note", message: "The note will be permanently deleted!", preferredStyle: UIAlertControllerStyle.alert)
         
         deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action:UIAlertAction!) in
+            self.removeLinksFromView()
             self.paperView.deleteNote()
 
             if self.currNote == nil {
@@ -445,6 +451,7 @@ class ViewController: UIViewController {
     
     // Load Note
     func loadNote(note: Note) {
+        self.removeLinksFromView()
         if self.prevNotes.count > 20 {
             self.prevNotes.remove(at: 0)
         }
@@ -454,6 +461,29 @@ class ViewController: UIViewController {
         self.currNote = note
         self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
         paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
+        if note.links != nil && note.links != ""{
+            self.links = Links(string: note.links! as String, linkDelegate: self)
+            for link in self.links.links {
+                self.paperView.addSubview(link.button)
+            }
+        }
+    }
+    
+    func findNoteByTitle(title: String) -> Note{
+        let notes = self.fetchNotes()
+        for note in notes {
+            if note.title == title {
+                return note
+            }
+        }
+        return self.currNote as! Note
+    }
+    
+    func removeLinksFromView() {
+        for link in self.links.links {
+            link.button.removeFromSuperview()
+        }
+        self.links.links = []
     }
     
     
