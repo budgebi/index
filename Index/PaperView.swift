@@ -83,7 +83,7 @@ class PaperView: UIImageView {
     // Handle Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if link {
-            self.delegate?.addNewLink()
+            self.delegate?.addNewLink(linkLocation: (touches.first?.location(in: self))!)
         } else {
             firstPoint = (touches.first?.location(in: self))!
             points = [firstPoint!]

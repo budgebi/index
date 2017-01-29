@@ -11,7 +11,7 @@ import CoreData
 
 protocol PaperViewDelegate: class {
     func saveNote(title: String, tags: String, image: UIImage)
-    func addNewLink()
+    func addNewLink(linkLocation: CGPoint)
 }
 
 extension ViewController: PaperViewDelegate {
@@ -63,7 +63,8 @@ extension ViewController: PaperViewDelegate {
         }
     }
     
-    internal func addNewLink() {
+    internal func addNewLink(linkLocation: CGPoint) {
+        self.linkLocation = linkLocation
         self.linkSearchModal = LinkSearchModalViewController(searchResultsUpdater: self)
         self.linkSearchModal?.delegate = self
         self.linkNav = UINavigationController(rootViewController: linkSearchModal!)
@@ -123,14 +124,13 @@ extension ViewController: LinkSearchModalDelegate {
     }
     
     internal func setLinkForNoteAtIndexPath(indexPath: IndexPath) {
-//        let note: Note = self.searchResults[indexPath.row]
-//        let origin = CGPoint(x: self.linkButton.frame.origin.x, y: self.linkButton.frame.origin.y - 64 + self.scrollView.contentOffset.y)
-//        let link = Link(origin: origin, noteTitle: note.title!)
-//        link.delegate = self
-//
-//        self.paperView.addSubview(link.button)
-//        self.linkButton.isHidden = true
-//        self.links.add(link)
+        let note: Note = self.searchResults[indexPath.row]
+        let origin = CGPoint(x: (self.linkLocation?.x)!, y: (self.linkLocation?.y)! - 64 + self.scrollView.contentOffset.y)
+        let link = Link(origin: origin, noteTitle: note.title!)
+        link.delegate = self
+
+        self.paperView.addSubview(link.button)
+        self.links.add(link)
     }
 }
 
@@ -167,7 +167,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var paperView: PaperView!
     @IBOutlet weak var paperBackground: PaperBackgroundView!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var linkButton: UIButton!
     @IBOutlet weak var scrollView: PaperScrollView!
     
     var tableViewController: IndexTableViewController!
@@ -184,6 +183,7 @@ class ViewController: UIViewController {
     
     public var linkSearchModal: LinkSearchModalViewController?
     public var linkNav: UINavigationController?
+    fileprivate var linkLocation: CGPoint?
     
     // Lifecycle Hooks
     override func viewDidLoad() {
