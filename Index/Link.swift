@@ -22,9 +22,10 @@ class Link: NSObject {
         self.noteTitle = noteTitle
     
         self.button = UIButton(type: .custom)
-        let linkImage = UIImage(named: "Link-Set")
-        self.button.setImage(linkImage, for: .normal)
-        self.button.frame = CGRect(origin: self.origin, size: CGSize(width: 33, height: 33))
+        self.button.setTitle(self.noteTitle, for: .normal)
+        self.button.setTitleColor(UIColor.blue, for: .normal)
+        let buttonSize = (self.noteTitle as NSString).size(attributes: [NSFontAttributeName: self.button.titleLabel?.font ?? UIFont.systemFont(ofSize: 12)])
+        self.button.frame = CGRect(origin: self.origin, size: CGSize(width: buttonSize.width, height: buttonSize.height))
         self.button.addTarget(self, action: #selector(loadLink), for: .touchUpInside)
     }
     

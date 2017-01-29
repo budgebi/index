@@ -125,7 +125,7 @@ extension ViewController: LinkSearchModalDelegate {
     
     internal func setLinkForNoteAtIndexPath(indexPath: IndexPath) {
         let note: Note = self.searchResults[indexPath.row]
-        let origin = CGPoint(x: (self.linkLocation?.x)!, y: (self.linkLocation?.y)! - 64 + self.scrollView.contentOffset.y)
+        let origin = CGPoint(x: (self.linkLocation?.x)!, y: (self.linkLocation?.y)! - 6 + self.scrollView.contentOffset.y)
         let link = Link(origin: origin, noteTitle: note.title!)
         link.delegate = self
 
