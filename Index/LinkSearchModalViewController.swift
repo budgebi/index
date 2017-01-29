@@ -89,9 +89,9 @@ class LinkSearchModalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        searchView = UIView(frame: CGRect(x: 0, y: 0, width: 250 , height: 44))
+        searchView = UIView(frame: CGRect(x: 0, y: 44, width: 350 , height: 44))
         
-        self.searchController.searchBar.frame = CGRect(x: 0, y: 0, width: 250, height: 44)
+        self.searchController.searchBar.frame = CGRect(x: 0, y: 0, width: 350, height: 44)
         
         self.searchView.addSubview(self.searchController.searchBar)
 

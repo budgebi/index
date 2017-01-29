@@ -82,20 +82,12 @@
                                     <action selector="eraserButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="TFP-P7-5r3"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" tag="91" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6I-7V-fVH">
-                                <rect key="frame" x="937" y="142" width="33" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gE6-D7-0yf">
+                                <rect key="frame" x="16" y="165" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Add-Link"/>
+                                <state key="normal" image="Link"/>
                                 <connections>
-                                    <action selector="addNewLinkWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bf5-jo-68c"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="90" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McZ-I5-xta">
-                                <rect key="frame" x="975" y="142" width="33" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Add"/>
-                                <connections>
-                                    <action selector="addButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="9J1-ta-Uh7"/>
+                                    <action selector="linkButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="VdD-3a-Keo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OdO-R9-GNZ">
@@ -281,7 +273,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="linkButton" destination="R6I-7V-fVH" id="3Py-n9-5bF"/>
                         <outlet property="paperBackground" destination="L8t-Pc-zqk" id="fef-r4-Dtt"/>
                         <outlet property="paperView" destination="0eb-D5-nBy" id="IK6-9z-1p4"/>
                         <outlet property="scrollView" destination="FpY-b6-GjV" id="fly-pg-Thv"/>
@@ -294,8 +285,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Add" width="33" height="33"/>
-        <image name="Add-Link" width="33" height="33"/>
         <image name="Back" width="33" height="33"/>
         <image name="Black" width="33" height="33"/>
         <image name="Blank" width="33" height="33"/>
@@ -308,6 +297,7 @@
         <image name="Large" width="33" height="33"/>
         <image name="Line" width="33" height="33"/>
         <image name="Lined" width="33" height="33"/>
+        <image name="Link" width="33" height="33"/>
         <image name="Medium" width="33" height="33"/>
         <image name="New" width="33" height="33"/>
         <image name="Red" width="33" height="33"/>

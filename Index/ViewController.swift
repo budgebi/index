@@ -11,6 +11,7 @@ import CoreData
 
 protocol PaperViewDelegate: class {
     func saveNote(title: String, tags: String, image: UIImage)
+    func addNewLink()
 }
 
 extension ViewController: PaperViewDelegate {
@@ -62,6 +63,21 @@ extension ViewController: PaperViewDelegate {
         }
     }
     
+    internal func addNewLink() {
+        self.linkSearchModal = LinkSearchModalViewController(searchResultsUpdater: self)
+        self.linkSearchModal?.delegate = self
+        self.linkNav = UINavigationController(rootViewController: linkSearchModal!)
+        self.linkNav?.modalPresentationStyle = .formSheet
+        self.linkNav?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+        self.linkNav?.navigationBar.topItem?.title = "Select a Link"
+        let popover = self.linkNav?.popoverPresentationController
+        
+        self.linkSearchModal?.preferredContentSize = CGSize(width: 350, height: 450)
+        popover?.delegate = self
+        
+        present(self.linkNav!, animated: true, completion: nil)
+    }
+    
 }
 
 protocol IndexTableViewDelegate: class {
@@ -107,14 +123,14 @@ extension ViewController: LinkSearchModalDelegate {
     }
     
     internal func setLinkForNoteAtIndexPath(indexPath: IndexPath) {
-        let note: Note = self.searchResults[indexPath.row]
-        let origin = CGPoint(x: self.linkButton.frame.origin.x, y: self.linkButton.frame.origin.y - 64 + self.scrollView.contentOffset.y)
-        let link = Link(origin: origin, noteTitle: note.title!)
-        link.delegate = self
-
-        self.paperView.addSubview(link.button)
-        self.linkButton.isHidden = true
-        self.links.add(link)
+//        let note: Note = self.searchResults[indexPath.row]
+//        let origin = CGPoint(x: self.linkButton.frame.origin.x, y: self.linkButton.frame.origin.y - 64 + self.scrollView.contentOffset.y)
+//        let link = Link(origin: origin, noteTitle: note.title!)
+//        link.delegate = self
+//
+//        self.paperView.addSubview(link.button)
+//        self.linkButton.isHidden = true
+//        self.links.add(link)
     }
 }
 
@@ -132,6 +148,8 @@ extension ViewController: LinkDelegate {
 extension ViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchText: searchController.searchBar.text!)
+        let tvc = (searchController.searchResultsController) as! UITableViewController
+        tvc.tableView.reloadData()
     }
 }
 
@@ -163,6 +181,9 @@ class ViewController: UIViewController {
     fileprivate var searchResults = [Note]()
     
     fileprivate var links: Links!
+    
+    public var linkSearchModal: LinkSearchModalViewController?
+    public var linkNav: UINavigationController?
     
     // Lifecycle Hooks
     override func viewDidLoad() {
@@ -344,27 +365,8 @@ class ViewController: UIViewController {
         self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
     }
     
-    // Annotation stuffs
-    @IBAction func addButtonPressed() {
-        let newLink = self.view.viewWithTag(91) as! UIButton
-        newLink.isHidden = !newLink.isHidden
-    }
-    
-    @IBAction func addNewLink(sender: UIButton) {
-        let linkSearchModal = LinkSearchModalViewController(searchResultsUpdater: self)
-        linkSearchModal.delegate = self
-        let nav = UINavigationController(rootViewController: linkSearchModal)
-        nav.modalPresentationStyle = .popover
-        nav.navigationBar.isHidden = true
-        
-        let popover = nav.popoverPresentationController
-        
-        linkSearchModal.preferredContentSize = CGSize(width: 250, height: 325)
-        popover?.delegate = self
-        popover?.sourceView = sender
-        popover?.sourceRect = sender.bounds
-        
-        present(nav, animated: true, completion: nil)
+    @IBAction func linkButtonPressed() {
+        self.paperView.useLink()
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -445,8 +447,6 @@ class ViewController: UIViewController {
         searchResults.sort {a,b in
             a.date?.compare(b.date as! Date) == ComparisonResult.orderedDescending
         }
-        
-        tableViewController.tableView.reloadData()
     }
     
     // Load Note

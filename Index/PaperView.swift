@@ -45,6 +45,8 @@ class PaperView: UIImageView {
     
     fileprivate var firstPoint: CGPoint?
     
+    fileprivate var link: Bool = false
+    
     // Draw style
     fileprivate var line: Bool!
     
@@ -80,8 +82,12 @@ class PaperView: UIImageView {
     
     // Handle Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        firstPoint = (touches.first?.location(in: self))!
-        points = [firstPoint!]
+        if link {
+            self.delegate?.addNewLink()
+        } else {
+            firstPoint = (touches.first?.location(in: self))!
+            points = [firstPoint!]
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -208,9 +214,6 @@ class PaperView: UIImageView {
     }
     
     public func useEraser() {
-        // Todo: this actually won't work most likely because the image is clear
-        // and we draw on it with the paper color so we aren't really deleting the line.
-        // maybe draw on it with clear?
         if (self.previousLineWidth == nil || self.lineWidth != self.eraseLineWidth) {
             self.previousLineWidth = self.lineWidth
         }
@@ -225,6 +228,9 @@ class PaperView: UIImageView {
         drawLayer?.strokeColor = drawColor.cgColor
     }
     
+    public func useLink() {
+        self.link = true
+    }
     
     public func setDrawColor(color: String) {
         if (self.previousLineWidth != nil) {
