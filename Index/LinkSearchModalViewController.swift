@@ -54,6 +54,8 @@ class LinkSearchModalViewController: UIViewController {
         self.tableViewController = LinkTableViewController(style: .plain)
         self.tableViewController.delegate = self
         self.tableViewController.extendedLayoutIncludesOpaqueBars = true
+        self.tableViewController.preferredContentSize = CGSize(width: 200, height: 406)
+        self.tableViewController.tableView.frame.size.width = 200
         
         searchController = LinkSearchController(searchResultsController: tableViewController)
         searchController.searchResultsUpdater = searchResultsUpdater

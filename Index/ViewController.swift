@@ -63,6 +63,10 @@ extension ViewController: PaperViewDelegate {
         }
     }
     
+    func cancelLink() {
+        self.linkNav?.dismiss(animated: true, completion: nil)
+    }
+    
     internal func addNewLink(linkLocation: CGPoint) {
         self.linkLocation = linkLocation
         self.linkSearchModal = LinkSearchModalViewController(searchResultsUpdater: self)
@@ -71,6 +75,8 @@ extension ViewController: PaperViewDelegate {
         self.linkNav?.modalPresentationStyle = .formSheet
         self.linkNav?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         self.linkNav?.navigationBar.topItem?.title = "Select a Link"
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelLink))
+        self.linkNav?.navigationBar.topItem?.leftBarButtonItem = cancelButton
         let popover = self.linkNav?.popoverPresentationController
         
         self.linkSearchModal?.preferredContentSize = CGSize(width: 350, height: 450)
