@@ -227,6 +227,8 @@ class ViewController: UIViewController {
         
         self.linkButton.setImage(UIImage(named: "LinkSelected"), for: .selected)
         self.eraseButton.setImage(UIImage(named: "EraseFilledSelected"), for: .selected)
+        self.drawButton.setImage(UIImage(named: "EditSelected"), for: .selected)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
