@@ -210,6 +210,11 @@ class PaperView: UIImageView {
     }
     
     public func setDrawStyle(style: String) {
+        self.drawColor = self.previousDrawColor!
+        drawLayer?.strokeColor = drawColor.cgColor
+        self.lineWidth =  self.previousLineWidth
+        drawLayer?.lineWidth = lineWidth
+
         self.link = false
         self.line = (style == "line")
     }
