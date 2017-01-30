@@ -210,10 +210,12 @@ class PaperView: UIImageView {
     }
     
     public func setDrawStyle(style: String) {
+        self.link = false
         self.line = (style == "line")
     }
     
     public func useEraser() {
+        self.link = false
         if (self.previousLineWidth == nil || self.lineWidth != self.eraseLineWidth) {
             self.previousLineWidth = self.lineWidth
         }

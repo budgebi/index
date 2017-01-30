@@ -175,6 +175,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var scrollView: PaperScrollView!
     
+    @IBOutlet weak var drawButton: UIButton!
+    @IBOutlet weak var linkButton: UIButton!
+    @IBOutlet weak var eraseButton: UIButton!
+    
     var tableViewController: IndexTableViewController!
     var searchController: UISearchController!
     
@@ -220,6 +224,9 @@ class ViewController: UIViewController {
         self.searchController.view.backgroundColor = UIColor.clear
         
         self.links = Links(links: [Link]())
+        
+        self.linkButton.setImage(UIImage(named: "LinkSelected"), for: .selected)
+        self.eraseButton.setImage(UIImage(named: "EraseFilledSelected"), for: .selected)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -323,6 +330,9 @@ class ViewController: UIViewController {
     // Commands
     @IBAction func eraserButtonPressed() {
         self.paperView.useEraser()
+        self.eraseButton.isSelected = true
+        self.drawButton.isSelected = false
+        self.linkButton.isSelected = false
     }
     
     @IBAction func paperButtonPressed(sender: AnyObject) {
@@ -336,10 +346,19 @@ class ViewController: UIViewController {
     
     @IBAction func drawStyleButtonPressed(sender: AnyObject) {
         let drawStyleButton = sender as! UIButton
+        if drawStyleButton.accessibilityIdentifier! == "line" {
+            self.drawButton.setImage(UIImage(named: "LineSelected"), for: .selected)
+        } else {
+            self.drawButton.setImage(UIImage(named: "EditSelected"), for: .selected)
+        }
         paperView.setDrawStyle(style: drawStyleButton.accessibilityIdentifier!)
 
         animateOptionSlide(button: drawStyleButton, start: 1, end: 2, hide: drawStyleOptionsDisplayed)
         drawStyleOptionsDisplayed = !drawStyleOptionsDisplayed
+        
+        self.drawButton.isSelected = true
+        self.eraseButton.isSelected = false
+        self.linkButton.isSelected = false
     }
     
     @IBAction func sizeButtonPressed(sender: AnyObject) {
@@ -373,6 +392,9 @@ class ViewController: UIViewController {
     
     @IBAction func linkButtonPressed() {
         self.paperView.useLink()
+        self.linkButton.isSelected = true
+        self.drawButton.isSelected = false
+        self.eraseButton.isSelected = false
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {

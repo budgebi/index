@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Link-Set.png",
+      "filename" : "LineSelected.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Link-Set@2x.png",
+      "filename" : "LineSelected@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Link-Set@3x.png",
+      "filename" : "LineSelected@3x.png",
       "scale" : "3x"
     }
   ],

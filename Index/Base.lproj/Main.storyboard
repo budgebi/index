@@ -273,6 +273,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="drawButton" destination="Uum-wz-Brp" id="Mfx-JL-Qek"/>
+                        <outlet property="eraseButton" destination="DbW-vW-nq2" id="XfO-AD-Ezy"/>
+                        <outlet property="linkButton" destination="gE6-D7-0yf" id="zWk-w8-NqX"/>
                         <outlet property="paperBackground" destination="L8t-Pc-zqk" id="fef-r4-Dtt"/>
                         <outlet property="paperView" destination="0eb-D5-nBy" id="IK6-9z-1p4"/>
                         <outlet property="scrollView" destination="FpY-b6-GjV" id="fly-pg-Thv"/>
