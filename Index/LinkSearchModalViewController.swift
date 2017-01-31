@@ -37,7 +37,9 @@ extension LinkSearchModalViewController: LinkTableViewDelegate {
     
     internal func setLinkForNoteAtIndexPath(indexPath: IndexPath) {
         self.delegate?.setLinkForNoteAtIndexPath(indexPath: indexPath)
-        self.parent?.dismiss(animated: true, completion: nil)
+        self.parent?.dismiss(animated: true, completion: { 
+            self.delegate?.linkChangeDetected()
+        })
     }
 }
 

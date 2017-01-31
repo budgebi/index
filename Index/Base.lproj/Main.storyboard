@@ -111,7 +111,7 @@
                                     <action selector="newNote" destination="BYZ-38-t0r" eventType="touchUpInside" id="HBg-St-uCt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="70" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK3-oi-nct">
+                            <button opaque="NO" tag="70" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK3-oi-nct">
                                 <rect key="frame" x="16" y="214" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Save"/>
@@ -278,6 +278,7 @@
                         <outlet property="linkButton" destination="gE6-D7-0yf" id="zWk-w8-NqX"/>
                         <outlet property="paperBackground" destination="L8t-Pc-zqk" id="fef-r4-Dtt"/>
                         <outlet property="paperView" destination="0eb-D5-nBy" id="IK6-9z-1p4"/>
+                        <outlet property="saveButton" destination="dK3-oi-nct" id="Ih2-Xe-wCO"/>
                         <outlet property="scrollView" destination="FpY-b6-GjV" id="fly-pg-Thv"/>
                         <outlet property="topView" destination="t4x-Sh-d3o" id="Ko6-SK-DCD"/>
                     </connections>

@@ -12,6 +12,7 @@ import CoreData
 protocol PaperViewDelegate: class {
     func saveNote(title: String, tags: String, image: UIImage)
     func addNewLink(linkLocation: CGPoint)
+    func changeDetected()
 }
 
 extension ViewController: PaperViewDelegate {
@@ -85,6 +86,9 @@ extension ViewController: PaperViewDelegate {
         present(self.linkNav!, animated: true, completion: nil)
     }
     
+    internal func changeDetected() {
+        self.saveButton.isEnabled = true
+    }
 }
 
 protocol IndexTableViewDelegate: class {
@@ -118,6 +122,8 @@ protocol LinkSearchModalDelegate: class {
     func linkForIndexPath(indexPath: IndexPath) -> Note
     
     func setLinkForNoteAtIndexPath(indexPath: IndexPath)
+    
+    func linkChangeDetected()
 }
 
 extension ViewController: LinkSearchModalDelegate {
@@ -137,6 +143,10 @@ extension ViewController: LinkSearchModalDelegate {
 
         self.paperView.addSubview(link.button)
         self.links.add(link)
+    }
+    
+    internal func linkChangeDetected() {
+        self.saveButton.isEnabled = true
     }
 }
 
@@ -178,6 +188,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var drawButton: UIButton!
     @IBOutlet weak var linkButton: UIButton!
     @IBOutlet weak var eraseButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
     var tableViewController: IndexTableViewController!
     var searchController: UISearchController!
@@ -228,7 +239,7 @@ class ViewController: UIViewController {
         self.linkButton.setImage(UIImage(named: "LinkSelected"), for: .selected)
         self.eraseButton.setImage(UIImage(named: "EraseFilledSelected"), for: .selected)
         self.drawButton.setImage(UIImage(named: "EditSelected"), for: .selected)
-
+        self.saveButton.setImage(UIImage(named: "SaveDisabled"), for: .disabled)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -306,6 +317,7 @@ class ViewController: UIViewController {
     
     @IBAction func saveNote() {
         self.paperView.saveNote()
+        self.saveButton.isEnabled = false
     }
     
     func fetchNotes() -> [Note] {
@@ -339,7 +351,10 @@ class ViewController: UIViewController {
     
     @IBAction func paperButtonPressed(sender: AnyObject) {
         let paperButton = sender as! UIButton
-        paperType =  paperButton.accessibilityIdentifier!
+        if paperType != paperButton.accessibilityIdentifier {
+            self.changeDetected()
+        }
+        paperType = paperButton.accessibilityIdentifier!
         paperBackground.setPaper(paper: paperType)
 
         animateOptionSlide(button: paperButton, start: 60, end: 62, hide: paperOptionsDisplayed)
@@ -381,6 +396,7 @@ class ViewController: UIViewController {
     
     @IBAction func undoButtonPressed() {
         self.paperView.undo()
+        self.changeDetected()
     }
     
     @IBAction func backButtonPressed() {

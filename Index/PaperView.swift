@@ -122,6 +122,7 @@ class PaperView: UIImageView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         drawStroke()
+        self.delegate?.changeDetected()
     }
     
     fileprivate func drawStroke() {
