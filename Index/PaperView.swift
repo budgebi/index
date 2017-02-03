@@ -151,6 +151,7 @@ class PaperView: UIImageView {
         
         UIGraphicsEndImageContext()
         
+        drawPath = nil
         drawLayer?.removeFromSuperlayer()
         addDrawLayer()
     }
