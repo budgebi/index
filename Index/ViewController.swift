@@ -252,23 +252,36 @@ class ViewController: UIViewController {
     
     // Note creation and deletion
     @IBAction func newNote() {
-        let newAlert = UIAlertController(title: "New Note", message: "Any unsaved changes will be lost!", preferredStyle: UIAlertControllerStyle.alert)
+        if self.saveButton.isEnabled {
+            let newAlert = UIAlertController(title: "New Note", message: "Any unsaved changes will be lost!", preferredStyle: UIAlertControllerStyle.alert)
+            newAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                if self.prevNotes.count > 20 {
+                    self.prevNotes.remove(at: 0)
+                }
+                if self.currNote != nil {
+                    self.prevNotes.append(self.currNote!)
+                }
+                self.currNote = nil
+                self.paperView.deleteNote()
+                self.removeLinksFromView()
+            }))
         
-        newAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            newAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                return
+            }))
+            
+            present(newAlert, animated: true, completion: nil)
+        } else {
             if self.prevNotes.count > 20 {
                 self.prevNotes.remove(at: 0)
             }
-            self.prevNotes.append(self.currNote!)
+            if self.currNote != nil {
+                self.prevNotes.append(self.currNote!)
+            }
             self.currNote = nil
             self.paperView.deleteNote()
             self.removeLinksFromView()
-        }))
-        
-        newAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-            return
-        }))
-        
-        present(newAlert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func deleteNote() {
