@@ -82,6 +82,7 @@ class PaperView: UIImageView {
     
     // Handle Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         if link {
             self.delegate?.addNewLink(linkLocation: (touches.first?.location(in: self))!)
         } else {
@@ -278,5 +279,6 @@ class PaperView: UIImageView {
 
         tagTextField?.text = note.tags
         titleTextField?.text = note.title
+        self.prevImages = []
     }
 }
