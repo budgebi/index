@@ -416,9 +416,19 @@ class ViewController: UIViewController {
         if self.prevNotes.count == 0 {
             return
         }
+        self.removeLinksFromView()
+
         self.currNote = self.prevNotes[self.prevNotes.count-1]
         self.prevNotes.remove(at: self.prevNotes.count-1)
         self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
+        paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
+        if (self.currNote as! Note).links != nil && (self.currNote as! Note).links != ""{
+            self.links = Links(string: (self.currNote as! Note).links! as String, linkDelegate: self)
+            for link in self.links.links {
+                self.paperView.addSubview(link.button)
+            }
+        }
+        
     }
     
     @IBAction func linkButtonPressed() {
