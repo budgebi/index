@@ -392,6 +392,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sizeButtonPressed(sender: AnyObject) {
+        self.drawButton.isSelected = true
+        self.eraseButton.isSelected = false
         let sizeButton = sender as! UIButton
         paperView.setLineWidth(lWidth: sizeButton.accessibilityIdentifier!)
 
