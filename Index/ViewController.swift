@@ -430,7 +430,10 @@ class ViewController: UIViewController {
                 self.paperView.addSubview(link.button)
             }
         }
-        
+    }
+    
+    @IBAction func cornellButtonPressed() {
+        self.paperBackground.drawCornellTemplate()
     }
     
     @IBAction func linkButtonPressed() {

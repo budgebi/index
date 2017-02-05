@@ -58,6 +58,32 @@ class PaperBackgroundView: UIImageView {
         UIGraphicsEndImageContext()
     }
     
+    public func drawCornellTemplate() {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+        let context = UIGraphicsGetCurrentContext()
+        image?.draw(in: bounds)
+        let multiplier: CGFloat = 32
+        
+        UIColor.black.setStroke()
+        context?.setLineWidth(1)
+        
+        context?.setLineCap(.round)
+        
+        context?.move(to: CGPoint(x: CGFloat(12)*multiplier, y: CGFloat(2)*multiplier))
+        context?.addLine(to: CGPoint(x: CGFloat(12)*multiplier, y: CGFloat(55)*multiplier))
+        
+        context?.strokePath()
+        
+        context?.move(to: CGPoint(x: CGFloat(3)*multiplier, y: CGFloat(55)*multiplier))
+        context?.addLine(to: CGPoint(x: 1024, y: CGFloat(55)*multiplier))
+        
+        context?.strokePath()
+        
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+    }
+    
     public func drawPlainPaper() {
         image = nil
     }

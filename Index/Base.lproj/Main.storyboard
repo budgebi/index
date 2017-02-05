@@ -75,15 +75,23 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" tag="30" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbW-vW-nq2">
-                                <rect key="frame" x="16" y="410" width="33" height="33"/>
+                                <rect key="frame" x="16" y="459" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Eraser"/>
                                 <connections>
                                     <action selector="eraserButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="TFP-P7-5r3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4m-HI-J0Q">
+                                <rect key="frame" x="16" y="263" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cornell"/>
+                                <connections>
+                                    <action selector="cornellButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="pMp-Jk-aHf"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gE6-D7-0yf">
-                                <rect key="frame" x="16" y="312" width="33" height="33"/>
+                                <rect key="frame" x="16" y="361" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Link"/>
                                 <connections>
@@ -120,7 +128,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="14" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFh-K4-ggg">
-                                <rect key="frame" x="168" y="459" width="33" height="33"/>
+                                <rect key="frame" x="168" y="508" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="red"/>
                                 <state key="normal" image="Red"/>
@@ -129,7 +137,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJH-HD-t3S">
-                                <rect key="frame" x="54" y="361" width="33" height="33"/>
+                                <rect key="frame" x="54" y="410" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="line"/>
                                 <state key="normal" image="Line"/>
@@ -138,7 +146,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORh-Ol-ad2">
-                                <rect key="frame" x="16" y="459" width="33" height="33"/>
+                                <rect key="frame" x="16" y="508" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="black"/>
                                 <state key="normal" image="Black"/>
@@ -147,7 +155,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="13" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kje-4L-XTy">
-                                <rect key="frame" x="130" y="459" width="33" height="33"/>
+                                <rect key="frame" x="130" y="508" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="green"/>
                                 <state key="normal" image="Green"/>
@@ -156,7 +164,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZp-Mi-zAG">
-                                <rect key="frame" x="54" y="459" width="33" height="33"/>
+                                <rect key="frame" x="54" y="508" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="blue"/>
                                 <state key="normal" image="Blue"/>
@@ -165,7 +173,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZx-be-hik">
-                                <rect key="frame" x="92" y="459" width="33" height="33"/>
+                                <rect key="frame" x="92" y="508" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="yellow"/>
                                 <state key="normal" image="Yellow"/>
@@ -174,7 +182,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="20" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Un8-Qg-U1b">
-                                <rect key="frame" x="16" y="508" width="33" height="33"/>
+                                <rect key="frame" x="16" y="557" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="small"/>
                                 <state key="normal" image="Small"/>
@@ -187,7 +195,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="21" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVB-6Z-f2m">
-                                <rect key="frame" x="54" y="508" width="33" height="33"/>
+                                <rect key="frame" x="54" y="557" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="medium"/>
                                 <state key="normal" image="Medium"/>
@@ -196,7 +204,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="22" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0F-cM-Pow">
-                                <rect key="frame" x="92" y="508" width="33" height="33"/>
+                                <rect key="frame" x="92" y="557" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="large"/>
                                 <state key="normal" image="Large"/>
@@ -205,7 +213,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="40" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRu-7o-TBp">
-                                <rect key="frame" x="16" y="557" width="33" height="33"/>
+                                <rect key="frame" x="16" y="606" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Undo"/>
                                 <connections>
@@ -213,7 +221,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="50" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIQ-qK-Wfl">
-                                <rect key="frame" x="16" y="606" width="33" height="33"/>
+                                <rect key="frame" x="16" y="655" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Trash"/>
                                 <connections>
@@ -221,7 +229,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uum-wz-Brp">
-                                <rect key="frame" x="16" y="361" width="33" height="33"/>
+                                <rect key="frame" x="16" y="410" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="squiggle"/>
                                 <state key="normal" image="Edit"/>
@@ -230,7 +238,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="60" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7RD-Fr-RwM">
-                                <rect key="frame" x="16" y="263" width="33" height="33"/>
+                                <rect key="frame" x="16" y="312" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="plain"/>
                                 <state key="normal" image="Blank"/>
@@ -239,7 +247,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="61" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imc-FL-LY1">
-                                <rect key="frame" x="54" y="263" width="33" height="33"/>
+                                <rect key="frame" x="54" y="312" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="grid"/>
                                 <state key="normal" image="Grid"/>
@@ -248,7 +256,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="62" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moE-TC-JDH">
-                                <rect key="frame" x="92" y="263" width="33" height="33"/>
+                                <rect key="frame" x="92" y="312" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="lined"/>
                                 <state key="normal" image="Lined"/>
