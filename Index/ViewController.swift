@@ -48,13 +48,14 @@ extension ViewController: PaperViewDelegate {
             note.setValue(Date(), forKey: "date")
             note.setValue(paperType, forKey: "paperType")
             note.setValue(self.links.stringify(), forKey: "links")
+            note.setValue(self.paperBackground.cornell, forKey: "cornell")
             currNote = note
         } else {
             currNote?.setValue(title, forKeyPath: "title")
             currNote?.setValue(tags, forKeyPath: "tags")
             currNote?.setValue(Date(), forKey: "date")
             currNote?.setValue(paperType, forKey: "paperType")
-            currNote?.setValue(self.links.stringify(), forKey: "links")
+            currNote?.setValue(self.paperBackground.cornell, forKey: "cornell")
         }
         
         do {
@@ -264,6 +265,10 @@ class ViewController: UIViewController {
                 self.currNote = nil
                 self.paperView.deleteNote()
                 self.removeLinksFromView()
+                self.saveButton.isEnabled = false
+                if self.paperBackground.cornell {
+                    self.cornellButtonPressed()
+                }
             }))
         
             newAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -281,6 +286,10 @@ class ViewController: UIViewController {
             self.currNote = nil
             self.paperView.deleteNote()
             self.removeLinksFromView()
+            self.saveButton.isEnabled = false
+            if self.paperBackground.cornell {
+                self.cornellButtonPressed()
+            }
         }
     }
     
@@ -291,7 +300,10 @@ class ViewController: UIViewController {
         deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action:UIAlertAction!) in
             self.removeLinksFromView()
             self.paperView.deleteNote()
-
+            self.saveButton.isEnabled = false
+            if self.paperBackground.cornell {
+                self.cornellButtonPressed()
+            }
             if self.currNote == nil {
                 return
             }
@@ -423,7 +435,10 @@ class ViewController: UIViewController {
         self.currNote = self.prevNotes[self.prevNotes.count-1]
         self.prevNotes.remove(at: self.prevNotes.count-1)
         self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
+        
+        self.paperBackground.cornell = (self.currNote as! Note).cornell
         paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
+        
         if (self.currNote as! Note).links != nil && (self.currNote as! Note).links != ""{
             self.links = Links(string: (self.currNote as! Note).links! as String, linkDelegate: self)
             for link in self.links.links {
@@ -434,6 +449,7 @@ class ViewController: UIViewController {
     
     @IBAction func cornellButtonPressed() {
         self.paperBackground.drawCornellTemplate()
+        self.changeDetected()
     }
     
     @IBAction func linkButtonPressed() {
@@ -534,7 +550,10 @@ class ViewController: UIViewController {
         }
         self.currNote = note
         self.paperView.loadNote(note: self.currNote as! Note, documentsDirectory: getDocumentsDirectory())
+        
+        self.paperBackground.cornell = (self.currNote as! Note).cornell
         paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
+        
         if note.links != nil && note.links != ""{
             self.links = Links(string: note.links! as String, linkDelegate: self)
             for link in self.links.links {

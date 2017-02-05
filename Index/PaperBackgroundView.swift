@@ -12,11 +12,12 @@ class PaperBackgroundView: UIImageView {
 
     fileprivate let blueLineColor: UIColor = UIColor.init(red: 173/255, green: 216/255, blue: 230/255, alpha: 1);
     fileprivate let redLineColor: UIColor = UIColor.init(red: 255/255, green: 102/255, blue: 102/255, alpha: 1);
-    fileprivate var cornell: Bool = false
+    public var cornell: Bool = false
     fileprivate var paperType: String = "plain"
     
     public func setPaper(paper: String) {
         self.paperType = paper
+        self.drawPlainPaper()
         if paper == "plain" {
             drawPlainPaper()
         } else if paper == "lined" {
