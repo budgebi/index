@@ -166,7 +166,7 @@ class PaperView: UIImageView {
         if titleTextField?.text != "" {
             title = (titleTextField?.text)!
         }
-        var tags: String = "Untitled"
+        var tags: String = "No tags exist"
         if tagTextField?.text != "" {
             tags = (tagTextField?.text)!
         }

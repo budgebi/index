@@ -265,10 +265,10 @@ class ViewController: UIViewController {
                 self.currNote = nil
                 self.paperView.deleteNote()
                 self.removeLinksFromView()
-                self.saveButton.isEnabled = false
                 if self.paperBackground.cornell {
                     self.cornellButtonPressed()
                 }
+                self.saveButton.isEnabled = false
             }))
         
             newAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -286,10 +286,10 @@ class ViewController: UIViewController {
             self.currNote = nil
             self.paperView.deleteNote()
             self.removeLinksFromView()
-            self.saveButton.isEnabled = false
             if self.paperBackground.cornell {
                 self.cornellButtonPressed()
             }
+            self.saveButton.isEnabled = false
         }
     }
     
@@ -542,6 +542,7 @@ class ViewController: UIViewController {
     // Load Note
     func loadNote(note: Note) {
         self.removeLinksFromView()
+        self.saveButton.isEnabled = false
         if self.prevNotes.count > 20 {
             self.prevNotes.remove(at: 0)
         }
