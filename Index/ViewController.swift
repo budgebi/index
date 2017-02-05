@@ -13,9 +13,32 @@ protocol PaperViewDelegate: class {
     func saveNote(title: String, tags: String, image: UIImage)
     func addNewLink(linkLocation: CGPoint)
     func changeDetected()
+    func retractOptions()
 }
 
 extension ViewController: PaperViewDelegate {
+    
+    internal func retractOptions() {
+        if self.drawStyleOptionsDisplayed {
+            animateOptions(hide: true, startTag: 1, endTag: 2)
+            self.drawStyleOptionsDisplayed = false
+        }
+        
+        if self.colorOptionsDisplayed {
+            animateOptions(hide: true, startTag: 10, endTag: 14)
+            self.colorOptionsDisplayed = false
+        }
+        
+        if self.sizeOptionsDisplayed {
+            animateOptions(hide: true, startTag: 20, endTag: 22)
+            self.sizeOptionsDisplayed = false
+        }
+        
+        if self.paperOptionsDisplayed {
+            animateOptions(hide: true, startTag: 60, endTag: 62)
+            self.paperOptionsDisplayed = false
+        }
+    }
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
