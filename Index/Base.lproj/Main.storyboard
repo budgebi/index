@@ -288,6 +288,7 @@
                         <outlet property="eraseButton" destination="DbW-vW-nq2" id="XfO-AD-Ezy"/>
                         <outlet property="linkButton" destination="gE6-D7-0yf" id="zWk-w8-NqX"/>
                         <outlet property="paperBackground" destination="L8t-Pc-zqk" id="fef-r4-Dtt"/>
+                        <outlet property="paperButton" destination="7RD-Fr-RwM" id="oir-Cl-wLc"/>
                         <outlet property="paperView" destination="0eb-D5-nBy" id="IK6-9z-1p4"/>
                         <outlet property="saveButton" destination="dK3-oi-nct" id="Ih2-Xe-wCO"/>
                         <outlet property="scrollView" destination="FpY-b6-GjV" id="fly-pg-Thv"/>

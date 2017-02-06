@@ -213,6 +213,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var linkButton: UIButton!
     @IBOutlet weak var eraseButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var paperButton: UIButton!
     
     var tableViewController: IndexTableViewController!
     var searchController: UISearchController!
@@ -562,6 +563,38 @@ class ViewController: UIViewController {
         }
     }
     
+    func setPaperButtons(paperType: String) {
+        let first = self.view.viewWithTag(60) as! UIButton
+        let second = self.view.viewWithTag(61) as! UIButton
+        let third = self.view.viewWithTag(62) as! UIButton
+        
+        if paperType == "plain" {
+            first.accessibilityIdentifier = paperType
+            second.accessibilityIdentifier = "grid"
+            third.accessibilityIdentifier = "lined"
+
+            first.setImage(UIImage(named: "Blank"), for: .normal)
+            second.setImage(UIImage(named: "Grid"), for: .normal)
+            third.setImage(UIImage(named: "Lined"), for: .normal)
+        } else if paperType == "grid" {
+            first.accessibilityIdentifier = paperType
+            second.accessibilityIdentifier = "plain"
+            third.accessibilityIdentifier = "lined"
+            
+            first.setImage(UIImage(named: "Grid"), for: .normal)
+            second.setImage(UIImage(named: "Blank"), for: .normal)
+            third.setImage(UIImage(named: "Lined"), for: .normal)
+        } else {
+            first.accessibilityIdentifier = paperType
+            second.accessibilityIdentifier = "grid"
+            third.accessibilityIdentifier = "plain"
+            
+            first.setImage(UIImage(named: "Lined"), for: .normal)
+            second.setImage(UIImage(named: "Grid"), for: .normal)
+            third.setImage(UIImage(named: "Blank"), for: .normal)
+        }
+    }
+    
     // Load Note
     func loadNote(note: Note) {
         self.removeLinksFromView()
@@ -577,7 +610,7 @@ class ViewController: UIViewController {
         
         self.paperBackground.cornell = (self.currNote as! Note).cornell
         paperBackground.setPaper(paper: (self.currNote as! Note).paperType!)
-        
+        self.setPaperButtons(paperType: (self.currNote as! Note).paperType!)
         if note.links != nil && note.links != ""{
             self.links = Links(string: note.links! as String, linkDelegate: self)
             for link in self.links.links {
