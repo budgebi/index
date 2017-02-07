@@ -49,6 +49,9 @@ class LinkSearchModalViewController: UIViewController {
     var searchController: LinkSearchController!
     var searchView: UIView!
     var typeToggleView: UIView!
+    var note: UIButton?
+    var web: UIButton?
+    var urlBar: UITextField?
     weak var delegate: LinkSearchModalDelegate?
     
     init(searchResultsUpdater: UISearchResultsUpdating) {
@@ -100,22 +103,24 @@ class LinkSearchModalViewController: UIViewController {
         self.typeToggleView = UIView(frame: CGRect(x: 0, y: 44, width: 70, height: 44))
         self.typeToggleView.backgroundColor = UIColor(red: 201/255, green: 201/255, blue: 206/255, alpha: 1)
         
-        let note = UIButton(frame: CGRect(x: 0, y: 0, width: 70, height: 22))
-        let web = UIButton(frame: CGRect(x: 0, y: 22, width: 70, height: 22))
+        self.note = UIButton(frame: CGRect(x: 0, y: 0, width: 70, height: 22))
+        self.web = UIButton(frame: CGRect(x: 0, y: 22, width: 70, height: 22))
         
-        note.setTitle("Note", for: .normal)
-        note.setTitleColor(self.view.tintColor, for: .selected)
-        note.setTitleColor(UIColor.lightGray, for: .normal)
-        note.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightThin)
-        note.isSelected = true
+        note?.setTitle("Note", for: .normal)
+        note?.setTitleColor(self.view.tintColor, for: .selected)
+        note?.setTitleColor(UIColor.lightGray, for: .normal)
+        note?.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightThin)
+        note?.addTarget(self, action:  #selector(noteButtonPressed), for: UIControlEvents.touchUpInside)
+        note?.isSelected = true
         
-        web.setTitle("Web", for: .normal)
-        web.setTitleColor(self.view.tintColor, for: .selected)
-        web.setTitleColor(UIColor.lightGray, for: .normal)
-        web.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightThin)
-
-        self.typeToggleView.addSubview(note)
-        self.typeToggleView.addSubview(web)
+        web?.setTitle("Web", for: .normal)
+        web?.setTitleColor(self.view.tintColor, for: .selected)
+        web?.setTitleColor(UIColor.lightGray, for: .normal)
+        web?.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightThin)
+        web?.addTarget(self, action:  #selector(webButtonPressed), for: UIControlEvents.touchUpInside)
+        
+        self.typeToggleView.addSubview(note!)
+        self.typeToggleView.addSubview(web!)
         self.view.addSubview(self.typeToggleView)
         
         self.searchView.addSubview(self.searchController.searchBar)
@@ -125,6 +130,28 @@ class LinkSearchModalViewController: UIViewController {
         self.searchController.searchBar.isTranslucent = false
         self.searchController.extendedLayoutIncludesOpaqueBars = true
         extendedLayoutIncludesOpaqueBars = true
+    }
+    
+    func noteButtonPressed() {
+        note?.isSelected = true
+        web?.isSelected = false
+        urlBar?.removeFromSuperview()
+        searchView.addSubview(searchController.searchBar)
+    }
+    
+    func webButtonPressed() {
+        note?.isSelected = false
+        web?.isSelected = true
+        urlBar = UITextField(frame: CGRect(x: 17, y: 0, width: 280, height: 44))
+        urlBar?.placeholder = "URL"
+        urlBar?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightSemibold)
+        
+        searchView?.layer.borderWidth = 8
+        searchView?.layer.borderColor = UIColor(red: 201/255, green: 201/255, blue: 206/255, alpha: 1).cgColor
+        searchController.searchBar.removeFromSuperview()
+        searchView.addSubview(urlBar!)
+        self.view.frame.size.height = 88
+        self.delegate?.webButtonPressed()
     }
     
     override func didReceiveMemoryWarning() {

@@ -148,6 +148,8 @@ protocol LinkSearchModalDelegate: class {
     func setLinkForNoteAtIndexPath(indexPath: IndexPath)
     
     func linkChangeDetected()
+    
+    func webButtonPressed()
 }
 
 extension ViewController: LinkSearchModalDelegate {
@@ -171,6 +173,10 @@ extension ViewController: LinkSearchModalDelegate {
     
     internal func linkChangeDetected() {
         self.saveButton.isEnabled = true
+    }
+    
+    internal func webButtonPressed() {
+        self.linkNav?.preferredContentSize.height = 44
     }
 }
 
