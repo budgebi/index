@@ -176,7 +176,6 @@ extension ViewController: LinkSearchModalDelegate {
     }
     
     internal func webButtonPressed() {
-        self.linkNav?.preferredContentSize.height = 44
     }
 }
 
