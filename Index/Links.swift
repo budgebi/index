@@ -42,7 +42,7 @@ class Links: NSObject {
     public func stringify() -> String {
         var str = ""
         for link in self.links {
-            str += link.linkTitle + ";" + link.origin.x.description + ";" + link.origin.y.description + "," + link.type + ","
+            str += link.linkTitle + ";" + link.origin.x.description + ";" + link.origin.y.description + ";" + link.type + ","
         }
         return str
     }
