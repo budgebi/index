@@ -32,7 +32,7 @@ class Links: NSObject {
         for linkStr in ls {
             let items = linkStr.characters.split(separator: ";").map(String.init)
             let point: CGPoint = CGPoint(x: (items[1] as NSString).doubleValue , y: (items[2] as NSString).doubleValue)
-            let link = Link(origin: point, noteTitle: items[0])
+            let link = Link(origin: point, linkTitle: items[0], type: items[3])
             link.delegate = linkDelegate
             l.append(link)
         }
@@ -42,7 +42,7 @@ class Links: NSObject {
     public func stringify() -> String {
         var str = ""
         for link in self.links {
-            str += link.noteTitle + ";" + link.origin.x.description + ";" + link.origin.y.description + ","
+            str += link.linkTitle + ";" + link.origin.x.description + ";" + link.origin.y.description + "," + link.type + ","
         }
         return str
     }

@@ -149,8 +149,7 @@ protocol LinkSearchModalDelegate: class {
     
     func linkChangeDetected()
     
-    func webButtonPressed()
-    func noteButtonPressed()
+    func saveWebLink(url: String)
 }
 
 extension ViewController: LinkSearchModalDelegate {
@@ -165,7 +164,7 @@ extension ViewController: LinkSearchModalDelegate {
     internal func setLinkForNoteAtIndexPath(indexPath: IndexPath) {
         let note: Note = self.searchResults[indexPath.row]
         let origin = CGPoint(x: (self.linkLocation?.x)!, y: (self.linkLocation?.y)! - 6 + self.scrollView.contentOffset.y)
-        let link = Link(origin: origin, noteTitle: note.title!)
+        let link = Link(origin: origin, linkTitle: note.title!, type: "note")
         link.delegate = self
 
         self.paperView.addSubview(link.button)
@@ -176,10 +175,13 @@ extension ViewController: LinkSearchModalDelegate {
         self.saveButton.isEnabled = true
     }
     
-    internal func webButtonPressed() {
-    }
-    
-    internal func noteButtonPressed() {
+    internal func saveWebLink(url: String) {
+        let origin = CGPoint(x: (self.linkLocation?.x)!, y: (self.linkLocation?.y)! - 6 + self.scrollView.contentOffset.y)
+        let link = Link(origin: origin, linkTitle: url, type: "web")
+        link.delegate = self
+        
+        self.paperView.addSubview(link.button)
+        self.links.add(link)
     }
 }
 
@@ -189,8 +191,12 @@ protocol LinkDelegate: class {
 
 extension ViewController: LinkDelegate {
     internal func loadLink(link: Link) {
-        let note = self.findNoteByTitle(title: link.noteTitle)
-        self.loadNote(note: note)
+        if link.type == "note" {
+            let note = self.findNoteByTitle(title: link.linkTitle)
+            self.loadNote(note: note)
+        } else {
+            UIApplication.shared.open(URL(string: link.linkTitle)!, options: [:], completionHandler: nil)
+        }
     }
 }
 

@@ -11,19 +11,20 @@ import UIKit
 
 class Link: NSObject {
     public var origin: CGPoint!
-    public var noteTitle: String!
+    public var linkTitle: String!
     public var button: UIButton!
+    public var type: String!
     
     weak var delegate: LinkDelegate?
     
-    init(origin: CGPoint, noteTitle: String) {
+    init(origin: CGPoint, linkTitle: String, type: String) {
         super.init()
-        self.noteTitle = noteTitle
-    
+        self.linkTitle = linkTitle
+        self.type = type
         self.button = UIButton(type: .custom)
-        self.button.setTitle(self.noteTitle, for: .normal)
+        self.button.setTitle(self.linkTitle, for: .normal)
         self.button.setTitleColor(UIColor.blue, for: .normal)
-        let buttonSize = (self.noteTitle as NSString).size(attributes: [NSFontAttributeName: self.button.titleLabel?.font ?? UIFont.systemFont(ofSize: 12)])
+        let buttonSize = (self.linkTitle as NSString).size(attributes: [NSFontAttributeName: self.button.titleLabel?.font ?? UIFont.systemFont(ofSize: 12)])
         self.origin = CGPoint(x: origin.x, y: origin.y - 6)
         self.button.frame = CGRect(origin: self.origin, size: CGSize(width: buttonSize.width, height: buttonSize.height))
         self.button.addTarget(self, action: #selector(loadLink), for: .touchUpInside)

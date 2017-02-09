@@ -131,13 +131,18 @@ class LinkSearchModalViewController: UIViewController {
                 createButton = UIButton(frame: CGRect(x: 0, y: 118, width: 350, height: 494-118))
                 createButton?.setTitleColor(segmentedControl?.tintColor, for: .normal)
                 createButton?.setTitle("Create", for: .normal)
-
+                createButton?.addTarget(self, action: #selector(saveWebLink), for: .touchUpInside)
                 self.view.addSubview(createButton!)
             default:
                 self.urlBar?.removeFromSuperview()
                 createButton?.removeFromSuperview()
                 self.searchView.addSubview(self.searchController.searchBar)
         }
+    }
+    
+    func saveWebLink() {
+        self.delegate?.saveWebLink(url: (self.urlBar?.text)!)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
