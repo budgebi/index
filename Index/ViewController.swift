@@ -150,6 +150,7 @@ protocol LinkSearchModalDelegate: class {
     func linkChangeDetected()
     
     func webButtonPressed()
+    func noteButtonPressed()
 }
 
 extension ViewController: LinkSearchModalDelegate {
@@ -176,6 +177,9 @@ extension ViewController: LinkSearchModalDelegate {
     }
     
     internal func webButtonPressed() {
+    }
+    
+    internal func noteButtonPressed() {
     }
 }
 
